@@ -4,27 +4,47 @@ import { BsGear, BsGearFill, BsHouse } from "react-icons/bs"
 import { PiHouseFill } from "react-icons/pi"
 import Link from 'next/link';
 import { LangPageProps } from '@/types/pages';
+import { getDictionary } from '@/lib/dictionary';
+import { Languages } from 'lucide-react';
+import { ChangeLanguages } from './changeLanguages';
+import { SPLine } from '../style/simpleComponents/line';
+import { AuthChangeTheme } from './authChangeTheme';
 
-export const AuthNav = ({lang} : LangPageProps) => {
+export const AuthNav = async ({lang} : LangPageProps) => {
+    const {nav} = await getDictionary(lang)
   return (
     <nav className=' fixed z-50 flex justify-end w-full p-2 max-lg:p-2'>
         <div className=' flex gap-2'>
             <Link href={`/${lang}`} className=' btn btn-square'>
                 <span className=' sr-only'>Go back</span>
-                <PiHouseFill size={26} className=''/>
+                <PiHouseFill size={24} className=''/>
             </Link>
             <Dialog>
                 <DialogTrigger className=' btn btn-square'>
-                    <BsGearFill size={26} className=''/>
+                    <BsGearFill size={24} className=''/>
                     <span className=' sr-only'>Setting</span>
                 </DialogTrigger>
-                <DialogContent className=' bg-base-300'>
+                <DialogContent className=' bg-base-300 '>
                     <DialogTitle>
-                        Settings
+                        {nav.auth.settingDialog.setting}
                     </DialogTitle>
-                    <div className=' h-1 w-full bg-base-100'/>
-                    <div>
-                        Language
+                    <SPLine />
+                    <div className=''>
+                        <ChangeLanguages lang={lang} choose={nav.auth.settingDialog.chooseLanguage.changeLanguage}>
+                            <div className=' flex justify-between w-full'>
+                                <div className=' flex gap-1 items-center'>
+                                    <Languages size={18}/>
+                                    <span className=''>{nav.auth.settingDialog.language}</span>
+                                </div>
+                                <span className=''>{lang === "en" ? "English" : "Kinyarwanda"}</span>
+                            </div>
+                        </ChangeLanguages>
+                        <SPLine className=' mb-2'/>
+                        <div>
+                            <AuthChangeTheme >
+                                {nav.auth.settingDialog.changeTheme}
+                            </AuthChangeTheme>
+                        </div>
                     </div>
                 </DialogContent>
             </Dialog>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ChangeTheme, ClientThemeWrapper } from "@/context/changeTheme";
+import { LanguagesProps } from "@/types/pages";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,26 +18,26 @@ export const metadata: Metadata = {
   }
 };
 
-interface Props {
-  children: React.ReactNode;
-  params : {
-    locale: string;
-  };
-}
+
 export default function RootLayout(
   {
     children,
-    params : {locale},
-  } : Props
+    params : {lang},
+  } : LanguagesProps
 ) {
   return (
-    <html lang={locale}>
+    <html lang={lang}>
       <body className={inter.className}>
-        <ChangeTheme>
-          <ClientThemeWrapper>
-            {children}
-          </ClientThemeWrapper>
-        </ChangeTheme>
+          <ChangeTheme>
+            <ClientThemeWrapper>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+         >
+              {children}
+        </ThemeProvider>
+            </ClientThemeWrapper>
+          </ChangeTheme>
       </body>
     </html>
   );

@@ -1,0 +1,17 @@
+{
+    "nav" : {
+        "auth" : {
+        "settingDialog" : {
+            "setting" : "Gushyiraho",
+            "language" : "Ururimi",
+            "chooseLanguage" : {
+                "changeLanguage" : "Guhindura ururimi"
+            },
+            "changeTheme" : "Guhindura Amabara"
+        }
+    }
+    },
+    "indexPage" : {
+        "getStart" : "Gutagira"
+    }
+}

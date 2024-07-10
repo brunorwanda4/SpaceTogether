@@ -1,17 +1,20 @@
+import { Locale } from "../i18n";
+
 /**
  * pages params for languages english and kinyarwanda
- * @type {string ,}
+ * @type {Locale ,}
  */
 
+
 export interface LanguagesProps {
-    params : {locale: string}
+    params : {lang: Locale}
     children ?: React.ReactNode
 }
 
 /**
  * pages link for languages english and kinyarwanda
- * @type {string}
+ * @type {Locale}
  */
 export interface LangPageProps {
-    lang : string;
+    lang : Locale;
 }

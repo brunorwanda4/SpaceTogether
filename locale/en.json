@@ -1,0 +1,17 @@
+{
+    "nav" : {
+        "auth" : {
+        "settingDialog" : {
+            "setting" : "Settings",
+            "language" : "Language",
+            "chooseLanguage" : {
+                "changeLanguage" : "Change Language"
+            },
+            "changeTheme" : "Change Theme"
+        }
+    }
+    },
+    "indexPage" : {
+        "getStart" : "Get start"
+    }
+}

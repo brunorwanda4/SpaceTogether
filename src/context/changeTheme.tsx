@@ -11,7 +11,7 @@ export const ChangeTheme = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         setIsMounted(true);
-        const storedTheme = localStorage.getItem("theme") || "light";
+        const storedTheme = localStorage.getItem("theme") || "dark";
         setTheme(storedTheme);
     }, []);
 
@@ -38,5 +38,5 @@ interface Props {
 
 export const ClientThemeWrapper = ({className , children} : Props) => {
     const { theme } = useContext(ThemeContext)!;
-    return <main data-theme={theme || "cupcake"} className={cn(theme, "min-h-screen", className)}>{children}</main>;
+    return <main data-theme={theme || "dark"} className={cn(theme, "min-h-screen", className)}>{children}</main>;
 };
