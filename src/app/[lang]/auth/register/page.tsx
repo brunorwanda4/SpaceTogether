@@ -9,7 +9,7 @@ export const metadata:Metadata = {
   title : "Create Account",
 }
 
-const page = async ({ params : {lang} } : LanguagesProps) => {
+const Page = async ({ params : {lang} } : LanguagesProps) => {
  const {page} = await getDictionary(lang);
   return (
     <div className=' grid place-content-center h-screen'>
@@ -47,4 +47,4 @@ const page = async ({ params : {lang} } : LanguagesProps) => {
   )
 }
 
-export default page
+export default Page

@@ -1,19 +1,14 @@
 import { ChooseWhichWayCanCreateAccount } from '@/components/auth/chooseWhichWayCanCreateAccount'
 import { Logo } from '@/components/navbar/Logo'
-import { Locale } from '@/i18n'
 import { getDictionary } from '@/lib/dictionary'
+import { LanguagesProps } from '@/types/pages'
 import { Metadata } from 'next'
 import React from 'react'
 export const metadata: Metadata = {
   title : "Login"
 }
 
-interface Props {
-  params : {lang: Locale}
-  children ?: React.ReactNode
-}
-
-const page = async ({params : {lang}} : Props) => {
+const Page = async ({params : {lang}} : LanguagesProps) => {
   const {page} = await getDictionary(lang)
   return (
     <div className=' grid place-content-center h-screen'>
@@ -28,4 +23,4 @@ const page = async ({params : {lang}} : Props) => {
   )
 }
 
-export default page
+export default Page

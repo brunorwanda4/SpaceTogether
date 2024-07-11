@@ -3,7 +3,7 @@ import { getDictionary } from '@/lib/dictionary'
 import { LanguagesProps } from '@/types/pages'
 import React from 'react'
 
-const layout = ({children , params : {lang}} : LanguagesProps) => {
+const Layout = ({children , params : {lang}} : LanguagesProps) => {
   return (
     <section className=" px-2 max-lg:px-1">
         <AuthNav lang={lang}/>
@@ -12,4 +12,4 @@ const layout = ({children , params : {lang}} : LanguagesProps) => {
   )
 }
 
-export default layout
+export default Layout
