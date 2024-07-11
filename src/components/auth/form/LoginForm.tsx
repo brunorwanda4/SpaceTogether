@@ -21,15 +21,22 @@ import { GetServerSideProps } from 'next';
 import { getDictionary } from '@/lib/dictionary';
 import { Locale } from '@/i18n';
 import { BsEye, BsEyeFill } from 'react-icons/bs';
+import UseOnlineStatus from '@/hooks/useOnlineStatus';
+import Link from 'next/link';
 
 interface Props {
     TPassword: string;
     TUsername: string;
     lang : Locale
+    TLogin : string;
+    TForget : string;
 }
 
-const LoginForm = ({lang , TPassword , TUsername} : Props) => {
-  const [seePassword , setSeePassword] = useState<boolean>(false);
+const LoginForm = ({lang ,TForget, TPassword ,TLogin , TUsername} : Props) => {
+  const [seePassword , setSeePassword] = useState<boolean>(true);
+    
+  const online = UseOnlineStatus();
+
     const form = useForm<z.infer <typeof LoginValidation>> ({
         resolver : zodResolver(LoginValidation),
         defaultValues : {
@@ -51,7 +58,7 @@ const LoginForm = ({lang , TPassword , TUsername} : Props) => {
             <FormItem>
               <FormLabel>{TUsername}</FormLabel>
               <FormControl>
-                <Input className=' bg-base-300' placeholder="user_name" {...field} />
+                <Input className=' bg-base-300' autoFocus placeholder="user_name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -67,7 +74,7 @@ const LoginForm = ({lang , TPassword , TUsername} : Props) => {
               <FormControl>
                 <div className=' relative '>
                   <Input className=' bg-base-300 ' placeholder="password" type={seePassword ? "password" : "text"} {...field} />
-                  <div className=' absolute  top-2 right-4 ' onClick={handleSeePassword}>
+                  <div className=' absolute  top-2 right-4  cursor-pointer' onClick={handleSeePassword}>
                     {seePassword ? <BsEyeFill size={24} /> : <BsEye size={24} />}
                   </div>
                 </div>
@@ -76,6 +83,10 @@ const LoginForm = ({lang , TPassword , TUsername} : Props) => {
             </FormItem>
           )}
         />
+        {!!online && <Link className='link-hover text-sm duration-300 text-neutral leading-4' href={`/${lang}/auth/forgetPassword`}>{TForget}</Link>}
+        <button className=' btn btn-neutral capitalize font-semibold' type='submit'>
+          {TLogin}
+        </button>
       </form>
     </Form>
   )

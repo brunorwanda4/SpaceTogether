@@ -16,7 +16,7 @@ const {changeTheme} = useContext(ThemeContext)!;
 const { theme , setTheme } = useTheme()
 const [selectedTheme, setSelectedTheme] = useState<string>('system'); 
 
-const themes   = ["light","pastel" , "forest", "dark", "black",]
+const themes   = ["light","pastel" , "forest", "dark", "night",]
 
 useEffect(() => {
     // Use 'system' as a default if theme is undefined

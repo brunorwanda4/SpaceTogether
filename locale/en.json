@@ -5,7 +5,9 @@
             "setting" : "Settings",
             "language" : "Language",
             "chooseLanguage" : {
-                "changeLanguage" : "Change Language"
+                "changeLanguage" : "Change Language",
+                "save" : "Save",
+                "cancel" : "Cancel"
             },
             "changeTheme" : "Change Theme"
         }
@@ -20,7 +22,11 @@
             "loginTitle" : "Login in your account",
             "loginForm" : {
                 "username" : "Username or you email",
-                "password" : "Password"
+                "password" : "Password",
+                "login" : "Login",
+                "provides" : "provides",
+                "forgetPassword" : "Forget Password",
+                "register" : " Create new account"
             }
         }
     }

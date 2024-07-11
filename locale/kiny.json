@@ -5,7 +5,9 @@
             "setting" : "Gushyiraho",
             "language" : "Ururimi",
             "chooseLanguage" : {
-                "changeLanguage" : "Guhindura ururimi"
+                "changeLanguage" : "Guhindura ururimi",
+                "save" : "hindura",
+                "cancel" : "bireke"
             },
             "changeTheme" : "Guhindura Amabara"
         }
@@ -17,10 +19,14 @@
     "page" : {
         "auth" : {
             "getStart" : " Komeza ukoresheje online cyangwa offline",
-            "loginTitle" : "Inshira muri koni yawe",
+            "loginTitle" : "Inshira muri konti yawe",
             "loginForm" : {
                 "username" : "Izina ukoresha cyangwa emaili yawe",
-                "password" : "Ijambo banga"
+                "password" : "Ijambo banga",
+                "login" : "Kwinjira",
+                "provides" : "koresha",
+                "forgetPassword" : "Kwibangirwa ijambo banga",
+                "register" : "Kora konti cyashya"
             }
         }
     }

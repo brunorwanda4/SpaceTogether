@@ -26,20 +26,11 @@ export const AuthNav = async ({lang} : LangPageProps) => {
                 </DialogTrigger>
                 <DialogContent className=' bg-base-300 '>
                     <DialogTitle>
-                        {/* {nav.auth.settingDialog.setting} */}
-                        open
+                        {nav.auth.settingDialog.setting}
                     </DialogTitle>
                     <SPLine />
                     <div className=''>
-                        <ChangeLanguages lang={lang} choose={"open"}>
-                            <div className=' flex justify-between w-full'>
-                                <div className=' flex gap-1 items-center'>
-                                    <Languages size={18}/>
-                                    <span className=''>{nav.auth.settingDialog.language}</span>
-                                </div>
-                                <span className=''>{lang === "en" ? "English" : "Kinyarwanda"}</span>
-                            </div>
-                        </ChangeLanguages>
+                        <ChangeLanguages TSave={nav.auth.settingDialog.chooseLanguage.save} TCancel={nav.auth.settingDialog.chooseLanguage.cancel} title={nav.auth.settingDialog.language} lang={lang} chooseLang={nav.auth.settingDialog.chooseLanguage.changeLanguage} />
                         <SPLine className=' mb-2'/>
                         <div>
                             <AuthChangeTheme title={nav.auth.settingDialog.changeTheme}/>
