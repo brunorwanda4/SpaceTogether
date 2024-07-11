@@ -27,6 +27,20 @@
                 "provides" : "provides",
                 "forgetPassword" : "Forget Password",
                 "register" : " Create new account"
+            },
+            "register" : {
+                "registerTitle" : "Create new account",
+                "login" : "Login",
+                "FName" : "First name",
+                "LName" : "Last name",
+                "email" : "Email",
+                "year" :"Year",
+                "month" : "Month",
+                "day" : "Day",
+                "Gender" : "Gender",
+                "Male" : "Male",
+                "Female" : "Female",
+                "Other" : "Other"
             }
         }
     }

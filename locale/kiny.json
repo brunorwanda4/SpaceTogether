@@ -21,12 +21,26 @@
             "getStart" : " Komeza ukoresheje online cyangwa offline",
             "loginTitle" : "Inshira muri konti yawe",
             "loginForm" : {
-                "username" : "Izina ukoresha cyangwa emaili yawe",
+                "username" : "Izina ukoresha cyangwa imeri yawe",
                 "password" : "Ijambo banga",
                 "login" : "Kwinjira",
                 "provides" : "koresha",
                 "forgetPassword" : "Kwibangirwa ijambo banga",
-                "register" : "Kora konti cyashya"
+                "register" : "Kora konti nshyashya"
+            },
+            "register" : {
+                "registerTitle" : "Kora konti nshyashya",
+                "login" : "Injira muri konti yawe",
+                "FName" : "Izina ryambere",
+                "LName" : "Izina ryanyuma",
+                "email" : "imeri",
+                "year" :"Imyaka",
+                "month" : "Ameze",
+                "day" : "Iminsi",
+                "Gender" : "Igistina",
+                "Male" : "Umugabo",
+                "Female" : "Umugore",
+                "Other" : "Abandi"
             }
         }
     }

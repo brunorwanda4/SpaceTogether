@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import z from "zod";
 import { Button } from "@/components/ui/button"
@@ -17,12 +17,11 @@ import { Input } from "@/components/ui/input";
 
 import { LoginValidation } from '@/validation/loginValidation';
 import { zodResolver } from "@hookform/resolvers/zod"
-import { GetServerSideProps } from 'next';
-import { getDictionary } from '@/lib/dictionary';
 import { Locale } from '@/i18n';
 import { BsEye, BsEyeFill } from 'react-icons/bs';
 import UseOnlineStatus from '@/hooks/useOnlineStatus';
 import Link from 'next/link';
+import { ImEye, ImEyeBlocked } from 'react-icons/im';
 
 interface Props {
     TPassword: string;
@@ -32,7 +31,9 @@ interface Props {
     TForget : string;
 }
 
-const LoginForm = ({lang ,TForget, TPassword ,TLogin , TUsername} : Props) => {
+const LoginForm = ({
+  lang ,TForget, TPassword ,TLogin , TUsername
+} : Props) => {
   const [seePassword , setSeePassword] = useState<boolean>(true);
     
   const online = UseOnlineStatus();
@@ -74,9 +75,9 @@ const LoginForm = ({lang ,TForget, TPassword ,TLogin , TUsername} : Props) => {
               <FormControl>
                 <div className=' relative '>
                   <Input className=' bg-base-300 ' placeholder="password" type={seePassword ? "password" : "text"} {...field} />
-                  <div className=' absolute  top-2 right-4  cursor-pointer' onClick={handleSeePassword}>
-                    {seePassword ? <BsEyeFill size={24} /> : <BsEye size={24} />}
-                  </div>
+                  <div className=' absolute right-0 top-0 items-center flex rounded-r-md cursor-pointer h-full w-6 px-1 hover:bg-neutral/40 duration-200' onClick={handleSeePassword}>
+                      {seePassword ? <ImEye size={24} /> : <ImEyeBlocked size={24} />}
+                    </div>
                 </div>
               </FormControl>
               <FormMessage />
