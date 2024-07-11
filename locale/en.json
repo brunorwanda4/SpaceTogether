@@ -13,5 +13,15 @@
     },
     "indexPage" : {
         "getStart" : "Get start"
+    },
+    "page" : {
+        "auth" : {
+            "getStart" : " Continuer with offline or online",
+            "loginTitle" : "Login in your account",
+            "loginForm" : {
+                "username" : "Username or you email",
+                "password" : "Password"
+            }
+        }
     }
 }

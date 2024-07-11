@@ -8,10 +8,10 @@ import { ThemeContext } from "@/context/changeTheme";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 interface Props {
-    children : React.ReactNode
+    title : string
 }
 
-export const AuthChangeTheme = ({children} : Props) => {
+export const AuthChangeTheme = ({title} : Props) => {
 const {changeTheme} = useContext(ThemeContext)!;
 const { theme , setTheme } = useTheme()
 const [selectedTheme, setSelectedTheme] = useState<string>('system'); 
@@ -34,7 +34,7 @@ const handleThemeChange = (newTheme: string) => {
             <div className=" flex gap-2 items-center">
                 <BsPaletteFill size={20} className=""/>
                     <h3>
-                        {children}
+                        {title}
                     </h3>
             </div>
             <div className=" flex gap-2">

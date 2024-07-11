@@ -26,11 +26,12 @@ export const AuthNav = async ({lang} : LangPageProps) => {
                 </DialogTrigger>
                 <DialogContent className=' bg-base-300 '>
                     <DialogTitle>
-                        {nav.auth.settingDialog.setting}
+                        {/* {nav.auth.settingDialog.setting} */}
+                        open
                     </DialogTitle>
                     <SPLine />
                     <div className=''>
-                        <ChangeLanguages lang={lang} choose={nav.auth.settingDialog.chooseLanguage.changeLanguage}>
+                        <ChangeLanguages lang={lang} choose={"open"}>
                             <div className=' flex justify-between w-full'>
                                 <div className=' flex gap-1 items-center'>
                                     <Languages size={18}/>
@@ -41,9 +42,7 @@ export const AuthNav = async ({lang} : LangPageProps) => {
                         </ChangeLanguages>
                         <SPLine className=' mb-2'/>
                         <div>
-                            <AuthChangeTheme >
-                                {nav.auth.settingDialog.changeTheme}
-                            </AuthChangeTheme>
+                            <AuthChangeTheme title={nav.auth.settingDialog.changeTheme}/>
                         </div>
                     </div>
                 </DialogContent>

@@ -13,5 +13,15 @@
     },
     "indexPage" : {
         "getStart" : "Gutagira"
+    },
+    "page" : {
+        "auth" : {
+            "getStart" : " Komeza ukoresheje online cyangwa offline",
+            "loginTitle" : "Inshira muri koni yawe",
+            "loginForm" : {
+                "username" : "Izina ukoresha cyangwa emaili yawe",
+                "password" : "Ijambo banga"
+            }
+        }
     }
 }
