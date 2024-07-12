@@ -6,6 +6,7 @@ import { Locale } from '@/i18n';
 import { LoginDialog } from './loginDialog';
 import { RegisterDialog } from './registerDialog';
 import { RegisterProps } from './form/RegisterForm';
+import { useTheme } from '@/hooks/useTheme';
 
 interface Props {
     indexWord : string
@@ -95,6 +96,10 @@ const AuthDialog = ({
 }
 
 
+// theme use is using 
+
+const theme = useTheme()
+
   return (
     <Dialog>
       <DialogTrigger>
@@ -102,7 +107,7 @@ const AuthDialog = ({
              {indexWord}
           </div>
       </DialogTrigger>
-      <DialogContent className=' max-w-fit'>
+      <DialogContent data-theme={theme} className=' max-w-fit  bg-base-300 card'>
         {renderContent()}
       </DialogContent>
     </Dialog>

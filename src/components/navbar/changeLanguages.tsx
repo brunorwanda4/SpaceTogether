@@ -9,6 +9,7 @@ import { i18n, Locale } from '@/i18n';
 import { cn } from '@/lib/utils';
 import { LangPageProps } from '@/types/pages';
 import { Languages } from 'lucide-react';
+import { useTheme } from '@/hooks/useTheme';
 
 interface Props {
   title: string
@@ -21,6 +22,7 @@ interface Props {
 export const ChangeLanguages = ({ title,TSave, TCancel, chooseLang, lang }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
+  const theme = useTheme();
   const [selectedLang, setSelectedLang] = useState<Locale>(lang);
 
   const redirectedPathName = (locale: string) => {
@@ -39,13 +41,13 @@ export const ChangeLanguages = ({ title,TSave, TCancel, chooseLang, lang }: Prop
       <AlertDialogTrigger className=' w-full'>
       <div className=' flex justify-between w-full'>
           <div className=' flex gap-1 items-center'>
-              <Languages size={18}/>
+              <Languages size={18} className=' text-neutral'/>
               <span className=''>{title}</span>
           </div>
           <span className=''>{lang === "en" ? "English" : "Kinyarwanda"}</span>
       </div>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent data-theme={theme}>
         <AlertDialogHeader>
           <AlertDialogTitle>{chooseLang}</AlertDialogTitle>
           <div className="flex flex-col gap-2 justify-start items-start">

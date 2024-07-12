@@ -1,19 +1,22 @@
-import { ChooseTheme } from "@/components/theme/chooseTheme";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import Link from "next/link";
-import { useTranslations } from "next-intl"
 import { LanguagesProps } from "@/types/pages";
 import { getDictionary } from "@/lib/dictionary";
 import { AuthNav } from "@/components/navbar/authNav";
 import AuthDialog from "@/components/auth/authDialog";
 
 const Home = async ({params : {lang}} : LanguagesProps) =>{
-  const { indexPage, page } = await getDictionary(lang);
+  const { indexPage, page , nav } = await getDictionary(lang);
   return (
     <div className="">
       <div>
-        <AuthNav lang={lang}/>
+        <AuthNav 
+         lang={lang}
+         TTLanguage={nav.auth.settingDialog.language}
+         TSetting={nav.auth.settingDialog.setting}
+         title={nav.auth.settingDialog.changeTheme}
+         TSave={nav.auth.settingDialog.chooseLanguage.save}
+         TCancel={nav.auth.settingDialog.chooseLanguage.cancel}
+         chooseLang={nav.auth.settingDialog.chooseLanguage.changeLanguage}
+        />
       </div>
       <div className=" grid place-content-center h-screen">
         <div>

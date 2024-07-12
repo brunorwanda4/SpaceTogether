@@ -30,7 +30,7 @@ export const ChooseWhichWayCanCreateAccount = ({
     <div>
       <div className=''>
         <LoginForm TForget={TForget} lang={lang} TLogin={TLogin} TPassword={TPassword} TUsername={TUsername}/>
-        <button onClick={() => choose("register")} className=' mt-2 text-sm text-neutral link-hover'>{TRegister}</button>
+        {!!online &&(<button onClick={() => choose("register")} className=' mt-2 text-sm text-neutral link-hover'>{TRegister}</button>)}
       </div>
       {!!online && (
         <div className=' mt-2'>

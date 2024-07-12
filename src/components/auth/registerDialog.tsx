@@ -22,7 +22,7 @@ export const RegisterDialog = ({
     TPassword , TRegister , choose, registerProp, TProvides ,TLogin, TUsername , lang,TTRegister,TForget,
 } : Props) => {
   return (
-    <main className=' card bg-base-300 shadow-lg min-w-96 p-4 min-h-60 h-auto'>
+    <main className='min-w-96 min-h-60 h-auto'>
        <h2 className=' text-center text-2xl font-medium'>{TTRegister}</h2>
        <ChooseHowToCreateAccount
          lang={lang} 

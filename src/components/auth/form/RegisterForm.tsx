@@ -78,8 +78,8 @@ const RegisterForm = ({
   return (
     <Form {...form} >
       <form action="" className=' flex gap-2 flex-col'>
-        {/* left */}
         <div className=' flex gap-2'>
+        {/* left */}
         <div className={cn(DivClass[0])}>
             {/* first name */}
             <FormField

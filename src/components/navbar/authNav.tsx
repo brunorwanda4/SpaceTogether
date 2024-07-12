@@ -1,35 +1,53 @@
+"use client";
+
 import React from 'react'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '../ui/dialog'
 import { BsGear, BsGearFill, BsHouse } from "react-icons/bs"
-import { PiHouseFill } from "react-icons/pi"
-import Link from 'next/link';
-import { LangPageProps } from '@/types/pages';
-import { getDictionary } from '@/lib/dictionary';
 import { Languages } from 'lucide-react';
 import { ChangeLanguages } from './changeLanguages';
 import { SPLine } from '../style/simpleComponents/line';
 import { AuthChangeTheme } from './authChangeTheme';
+import { Locale } from '@/i18n';
+import { useTheme } from '@/hooks/useTheme';
 
-export const AuthNav = async ({lang} : LangPageProps) => {
-    const {nav} = await getDictionary(lang)
+interface Props {
+    title: string
+    chooseLang: string
+    lang: Locale;
+    TSave : string
+    TCancel : string
+    TSetting : string
+    TTLanguage : string
+  }
+
+export const AuthNav = ({
+    title, lang, TSave,TCancel,chooseLang,TSetting,TTLanguage
+} : Props) => {
+    const theme = useTheme();
   return (
     <nav className=' fixed z-50 flex justify-end w-full p-2 max-lg:p-2'>
         <div className=' flex gap-2'>
             <Dialog>
                 <DialogTrigger className=' btn btn-square'>
                     <BsGearFill size={24} className=''/>
-                    <span className=' sr-only'>Setting</span>
+                    <span className=' sr-only'>{TSetting}</span>
                 </DialogTrigger>
-                <DialogContent className=' bg-base-300 '>
+                <DialogContent data-theme={theme} className=' bg-base-300 '>
                     <DialogTitle>
-                        {nav.auth.settingDialog.setting}
+                        {TSetting}
                     </DialogTitle>
                     <SPLine />
                     <div className=''>
-                        <ChangeLanguages TSave={nav.auth.settingDialog.chooseLanguage.save} TCancel={nav.auth.settingDialog.chooseLanguage.cancel} title={nav.auth.settingDialog.language} lang={lang} chooseLang={nav.auth.settingDialog.chooseLanguage.changeLanguage} />
+                        <ChangeLanguages 
+                         TSave={TSave} 
+                         TCancel={TCancel} 
+                         title={TTLanguage} 
+                         lang={lang} 
+                         chooseLang={chooseLang} 
+                        />
                         <SPLine className=' mb-2'/>
                         <div>
-                            <AuthChangeTheme title={nav.auth.settingDialog.changeTheme}/>
+                            <AuthChangeTheme title={title}/>
                         </div>
                     </div>
                 </DialogContent>

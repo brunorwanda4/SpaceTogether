@@ -24,7 +24,7 @@ export const LoginDialog = ({
     TForget, TUsername, TProvides,choose, TRegister, TLogin,TTitleLogin,lang,TPassword
  } : Props) => {
   return (
-    <main className='card bg-base-300 shadow-lg min-w-96 p-4 min-h-60 h-auto'>
+    <main className='card min-w-96 min-h-60 h-auto'>
       <h2 className='text-center text-2xl font-medium'>{TTitleLogin}</h2>
       <ChooseWhichWayCanCreateAccount
         choose={choose}
