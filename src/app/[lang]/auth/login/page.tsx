@@ -1,30 +1,45 @@
 // src/app/[lang]/auth/login/page.tsx
 
-import { ChooseWhichWayCanCreateAccount } from '@/components/auth/chooseWhichWayCanCreateAccount'
-import { Logo } from '@/components/navbar/Logo'
-import { Locale } from '@/i18n'
-import { getDictionary } from '@/lib/dictionary'
-import { Metadata } from 'next'
-import React from 'react'
+import { ChooseWhichWayCanCreateAccount } from '@/components/auth/chooseWhichWayCanCreateAccount';
+import { Logo } from '@/components/navbar/Logo';
+import { Locale } from '@/i18n';
+import { getDictionary } from '@/lib/dictionary';
+import { Metadata } from 'next';
+import React from 'react';
 
 export const metadata: Metadata = {
-  title: "Login"
-}
+  title: 'Login',
+};
 
 interface Props {
-  params: { lang: Locale }
-  children?: React.ReactNode
+  params: { lang: Locale };
+  children?: React.ReactNode;
 }
 
-const Page = async ({ params }: Props) => {
-  const { page } = await getDictionary(params.lang)
+// Change the component to a functional component since async components can cause issues
+const Page: React.FC<Props> = ({ params }) => {
+  const [page, setPage] = React.useState<any>(null);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const { page } = await getDictionary(params.lang);
+      setPage(page);
+    };
+
+    fetchData();
+  }, [params.lang]);
+
+  if (!page) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className='grid place-content-center h-screen'>
-      <div className='flex justify-center mb-4'>
+    <div className="grid place-content-center h-screen">
+      <div className="flex justify-center mb-4">
         <Logo title />
       </div>
-      <main className='card bg-base-300 shadow-lg min-w-96 p-4 min-h-60 h-auto'>
-        <h2 className='text-center text-2xl font-medium'>{page.auth.loginTitle}</h2>
+      <main className="card bg-base-300 shadow-lg min-w-96 p-4 min-h-60 h-auto">
+        <h2 className="text-center text-2xl font-medium">{page.auth.loginTitle}</h2>
         <ChooseWhichWayCanCreateAccount
           lang={params.lang}
           TRegister={page.auth.loginForm.register}
@@ -36,7 +51,7 @@ const Page = async ({ params }: Props) => {
         />
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
