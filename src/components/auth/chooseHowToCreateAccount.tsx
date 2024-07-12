@@ -9,6 +9,7 @@ import { SPLine } from '../style/simpleComponents/line';
 import AuthProvides from './authProvides';
 import { AuthSeverDiv } from './authSeverDiv';
 import RegisterForm, { RegisterProps } from './form/RegisterForm';
+import { ChoosePropsAuth } from './authDialog';
 
 interface Props {
   TPassword: string;
@@ -19,17 +20,32 @@ interface Props {
   TForget : string,
   TRegister : string,
   registerProp : RegisterProps
+  choose : (choice : ChoosePropsAuth) => void
 }
 
 export const ChooseHowToCreateAccount = ({
-    TPassword , TRegister ,registerProp, TProvides ,TLogin, TUsername , lang
+    TPassword , TRegister ,registerProp, TProvides ,TLogin, TUsername , lang,choose
   } : Props) => {
     const online = UseOnlineStatus();
   return (
     <div>
       <div className=''>
-        <RegisterForm TFName={registerProp.TFName} TEmail={registerProp.TEmail} TLName={registerProp.TLName} TDay={registerProp.TDay} TFmale={registerProp.TFmale} TGender={registerProp.TGender} TMale={registerProp.TMale} TMonth={registerProp.TMonth} TOther={registerProp.TOther} TYear={registerProp.TYear} lang={lang} TLogin={TLogin} TPassword={TPassword} />
-       <Link className=' mt-2 text-sm text-neutral link-hover' href={`/${lang}/auth/login`}>{TRegister}</Link>
+        <RegisterForm 
+         TFName={registerProp.TFName} 
+         TEmail={registerProp.TEmail} 
+         TLName={registerProp.TLName} 
+         TDay={registerProp.TDay} 
+         TFmale={registerProp.TFmale} 
+         TGender={registerProp.TGender} 
+         TMale={registerProp.TMale} 
+         TMonth={registerProp.TMonth} 
+         TOther={registerProp.TOther} 
+         TYear={registerProp.TYear} 
+         lang={lang} 
+         TLogin={TLogin} 
+         TPassword={TPassword} 
+        />
+       <button onClick={() => choose("login")} className=' mt-2 text-sm text-neutral link-hover'>{TLogin}</button>
       </div>
       {!!online && (
         <div className=' mt-2'>

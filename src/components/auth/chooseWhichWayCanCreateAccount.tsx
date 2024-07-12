@@ -9,6 +9,7 @@ import LoginForm from './form/LoginForm';
 import { SPLine } from '../style/simpleComponents/line';
 import AuthProvides from './authProvides';
 import { AuthSeverDiv } from './authSeverDiv';
+import { ChoosePropsAuth } from './authDialog';
 
 interface Props {
   TPassword: string;
@@ -18,17 +19,18 @@ interface Props {
   TProvides : string,
   TForget : string,
   TRegister : string,
+  choose : (choice : ChoosePropsAuth) => void
 }
 
 export const ChooseWhichWayCanCreateAccount = ({
-    TPassword , TRegister ,TForget, TProvides ,TLogin, TUsername , lang
+    TPassword , TRegister ,TForget,choose, TProvides ,TLogin, TUsername , lang
   } : Props) => {
    const online = UseOnlineStatus();
   return (
     <div>
       <div className=''>
         <LoginForm TForget={TForget} lang={lang} TLogin={TLogin} TPassword={TPassword} TUsername={TUsername}/>
-       {!!online &&  (<Link className=' mt-2 text-sm text-neutral-content link-hover' href={`/${lang}/auth/register`}>{TRegister}</Link>)}
+        <button onClick={() => choose("register")} className=' mt-2 text-sm text-neutral link-hover'>{TRegister}</button>
       </div>
       {!!online && (
         <div className=' mt-2'>

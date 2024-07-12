@@ -15,10 +15,6 @@ export const AuthNav = async ({lang} : LangPageProps) => {
   return (
     <nav className=' fixed z-50 flex justify-end w-full p-2 max-lg:p-2'>
         <div className=' flex gap-2'>
-            <Link href={`/${lang}`} className=' btn btn-square'>
-                <span className=' sr-only'>Go back</span>
-                <PiHouseFill size={24} className=''/>
-            </Link>
             <Dialog>
                 <DialogTrigger className=' btn btn-square'>
                     <BsGearFill size={24} className=''/>

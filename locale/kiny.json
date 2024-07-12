@@ -23,7 +23,7 @@
             "loginForm" : {
                 "username" : "Izina ukoresha cyangwa imeri yawe",
                 "password" : "Ijambo banga",
-                "login" : "Kwinjira",
+                "login" : "Koresha konti yawe",
                 "provides" : "koresha",
                 "forgetPassword" : "Kwibangirwa ijambo banga",
                 "register" : "Kora konti nshyashya"
