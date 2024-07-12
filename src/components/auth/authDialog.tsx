@@ -97,9 +97,7 @@ const AuthDialog = ({
 
 
 // theme use is using 
-
-const theme = useTheme()
-
+const theme = useTheme();
   return (
     <Dialog>
       <DialogTrigger>
@@ -108,6 +106,9 @@ const theme = useTheme()
           </div>
       </DialogTrigger>
       <DialogContent data-theme={theme} className=' max-w-fit  bg-base-300 card'>
+        <button className=" btn btn-error">
+          login out
+        </button>
         {renderContent()}
       </DialogContent>
     </Dialog>
