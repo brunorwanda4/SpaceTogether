@@ -2,7 +2,7 @@ import { LanguagesProps } from "@/types/pages";
 import { getDictionary } from "@/lib/dictionary";
 import { AuthNav } from "@/components/navbar/authNav";
 import AuthDialog from "@/components/auth/authDialog";
-import { auth, signOut } from "@/auth";
+import { auth, signIn, signOut } from "@/auth";
 
 const Home = async ({params : {lang}} : LanguagesProps) =>{
   const { indexPage, page , nav } = await getDictionary(lang);
@@ -10,6 +10,7 @@ const Home = async ({params : {lang}} : LanguagesProps) =>{
   return (
     <div className="">
       name is : {session?.user?.name}
+      
       <div>
         <AuthNav 
          lang={lang}

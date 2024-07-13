@@ -7,6 +7,8 @@ import { LoginDialog } from './loginDialog';
 import { RegisterDialog } from './registerDialog';
 import { RegisterProps } from './form/RegisterForm';
 import { useTheme } from '@/hooks/useTheme';
+import { signIn } from '@/auth';
+import { logout } from '@/server/logout';
 
 interface Props {
     indexWord : string
@@ -95,7 +97,6 @@ const AuthDialog = ({
     }
 }
 
-
 // theme use is using 
 const theme = useTheme();
   return (
@@ -106,7 +107,7 @@ const theme = useTheme();
           </div>
       </DialogTrigger>
       <DialogContent data-theme={theme} className=' max-w-fit  bg-base-300 card'>
-        <button className=" btn btn-error">
+        <button onClick={() => logout()} className=" btn btn-error">
           login out
         </button>
         {renderContent()}

@@ -50,7 +50,7 @@ export const ChooseHowToCreateAccount = ({
       {!!online && (
         <div className=' mt-2'>
           <AuthSeverDiv >
-            <AuthProvides TProvides={TProvides}/>
+            <AuthProvides TProvides={TProvides} lang={lang}/>
           </AuthSeverDiv>
       </div> 
       )}
