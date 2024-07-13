@@ -6,7 +6,7 @@ import { i18n } from '@/i18n';
 import { match as matchLocale } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
 
-function getLocale(request: NextRequest): string | undefined {
+function getLocale(request: NextRequest){
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
@@ -32,6 +32,12 @@ export function middleware(request: NextRequest) {
     locale => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
 
+  const apiRoute = pathname.startsWith("/api/auth");
+
+  if(!!apiRoute) {
+    return null
+  }
+
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
     return NextResponse.redirect(
@@ -44,5 +50,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 };

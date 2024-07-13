@@ -8,9 +8,7 @@ const Home = async ({params : {lang}} : LanguagesProps) =>{
   const { indexPage, page , nav } = await getDictionary(lang);
   const session = await auth();
   return (
-    <div className="">
-      name is : {session?.user?.name}
-      
+    <div className="">      
       <div>
         <AuthNav 
          lang={lang}

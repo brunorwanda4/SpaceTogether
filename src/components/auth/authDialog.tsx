@@ -107,9 +107,6 @@ const theme = useTheme();
           </div>
       </DialogTrigger>
       <DialogContent data-theme={theme} className=' max-w-fit  bg-base-300 card'>
-        <button onClick={() => logout()} className=" btn btn-error">
-          login out
-        </button>
         {renderContent()}
       </DialogContent>
     </Dialog>
