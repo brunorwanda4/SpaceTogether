@@ -16,7 +16,7 @@ const page = async ({ params : {lang} } : LanguagesProps) => {
     <div className=' flex justify-center mb-4'>
        <Logo title/>
     </div>
-     <main className=' card bg-base-300 shadow-lg min-w-96 p-4 min-h-60 h-auto'>
+     <main className=' card bg-base-300 shadow-lg min-w-96 p-4 min-h-60 h-auto max-w-xl'>
        <h2 className=' text-center text-2xl font-medium'>{page.auth.register.registerTitle}</h2>
        <ChooseHowToCreateAccount 
          lang={lang} 
@@ -39,7 +39,8 @@ const page = async ({ params : {lang} } : LanguagesProps) => {
           TMale: page.auth.register.Male,
           TFmale: page.auth.register.Female,
           TOther: page.auth.register.Other,
-          TEmail : page.auth.register.email
+          TEmail : page.auth.register.email,
+          TCreate : page.auth.register.createAccount
         }}
          />
      </main>

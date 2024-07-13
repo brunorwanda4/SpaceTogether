@@ -41,13 +41,14 @@ export const ChooseHowToCreateAccount = ({
          TMonth={registerProp.TMonth} 
          TOther={registerProp.TOther} 
          TYear={registerProp.TYear} 
+         TCreate={registerProp.TCreate}
          lang={lang} 
          TLogin={TLogin} 
-         TPassword={TPassword} 
+         TPassword={TPassword}
         />
        {!!online &&(<>
          {choose ? (
-          <button onClick={() => choose("register")} className=' mt-2 text-sm text-neutral link-hover'>{TLogin}</button>
+          <button onClick={() => choose("login")} className=' mt-2 text-sm text-neutral link-hover'>{TLogin}</button>
          ) : (
           <Link href={`/${lang}/auth/register`} className=' mt-2 text-sm text-neutral link-hover'>{TLogin}</Link>
          )}

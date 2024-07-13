@@ -3,6 +3,7 @@ import { getDictionary } from "@/lib/dictionary";
 import { AuthNav } from "@/components/navbar/authNav";
 import AuthDialog from "@/components/auth/authDialog";
 import { auth, signIn, signOut } from "@/auth";
+import { LogoutButton } from "@/components/auth/logoutButton";
 
 const Home = async ({params : {lang}} : LanguagesProps) =>{
   const { indexPage, page , nav } = await getDictionary(lang);
@@ -21,6 +22,12 @@ const Home = async ({params : {lang}} : LanguagesProps) =>{
         />
       </div>
       <div className=" grid place-content-center h-screen">
+        {/* check if user is login */}
+
+        <button>
+          name : {session?.user?.name}
+        </button>
+        <LogoutButton/>)
         <div>
           <AuthDialog 
            indexWord={indexPage.getStart}
@@ -46,7 +53,8 @@ const Home = async ({params : {lang}} : LanguagesProps) =>{
             TMale: page.auth.register.Male,
             TFmale: page.auth.register.Female,
             TOther: page.auth.register.Other,
-            TEmail : page.auth.register.email
+            TEmail : page.auth.register.email,
+            TCreate : page.auth.register.createAccount
           }}
           />
         </div>

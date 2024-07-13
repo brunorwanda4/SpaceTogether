@@ -106,7 +106,7 @@ const theme = useTheme();
              {indexWord}
           </div>
       </DialogTrigger>
-      <DialogContent data-theme={theme} className=' max-w-fit  bg-base-300 card'>
+      <DialogContent data-theme={theme} className=' max-w-fit  bg-base-300 card '>
         {renderContent()}
       </DialogContent>
     </Dialog>

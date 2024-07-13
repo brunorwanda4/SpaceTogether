@@ -21,14 +21,14 @@ import { GetServerSideProps } from 'next';
 import { getDictionary } from '@/lib/dictionary';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Locale } from '@/i18n';
-import { BsEye, BsEyeFill } from 'react-icons/bs';
-import UseOnlineStatus from '@/hooks/useOnlineStatus';
-import Link from 'next/link';
 import { RegisterValidation } from '@/validation/registerValidation';
-import { cva } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
 import { Label } from '@/components/ui/label';
+import { regServer } from '@/server/regServer';
+import { FormMessageError, FormMessageSuccess } from './formMessagers';
+import { useRouter } from 'next/navigation';
+import { toast } from '@/components/ui/use-toast';
 
 export interface RegisterProps {
     TPassword: string;
@@ -44,18 +44,17 @@ export interface RegisterProps {
     TMale : string
     TFmale : String
     TOther : string
+    TCreate : string
 }
 
 const RegisterForm = ({
-    lang , TPassword ,TLogin ,TDay,TMonth,TYear,TGender,TOther,TFName,TFmale,TLName,TMale,TEmail
+    lang , TPassword ,TLogin ,TDay,TMonth,TYear,TGender,TOther,TFName,TFmale,TLName,TMale,TEmail,TCreate
   } : RegisterProps) => {
     // show password
     const [seePassword , setSeePassword] = useState<boolean>(true);
     const handleSeePassword = () => {
       setSeePassword(sate => !sate)
     }
-
-    const [isPending, startTransition] = useTransition();
 
     // month
     const months ={ January: 31, February: 28, March: 31, April: 30, May: 31, June: 30, July: 31, August: 31, September: 30, October: 31, November: 30, December: 31,};
@@ -73,11 +72,41 @@ const RegisterForm = ({
         },
     });
 
-    const DivClass = ["flex gap-2 flex-col","bg-base-300 lg:min-w-60"]
+    const DivClass = ["flex gap-2 flex-col","bg-base-300 lg:min-w-60"];
+
+    const [error , setError] = useState<string | undefined>("");
+    const [success , setSuccess] = useState<string | undefined>("");
+    const [isPending , startTransition] = useTransition();
+
+    // router
+    const router = useRouter();
+
+    const onSubmit = (values : z.infer<typeof RegisterValidation>) => {
+      startTransition(() => {
+        regServer(values).then((data) => {
+          
+          if(!!data.success) {
+            toast({
+              description: `${data.success}`
+            })
+            setSuccess(data.success);
+          }
+          if(!!data.error) {
+            toast({
+                title: "uh oh! some thing went wrong.",
+                description: `${data.error}`,
+                variant: "destructive",
+            })
+            setError(data.error);
+          }
+          
+        })
+      })
+    }
 
   return (
     <Form {...form} >
-      <form action="" className=' flex gap-2 flex-col'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className=' flex gap-2 flex-col'>
         <div className=' flex gap-2'>
         {/* left */}
         <div className={cn(DivClass[0])}>
@@ -199,7 +228,7 @@ const RegisterForm = ({
             {/* gender */}
             <FormField control={form.control}  name="gender" render={({ field }) => (
             <FormItem className="space-y-3">
-              <FormLabel>Gender</FormLabel>
+              <FormLabel>{TGender}</FormLabel>
               <FormControl>
                 <RadioGroup disabled={isPending} onValueChange={field.onChange}  defaultValue={field.value} className="flex space-x-1">
                   <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
@@ -207,7 +236,7 @@ const RegisterForm = ({
                       <RadioGroupItem className=' border-input' value="male" />
                     </FormControl>
                     <FormLabel className="font-normal">
-                      Male
+                      {TMale}
                     </FormLabel>
                   </FormItem>
                   <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
@@ -215,14 +244,14 @@ const RegisterForm = ({
                       <RadioGroupItem className=' border-input' value="female" />
                     </FormControl>
                     <FormLabel className="font-normal">
-                      Female
+                      {TFmale}
                     </FormLabel>
                   </FormItem>
                   <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
                     <FormControl>
                       <RadioGroupItem className=' border-input' value="other" />
                     </FormControl>
-                    <FormLabel className="font-normal">Other</FormLabel>
+                    <FormLabel className="font-normal">{TOther}</FormLabel>
                   </FormItem>
                 </RadioGroup>
               </FormControl>
@@ -250,8 +279,10 @@ const RegisterForm = ({
           />
         </div>
         </div>
+        <FormMessageError message={error}/>
+        <FormMessageSuccess message={success}/>
         <button className=' btn btn-neutral capitalize font-semibold' type='submit'>
-          {TLogin}
+          {TCreate}
         </button>
       </form>
     </Form>

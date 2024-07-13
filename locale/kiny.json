@@ -40,7 +40,8 @@
                 "Gender" : "Igistina",
                 "Male" : "Umugabo",
                 "Female" : "Umugore",
-                "Other" : "Abandi"
+                "Other" : "Abandi",
+                "createAccount" : "Kora konti nshyashya"
             }
         }
     }
