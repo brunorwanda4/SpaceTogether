@@ -2,8 +2,10 @@ import React from 'react'
 
 const Data = () => {
   return (
-    <div>
-      data
+    <div className=''>
+      <main>
+        data
+      </main>
     </div>
   )
 }

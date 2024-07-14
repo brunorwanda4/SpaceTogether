@@ -1,8 +1,10 @@
+import { auth } from '@/auth'
 import { ChooseWhichWayCanCreateAccount } from '@/components/auth/chooseWhichWayCanCreateAccount'
 import { Logo } from '@/components/navbar/Logo'
 import { Locale } from '@/i18n'
 import { getDictionary } from '@/lib/dictionary'
 import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 import React from 'react'
 export const metadata: Metadata = {
   title : "Login"
@@ -14,7 +16,12 @@ interface Props {
 }
 
 const page = async ({params : {lang}} : Props) => {
-  const {page} = await getDictionary(lang)
+  const {page} = await getDictionary(lang);
+  const login = await auth();
+
+  if(!!login) {
+    redirect(`/${lang}/s`)
+  }
   return (
     <div className=' grid place-content-center h-screen'>
        <div className=' flex justify-center mb-4'>

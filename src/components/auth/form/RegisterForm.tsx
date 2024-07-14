@@ -27,7 +27,7 @@ import { ChevronDown } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { regServer } from '@/server/regServer';
 import { FormMessageError, FormMessageSuccess } from './formMessagers';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { toast } from '@/components/ui/use-toast';
 
 export interface RegisterProps {
@@ -90,6 +90,7 @@ const RegisterForm = ({
               description: `${data.success}`
             })
             setSuccess(data.success);
+            router.push(`/${lang}/auth/data`)
           }
           if(!!data.error) {
             toast({
@@ -118,7 +119,7 @@ const RegisterForm = ({
                 <FormItem>
                 <FormLabel>{TFName}</FormLabel>
                 <FormControl>
-                    <Input className={cn(DivClass[1])} autoFocus placeholder="Rwanda" {...field} />
+                    <Input className={cn(DivClass[1])} disabled={isPending} autoFocus placeholder="Rwanda" {...field} />
                 </FormControl>
                 <FormMessage />
                 </FormItem>
@@ -132,7 +133,7 @@ const RegisterForm = ({
                 <FormItem>
                 <FormLabel>{TEmail}</FormLabel>
                 <FormControl>
-                    <Input className={cn(DivClass[1])} type='email' placeholder="example@email.com" {...field} />
+                    <Input className={cn(DivClass[1])} disabled={isPending} type='email' placeholder="example@email.com" {...field} />
                 </FormControl>
                 <FormMessage />
                 </FormItem>
@@ -151,7 +152,7 @@ const RegisterForm = ({
                         <SelectValue placeholder="11" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className=' max-h-40'>
+                    <SelectContent className=' min-h-40 max-h-60'>
                     {[...Array( 31)].map((_, index) => (
                       <SelectItem key={index + 1} value={`${index + 1}`}>
                         {index + 1}
@@ -172,7 +173,7 @@ const RegisterForm = ({
                         <SelectValue placeholder=" November" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className=' max-h-40'>
+                    <SelectContent className=' min-h-40 max-h-60'>
                       {Object.keys(months).map((items , index) => (
                         <SelectItem key={index + 1} value={items}>
                           {items}
@@ -193,7 +194,7 @@ const RegisterForm = ({
                         <SelectValue className=' text-xs' placeholder=" 2006"  />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className=' text-xs max-h-40'>
+                    <SelectContent className=' text-xs min-h-40 max-h-60'>
                       {[...Array(100)].map((_, index) => (
                         <SelectItem key={2024 - index} value={`${2024 - index}`}>
                           {2024 - index}
@@ -267,7 +268,7 @@ const RegisterForm = ({
                 <FormLabel>{TPassword}</FormLabel>
                 <FormControl>
                   <div className=' relative'>
-                    <Input className={cn(DivClass[1])} placeholder="password" type={seePassword ? "password" : "text"} {...field} />
+                    <Input className={cn(DivClass[1])} disabled={isPending} placeholder="password" type={seePassword ? "password" : "text"} {...field} />
                     <div className=' absolute right-0 top-0 items-center flex rounded-r-md cursor-pointer h-full w-6 px-1 hover:bg-neutral/40 duration-200' onClick={handleSeePassword}>
                       {seePassword ? <ImEye size={24} /> : <ImEyeBlocked size={24} />}
                     </div>

@@ -28,3 +28,5 @@ export const PublicRouter = [
  */
 
 export const AuthDefault = "/api/auth";
+
+export const DefaultRoute = "/en"

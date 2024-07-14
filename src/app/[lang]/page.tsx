@@ -4,10 +4,18 @@ import { AuthNav } from "@/components/navbar/authNav";
 import AuthDialog from "@/components/auth/authDialog";
 import { auth, signIn, signOut } from "@/auth";
 import { LogoutButton } from "@/components/auth/logoutButton";
+import { redirect } from "next/navigation";
 
 const Home = async ({params : {lang}} : LanguagesProps) =>{
   const { indexPage, page , nav } = await getDictionary(lang);
-  const session = await auth();
+  const session = await auth()
+
+  if(session){
+    redirect(`/${lang}/s`)
+  }
+
+  // if user is login
+  
   return (
     <div className="">      
       <div>
@@ -23,11 +31,7 @@ const Home = async ({params : {lang}} : LanguagesProps) =>{
       </div>
       <div className=" grid place-content-center h-screen">
         {/* check if user is login */}
-
-        <button>
-          name : {session?.user?.name}
-        </button>
-        <LogoutButton/>)
+        {!!session && (<LogoutButton/>)}
         <div>
           <AuthDialog 
            indexWord={indexPage.getStart}

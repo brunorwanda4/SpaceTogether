@@ -1,8 +1,10 @@
+import { auth } from '@/auth';
 import { ChooseHowToCreateAccount } from '@/components/auth/chooseHowToCreateAccount';
 import { Logo } from '@/components/navbar/Logo'
 import { getDictionary } from '@/lib/dictionary'
 import { LangPageProps, LanguagesProps } from '@/types/pages';
 import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 import React from 'react'
 
 export const metadata:Metadata = {
@@ -11,8 +13,14 @@ export const metadata:Metadata = {
 
 const page = async ({ params : {lang} } : LanguagesProps) => {
  const {page} = await getDictionary(lang);
+
+  const login = await auth();
+
+  if(!!login) {
+    redirect(`/${lang}/s`)
+  }
   return (
-    <div className=' grid place-content-center h-screen'>
+    <div className=' grid place-content-center min-h-screen p-5'>
     <div className=' flex justify-center mb-4'>
        <Logo title/>
     </div>
