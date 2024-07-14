@@ -1,4 +1,5 @@
 import { auth } from '@/auth';
+import { AuthDivPage } from '@/components/auth/authDivForm';
 import { ChooseHowToCreateAccount } from '@/components/auth/chooseHowToCreateAccount';
 import { Logo } from '@/components/navbar/Logo'
 import { getDictionary } from '@/lib/dictionary'
@@ -20,13 +21,8 @@ const page = async ({ params : {lang} } : LanguagesProps) => {
     redirect(`/${lang}/s`)
   }
   return (
-    <div className=' grid place-content-center min-h-screen p-5'>
-    <div className=' flex justify-center mb-4'>
-       <Logo title/>
-    </div>
-     <main className=' card bg-base-300 shadow-lg min-w-96 p-4 min-h-60 h-auto max-w-xl'>
-       <h2 className=' text-center text-2xl font-medium'>{page.auth.register.registerTitle}</h2>
-       <ChooseHowToCreateAccount 
+    <AuthDivPage title={page.auth.register.registerTitle}>
+      <ChooseHowToCreateAccount 
          lang={lang} 
          TRegister={page.auth.register.login} 
          TForget={page.auth.loginForm.forgetPassword} 
@@ -51,8 +47,7 @@ const page = async ({ params : {lang} } : LanguagesProps) => {
           TCreate : page.auth.register.createAccount
         }}
          />
-     </main>
- </div>
+    </AuthDivPage>
   )
 }
 

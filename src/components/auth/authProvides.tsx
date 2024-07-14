@@ -23,7 +23,7 @@ const AuthProvides = ({TProvides , lang} : Props) => {
         <button onClick={() => loginAuthProvider({provides : "github" , locale : lang})} className=' btn btn-circle btn-neutral'>
             <BsGithub size={24} />
         </button>
-        <button className=' btn btn-circle btn-neutral'>
+        <button className=' btn btn-circle btn-neutral' onClick={() => loginAuthProvider({provides : "google" , locale : lang})}>
             <BsGoogle size={24} />
         </button>
         <button className=' btn btn-circle btn-neutral'>

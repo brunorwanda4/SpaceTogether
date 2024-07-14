@@ -90,7 +90,7 @@ const RegisterForm = ({
               description: `${data.success}`
             })
             setSuccess(data.success);
-            router.push(`/${lang}/auth/data`)
+            router.push(`/${lang}/s`)
           }
           if(!!data.error) {
             toast({

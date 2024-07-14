@@ -1,4 +1,5 @@
 import { auth } from '@/auth'
+import { AuthDivPage } from '@/components/auth/authDivForm'
 import { ChooseWhichWayCanCreateAccount } from '@/components/auth/chooseWhichWayCanCreateAccount'
 import { Logo } from '@/components/navbar/Logo'
 import { Locale } from '@/i18n'
@@ -17,19 +18,10 @@ interface Props {
 
 const page = async ({params : {lang}} : Props) => {
   const {page} = await getDictionary(lang);
-  const login = await auth();
 
-  if(!!login) {
-    redirect(`/${lang}/s`)
-  }
   return (
-    <div className=' grid place-content-center h-screen'>
-       <div className=' flex justify-center mb-4'>
-          <Logo title/>
-       </div>
-        <main className=' card bg-base-300 shadow-lg min-w-96 p-4 min-h-60 h-auto'>
-          <h2 className=' text-center text-2xl font-medium'>{page.auth.loginTitle}</h2>
-          <ChooseWhichWayCanCreateAccount 
+    <AuthDivPage lang={lang} title={page.auth.loginTitle}>
+      <ChooseWhichWayCanCreateAccount 
            lang={lang} 
            TRegister={page.auth.loginForm.register} 
            TForget={page.auth.loginForm.forgetPassword} 
@@ -38,8 +30,7 @@ const page = async ({params : {lang}} : Props) => {
            TPassword={page.auth.loginForm.password} 
            TUsername={page.auth.loginForm.username}
           />
-        </main>
-    </div>
+    </AuthDivPage>
   )
 }
 

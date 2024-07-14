@@ -42,6 +42,9 @@
                 "Female" : "Female",
                 "Other" : "Other",
                 "createAccount" : "Create account"
+            },
+            "profile" : {
+                "title" : "Make your profile"
             }
         }
     }

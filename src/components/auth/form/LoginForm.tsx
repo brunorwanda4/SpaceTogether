@@ -26,7 +26,7 @@ import { loginServer } from '@/server/loginServer';
 import { toast } from '@/components/ui/use-toast';
 import { FormMessageError, FormMessageSuccess } from './formMessagers';
 import { redirect } from 'next/navigation';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 interface Props {
     TPassword: string;
