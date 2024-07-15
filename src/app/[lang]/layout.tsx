@@ -31,8 +31,8 @@ export default function RootLayout(
       <body className={inter.className}>
           <ChangeTheme>
             <ClientThemeWrapper>
-            {children}
-            <Toaster />
+              {children}
+              <Toaster />
             </ClientThemeWrapper>
           </ChangeTheme>
       </body>

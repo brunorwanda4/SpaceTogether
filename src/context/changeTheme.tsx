@@ -38,5 +38,5 @@ interface Props {
 
 export const ClientThemeWrapper = ({className , children} : Props) => {
     const { theme } = useContext(ThemeContext)!;
-    return <main data-theme={theme || "dark"} className={cn(theme, "min-h-screen", className)}>{children}</main>;
+    return <main data-theme={theme || "dark"} className={cn(theme, "min-h-screen w-full", className)}>{children}</main>;
 };

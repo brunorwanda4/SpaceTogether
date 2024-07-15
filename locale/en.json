@@ -1,17 +1,28 @@
 {
     "nav" : {
-        "auth" : {
-        "settingDialog" : {
-            "setting" : "Settings",
-            "language" : "Language",
-            "chooseLanguage" : {
-                "changeLanguage" : "Change Language",
-                "save" : "Save",
-                "cancel" : "Cancel"
-            },
-            "changeTheme" : "Change Theme"
+            "auth" : {
+            "settingDialog" : {
+                "setting" : "Settings",
+                "language" : "Language",
+                "chooseLanguage" : {
+                    "changeLanguage" : "Change Language",
+                    "save" : "Save",
+                    "cancel" : "Cancel"
+                },
+                "changeTheme" : "Change Theme"
+            }
+        },
+        "school" : {
+            "createSchool" : "Add school",
+            "joinSchool" : "Join school",
+            "aside" : {
+                "home" : "Home",
+                "clubs" : "Clubs",
+                "group" : "Groups",
+                "family" : "Familys",
+                "messages" : "Messages"
+            }
         }
-    }
     },
     "indexPage" : {
         "getStart" : "Get start"
@@ -42,9 +53,6 @@
                 "Female" : "Female",
                 "Other" : "Other",
                 "createAccount" : "Create account"
-            },
-            "profile" : {
-                "title" : "Make your profile"
             }
         }
     }

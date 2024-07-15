@@ -4,4 +4,7 @@ export interface TUser {
     email: string;
     image : string;
     password: string;
+    role : "direct" | "teacher" | "student"
 }
+
+export type TURole = "direct" | "teacher" | "student"

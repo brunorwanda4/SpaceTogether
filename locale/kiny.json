@@ -1,17 +1,28 @@
 {
     "nav" : {
-        "auth" : {
-        "settingDialog" : {
-            "setting" : "Gushyiraho",
-            "language" : "Ururimi",
-            "chooseLanguage" : {
-                "changeLanguage" : "Guhindura ururimi",
-                "save" : "hindura",
-                "cancel" : "bireke"
-            },
-            "changeTheme" : "Guhindura Amabara"
+            "auth" : {
+            "settingDialog" : {
+                "setting" : "Gushyiraho",
+                "language" : "Ururimi",
+                "chooseLanguage" : {
+                    "changeLanguage" : "Guhindura ururimi",
+                    "save" : "hindura",
+                    "cancel" : "bireke"
+                },
+                "changeTheme" : "Guhindura Amabara"
+            }
+        },
+        "school" : {
+            "createSchool" : "Shyiramo ishuri",
+            "joinSchool" : "Injira mwishuri",
+            "aside" : {
+                "home" : "Ahatagira",
+                "clubs" : "Amahuriro",
+                "group" : "Amansinda",
+                "family" : "imiryango",
+                "messages" : "Ubutumwa"
+            }
         }
-    }
     },
     "indexPage" : {
         "getStart" : "Gutagira"

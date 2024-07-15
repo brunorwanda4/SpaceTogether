@@ -2,7 +2,8 @@ import NextAuth from "next-auth"
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import authConfig from "@/auth.config"
 import clientPromise from "@/lib/db"
-import { getUserByEmail, getUserById } from "./data/getUserData"
+import { getUserByEmail,} from "./data/getUserData"
+import { TURole } from "./types/user"
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   callbacks : {
@@ -20,6 +21,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if(token.picture && session.user) {
         session.user.image = token.picture;
       }
+
+      if(token.role && session.user) {
+        session.user.role = token.role as TURole
+      }
       
       return session
     },
@@ -33,6 +38,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       token.email = user.email;
       token.picture = user.image;
       token.sub = user._id.toString();
+      token.role = user.role;
 
       return token
     }
