@@ -24,8 +24,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useTheme } from "@/hooks/useTheme";
 import UseOnlineStatus from "@/hooks/useOnlineStatus";
+import { FaSchool } from "react-icons/fa6";
 
-interface Props {
+export interface CreateSchoolProps {
   email : string | null | undefined
   TName : string
   TUsername : string
@@ -60,7 +61,7 @@ const SchoolOption: SchoolOptionType[] = [
 
 export const CreateSchoolForm = ({
   email, TName , TCity , TDescription ,TLocation ,TProvince,TLogo,TType,TUsername,TWebsite,TPhone,TEmail
-} : Props) => {
+} : CreateSchoolProps) => {
   // theme
   const theme = useTheme();
   const online = UseOnlineStatus();
@@ -155,6 +156,12 @@ export const CreateSchoolForm = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className=" w-full">
+       <div className=" flex gap-2 items-center justify-center w-full ">
+          <FaSchool size={24} className={cn(" text-neutral")}/>
+          <h2 className=" lg:text-xl font-semibold flex text-center leading-3 gap-2 font-allura">
+            <span>Add School</span>
+          </h2>
+       </div>
         <div className=" w-full">
         <FormField
             control={form.control}

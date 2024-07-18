@@ -24,8 +24,8 @@ export const SchoolAsidePublic = ({
     const pathname = usePathname();
   return (
     <div className=' mt-1 flex flex-col px-1'>
-        <Link className={cn(AsideLinkClassName , pathname === `/${lang}/s` && " text-warning")} href={`/${lang}/s`}> 
-            <FaSchool size={24}/>
+        <Link className={cn(AsideLinkClassName ,)} href={`/${lang}/s`}> 
+            <FaSchool size={24} className={cn( pathname === `/${lang}/s` && " text-warning")}/>
             <span>{THome}</span>
         </Link>
         {/* <Link className=' btn btn-sm w-full justify-start  btn-ghost hover:bg-black/20' href={`/${lang}/c`}> 

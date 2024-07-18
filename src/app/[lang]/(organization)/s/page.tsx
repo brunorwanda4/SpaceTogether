@@ -23,7 +23,7 @@ const SchoolPage =async ({
   const {page} = await getDictionary(lang)
 
   return (
-    <div className=' grid place-content-center h-[80vh]'>
+    <div className=' grid place-content-center h-[80vh] pb-12'>
       <div className=' flex justify-center h-full  items-center'>
       <div className=' flex flex-col  items-center  justify-center  w-full h-full'>
         <p>{page.school.welcome}</p>
