@@ -19,9 +19,9 @@ export const SchoolMenu = async ({
     return(
         <ResizablePanelGroup
         direction="horizontal"
-        className="min-h-screen rounded-lg w-full"
+        className="min-h-screen rounded-lg w-full fixed z-40"
       >
-        <ResizablePanel className=" h-full pt-12" defaultSize={15} maxSize={25} minSize={5}>
+        <ResizablePanel className=" h-full pt-12" defaultSize={15} maxSize={30} minSize={5}>
           <SchoolAside
            ShoolAsideProps={{
             TClub : nav.school.aside.clubs,
@@ -37,7 +37,7 @@ export const SchoolMenu = async ({
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel className=" w-full" defaultSize={75}>
-          <main className=" pt-12 px-1">
+          <main className=" pt-12 px-1 max-h-screen overflow-y-auto">
             {children}
           </main>
         </ResizablePanel>

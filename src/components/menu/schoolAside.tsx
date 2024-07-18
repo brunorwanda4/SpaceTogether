@@ -13,7 +13,7 @@ export const SchoolAside = ({
     lang , ShoolAsideProps , TSetting , TMessages
 } : Props) => {
   return (
-    <div className=" flex flex-col gap-1">
+    <div className=" flex flex-col gap-1 ">
         {/* public route */}
         <SchoolAsidePublic
           TClub={ShoolAsideProps.TClub}

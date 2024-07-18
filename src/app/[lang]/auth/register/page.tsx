@@ -21,7 +21,7 @@ const page = async ({ params : {lang} } : LanguagesProps) => {
     redirect(`/${lang}/s`)
   }
   return (
-    <AuthDivPage title={page.auth.register.registerTitle}>
+    <AuthDivPage lang={lang} title={page.auth.register.registerTitle}>
       <ChooseHowToCreateAccount 
          lang={lang} 
          TRegister={page.auth.register.login} 

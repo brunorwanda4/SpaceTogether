@@ -6,6 +6,7 @@ import "./globals.css";
 import { ChangeTheme, ClientThemeWrapper } from "@/context/changeTheme";
 import { LanguagesProps } from "@/types/pages";
 import { Toaster } from "@/components/ui/toaster"
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,7 @@ export default function RootLayout(
 ) {
   return (
     <html lang={lang}>
-      <body className={inter.className}>
+      <body className={cn(inter.className , " bg-fixed")}>
           <ChangeTheme>
             <ClientThemeWrapper>
               {children}

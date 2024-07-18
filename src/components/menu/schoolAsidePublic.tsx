@@ -8,6 +8,7 @@ import { IoIosPeople } from "react-icons/io";
 import { IoPeople } from "react-icons/io5";
 import { cn } from '@/lib/utils';
 import { AsideLinkClassName } from '../style';
+import { FaSchool } from "react-icons/fa6";
 
 export interface ShoolAsideProps {
     lang : Locale
@@ -24,7 +25,7 @@ export const SchoolAsidePublic = ({
   return (
     <div className=' mt-1 flex flex-col px-1'>
         <Link className={cn(AsideLinkClassName , pathname === `/${lang}/s` && " text-warning")} href={`/${lang}/s`}> 
-            <GoHome size={24}/>
+            <FaSchool size={24}/>
             <span>{THome}</span>
         </Link>
         {/* <Link className=' btn btn-sm w-full justify-start  btn-ghost hover:bg-black/20' href={`/${lang}/c`}> 

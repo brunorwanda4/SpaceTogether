@@ -15,11 +15,11 @@ interface Props {
 export const AuthDivPage = async ({
     children , className , title, lang
 } : Props) => {
-  // const login = await auth();
+  const login = await auth();
 
-  // if(!!login) {
-  //   redirect(`/${lang}/s`)
-  // }
+  if(!!login) {
+    redirect(`/${lang}/s`)
+  }
   return (
     <div className={cn("grid place-content-center min-h-screen p-5" , className)}>
         <div className=' flex justify-center mb-4'>

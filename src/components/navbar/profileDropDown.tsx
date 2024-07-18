@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { useTheme } from '@/hooks/useTheme';
 import UseOnlineStatus from '@/hooks/useOnlineStatus';
+import { AuthNav } from './authNav';
 
 interface Props {
     image : string | null | undefined,
@@ -31,7 +32,7 @@ export const ProfileDropDown = ({
             </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent data-theme={theme}>
-            profile 
+             <AuthNav/>
         </DropdownMenuContent>
     </DropdownMenu>
   )

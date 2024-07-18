@@ -16,7 +16,7 @@
             "createSchool" : "Shyiramo ishuri",
             "joinSchool" : "Injira mwishuri",
             "aside" : {
-                "home" : "Ahatagira",
+                "home" : "Amashuri",
                 "clubs" : "Amahuriro",
                 "group" : "Amansinda",
                 "family" : "imiryango",
@@ -53,6 +53,24 @@
                 "Female" : "Umugore",
                 "Other" : "Abandi",
                 "createAccount" : "Kora konti nshyashya"
+            }
+        },
+        "school" : {
+            "welcome" : "Mwiriwe shyiramo ishuri ryawe utagire",
+            "joinSchool" : "Shyiramo ishuri",
+            "addSchool" : "Kora ishuri",
+            "addSchoolFrom" : {
+                "name" : "Izina ry'ishuri",
+                "username" : "izina ishuri rizacya rikoresha",
+                "email" : "imeri",
+                "phone" : "Nimero ya terefone",
+                "location" : "Aho ishuri riri",
+                "website" : "urubuga rw 'ishuri",
+                "type" : "Ubumenyi ishuri ritanga",
+                "description" : "Sobanura ishuri",
+                "province" : "Intara",
+                "city" : "Akarere",
+                "logo" : "Ikirango cy'ishuri"
             }
         }
     }

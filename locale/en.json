@@ -16,7 +16,7 @@
             "createSchool" : "Add school",
             "joinSchool" : "Join school",
             "aside" : {
-                "home" : "Home",
+                "home" : "Schools",
                 "clubs" : "Clubs",
                 "group" : "Groups",
                 "family" : "Familys",
@@ -53,6 +53,24 @@
                 "Female" : "Female",
                 "Other" : "Other",
                 "createAccount" : "Create account"
+            }
+        },
+        "school" : {
+            "welcome" : "Hello add a school and get start",
+            "joinSchool" : "Join school",
+            "addSchool" : "Add School",
+            "addSchoolFrom" : {
+                "name" : "school name",
+                "username" : "school username",
+                "email" : "Email",
+                "phone" : "School phone number",
+                "location" : "School Location",
+                "website" : "School Website",
+                "type" : "Type",
+                "description" : "Description",
+                "province" : "Province",
+                "city" : "City",
+                "logo" : "Upload school logo"
             }
         }
     }
