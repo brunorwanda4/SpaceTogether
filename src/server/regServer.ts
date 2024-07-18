@@ -1,5 +1,6 @@
 "use server";
 
+import bcrypt from 'bcryptjs';
 import { signIn } from "@/auth";
 import clientPromise from "@/lib/db";
 import { RegisterValidation } from "@/validation/registerValidation";
@@ -17,6 +18,8 @@ export const regServer = async (values : z.infer<typeof RegisterValidation>) => 
 
     const birthDate = new Date(`${year}-${month}-${day}`);
 
+    const hashPassword = await bcrypt.hash(password , 10)
+
     try {
     const db = (await clientPromise).db();
 
@@ -32,7 +35,7 @@ export const regServer = async (values : z.infer<typeof RegisterValidation>) => 
     .collection("users")
     .insertOne({ 
         email : email,
-        password : password,
+        password : hashPassword,
         LName : LName,
         FName : FName,
         gender : gender,

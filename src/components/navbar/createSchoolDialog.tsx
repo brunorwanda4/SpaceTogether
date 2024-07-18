@@ -4,24 +4,28 @@ import React from 'react'
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
 import { CreateSchoolForm, CreateSchoolProps } from '../page/school/createSchoolForm'
 import { useTheme } from '@/hooks/useTheme'
+import { cn } from '@/lib/utils'
 
 interface Props {
     TCreate : string
     TSchoolProps : CreateSchoolProps
     email : string | null | undefined
+    className?: string 
 }
 
 export const CreateSchoolDialog = ({
-    TCreate , TSchoolProps, email
+    TCreate , TSchoolProps, email, className
 } : Props) => {
     const theme = useTheme();
   return (
     <Dialog>
-        <DialogTrigger className='btn btn-ghost w-full btn-sm'>
+        <DialogTrigger className={cn("btn btn-ghost w-full btn-sm" , className)}>
             {TCreate}
         </DialogTrigger >
         <DialogContent className='  overflow-y-auto max-h-2xl max-h-[90vh]' data-theme={theme}>
             <CreateSchoolForm
+             TCreateBy={TSchoolProps.TCreateBy}
+             lang={TSchoolProps.lang}
              TCity={TSchoolProps.TCity}
              TDescription={TSchoolProps.TDescription}
              TEmail={TSchoolProps.TEmail}

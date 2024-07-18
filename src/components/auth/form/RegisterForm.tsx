@@ -29,6 +29,8 @@ import { regServer } from '@/server/regServer';
 import { FormMessageError, FormMessageSuccess } from './formMessagers';
 import { redirect, useRouter } from 'next/navigation';
 import { toast } from '@/components/ui/use-toast';
+import { BeatLoader } from 'react-spinners';
+import { BsCheck2Circle } from 'react-icons/bs';
 
 export interface RegisterProps {
     TPassword: string;
@@ -87,7 +89,13 @@ const RegisterForm = ({
           
           if(!!data.success) {
             toast({
-              description: `${data.success}`
+              title : "WOW! account has been created successfully",
+              description: (
+                <div className=' flex gap-2'>
+                  <BsCheck2Circle size={20} className=' text-success'/>
+                  <span>{data.success}</span>
+                </div>
+              )
             })
             setSuccess(data.success);
             router.push(`/${lang}/s`)
@@ -100,7 +108,6 @@ const RegisterForm = ({
             })
             setError(data.error);
           }
-          
         })
       })
     }
@@ -283,7 +290,7 @@ const RegisterForm = ({
         <FormMessageError message={error}/>
         <FormMessageSuccess message={success}/>
         <button className=' btn btn-neutral capitalize font-semibold' type='submit'>
-          {TCreate}
+          {isPending ? <BeatLoader size={20} /> : `${TCreate}`}
         </button>
       </form>
     </Form>

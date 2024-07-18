@@ -1,4 +1,4 @@
-import z from "zod";
+import {z} from "zod";
 
 export const SchoolValidation = z.object({
     name : z.string().min(4 , {
@@ -7,7 +7,7 @@ export const SchoolValidation = z.object({
         message : "Maximum characters are 25",
     }),
     username : z.string().min(1 , {
-    message : "username are not required",
+        message : "username are not required",
     }).max(50, {
         message : "maximum characters are 50",
     }),
@@ -31,12 +31,13 @@ export const SchoolValidation = z.object({
         message : "Maximum characters are 23",
     }),
     type : z.array(z.object({
-        value: z.string(),
+        value: z.enum(["online", "primary", "middle", "vocational", "homeschooling", "boarding", "TVET", "high", "international"]),
         label: z.string(),
       })).min(1, 'Please select at least one color.'),
     description : z.string().min(10 , {
         message : "Minimum characters 10",
     }).max(255 , {
         message : "maximum characters are 255"
-    })
+    }),
+    createdBy : z.string(),
 })

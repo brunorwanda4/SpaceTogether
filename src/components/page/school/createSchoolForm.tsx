@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useForm } from "react-hook-form"
 import z from "zod"
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useTransition } from "react";
 import AsyncSelect from 'react-select';
 import makeAnimated from 'react-select/animated';
 
@@ -18,16 +18,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
+} from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useTheme } from "@/hooks/useTheme";
 import UseOnlineStatus from "@/hooks/useOnlineStatus";
 import { FaSchool } from "react-icons/fa6";
+import { CreateSchoolServer } from "@/server/s/createSchoolServer";
+import { useRouter } from "next/navigation";
+import { Locale } from "@/i18n";
+import { BeatLoader } from 'react-spinners';
+import { FormMessageError, FormMessageSuccess } from "@/components/auth/form/formMessagers";
+import { BsCheck2Circle } from "react-icons/bs";
+import { IoIosWarning } from "react-icons/io";
 
 export interface CreateSchoolProps {
   email : string | null | undefined
+  lang : Locale  
   TName : string
   TUsername : string
   TPhone : string
@@ -39,6 +47,7 @@ export interface CreateSchoolProps {
   TCity : string
   TWebsite : string
   TEmail : string
+  TCreateBy : string | null | undefined
 }
 
 type SchoolOptionType = {
@@ -60,7 +69,7 @@ const SchoolOption: SchoolOptionType[] = [
 ];
 
 export const CreateSchoolForm = ({
-  email, TName , TCity , TDescription ,TLocation ,TProvince,TLogo,TType,TUsername,TWebsite,TPhone,TEmail
+  email, TName , TCity , TDescription ,TLocation ,TProvince,TLogo,TType,TUsername,TWebsite,TPhone,TEmail , TCreateBy, lang
 } : CreateSchoolProps) => {
   // theme
   const theme = useTheme();
@@ -90,19 +99,20 @@ export const CreateSchoolForm = ({
       }
     };
 
-    const form = useForm<z.infer<typeof SchoolValidation>>({
+    const form = useForm<z.infer <typeof SchoolValidation>>({
         resolver : zodResolver(SchoolValidation),
         defaultValues : {
             name : "",
             username : "",
             email : email ? email :"",
-            country : "",
+            country : "Rwanda",
             city : "",
             province : "",
             logo : "",
             websiteURL : "",
             phoneNumber : "",
             type : undefined,
+            createdBy : TCreateBy ? TCreateBy : undefined,
         }
     });
 
@@ -137,21 +147,46 @@ export const CreateSchoolForm = ({
     Western: ["Karongi", "Rubavu", "Rusizi", "Ngororero", "Nyabihu", "Nyamasheke", "Rutsiro"]
   };
   
-  
   // submit
+    const [error , setError] = useState<string | undefined>("");
+    const [success , setSuccess] = useState<string | undefined>("");
+    const [isPending , startTransition] = useTransition();
 
-  const onSubmit = (data: z.infer<typeof SchoolValidation>) => {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white bg-base-200 h-32">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
-  }
+    // router
+    const router = useRouter();
 
-  console.log("Something went wrong❤️❤️")
+    const onSubmit = (values : z.infer<typeof SchoolValidation>) => {
+      startTransition(() => {
+        CreateSchoolServer(values).then((data) => {
+          if(!!data.succuss){
+            setSuccess(data.succuss)
+            toast({
+              title : "WOW! School has been created successfully",
+              description : (
+              <div className=" flex gap-2">
+                <BsCheck2Circle size={20} className="  text-success"/>
+                <span>{data.succuss}</span>
+              </div>
+              )
+            })
+          }
+          if(!!data.error) {
+            setError(data.error)
+            toast({
+              title : "Oops! Something went wrong",
+              description : (
+              <div className=" flex gap-1">
+                <IoIosWarning size={20} />
+                <span>{data.error}</span>
+              </div>
+              ),
+              variant : "destructive"
+            })
+          }
+        })
+      })
+      
+    }
 
   return (
     <Form {...form}>
@@ -189,7 +224,7 @@ export const CreateSchoolForm = ({
                     </div>
                   )}
                 </div>
-                <span className=" text-info flex ">{TLogo}</span>
+                <span className=" text-info flex  cursor-pointer">{TLogo}</span>
               </FormLabel>
                 <FormControl>
                 <Input
@@ -382,13 +417,16 @@ export const CreateSchoolForm = ({
                 <FormControl>
                   <Textarea className={cn(InputClassName)} placeholder="Explain your school " {...field}/>
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
             />
           </div>
         </div>
+        <FormMessageError className={" mt-2"} message={error}/>
+        <FormMessageSuccess className={" mt-2"} message={success}/>
         <button  className=' btn btn-neutral capitalize w-full mt-2 font-medium' type='submit'>
-          Send request
+          {isPending ? <BeatLoader /> : "Send request"}
         </button>
       </form>
     </Form>

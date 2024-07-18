@@ -57,10 +57,6 @@ const AuthDialog = ({
   // if user is login
   const user = !!isLogin();
 
-  if(user) {
-    router.push(`/${lang}/s`)
-  }
-
   const renderContent = () => {
     switch (choose) {
         case "login":

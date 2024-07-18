@@ -28,6 +28,8 @@ export const SchoolNav = async ({lang} : props) => {
              lang={lang}
              TSchoolProps={{
                 TCity : page.school.addSchoolFrom.city,
+                TCreateBy : user?.id,
+                lang : lang,
                 TDescription : page.school.addSchoolFrom.description,
                 TEmail : page.school.addSchoolFrom.email,
                 TPhone : page.school.addSchoolFrom.phone,

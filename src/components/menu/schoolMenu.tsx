@@ -35,7 +35,7 @@ export const SchoolMenu = async ({
            TMessages={nav.school.aside.messages}
           />
         </ResizablePanel>
-        <ResizableHandle withHandle />
+        <ResizableHandle  />
         <ResizablePanel className=" w-full" defaultSize={75}>
           <main className=" pt-12 px-1 max-h-screen overflow-y-auto">
             {children}

@@ -23,6 +23,8 @@ const CreteSchoolPage = async ({
       <main className={cn("card bg-base-300 shadow-lg min-w-96 p-4 max-w-2xl")}>
         <CreateSchoolForm 
          email={user?.email}
+         TCreateBy={user?.id}
+         lang={lang}
          TName={page.school.addSchoolFrom.name}
          TUsername={page.school.addSchoolFrom.username}
          TEmail={page.school.addSchoolFrom.email}

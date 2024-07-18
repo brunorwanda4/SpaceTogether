@@ -27,6 +27,6 @@ export const PublicRouter = [
  * @type {string}
  */
 
-export const AuthDefault = "/api/auth";
+export const AuthDefault = "/api";
 
 export const DefaultRoute = "/en"
