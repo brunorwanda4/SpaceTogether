@@ -37,7 +37,7 @@ export const SchoolMenu = async ({
         </ResizablePanel>
         <ResizableHandle  />
         <ResizablePanel className=" w-full" defaultSize={75}>
-          <main className=" pt-12 px-1 max-h-screen overflow-y-auto">
+          <main className=" pt-14 px-1 max-h-screen overflow-y-auto">
             {children}
           </main>
         </ResizablePanel>

@@ -1,3 +1,4 @@
+import { TUser } from './user';
 import { Document, ObjectId } from 'mongoose';
 
 export interface ISchool extends Document {
@@ -19,4 +20,8 @@ export interface ISchool extends Document {
   headerTeacher: ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+export interface TSchoolWithUser extends Omit<ISchool, 'createdBy'> {
+  createdBy: TUser | null;
 }

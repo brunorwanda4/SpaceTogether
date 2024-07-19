@@ -16,11 +16,11 @@ export const SchoolAsideMain = ({
   return (
     <div className='flex flex-col gap-1 w-full justify-start border-t border-neutral px-1 py-1 '>
         <Link className={cn(AsideLinkClassName)} href={`/${lang}/m`}>
-            <BsMessenger size={24}/>
+            <BsMessenger size={24} className=" text-gray-500"/>
             <span>{TMessages}</span>
         </Link>
-        <Link className={cn(AsideLinkClassName)} href={`/${lang}/se`}>
-            <IoSettingsOutline size={24}/>
+        <Link className={cn(AsideLinkClassName , "link-hover")} href={`/${lang}/se`}>
+            <IoSettingsOutline size={24} className="text-gray-500"/>
             <span>{TSetting}</span>
         </Link>
     </div>
