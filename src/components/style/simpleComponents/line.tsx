@@ -7,6 +7,6 @@ interface Props {
 
 export const SPLine = ({className} : Props) => {
   return (
-    <div className={cn( "h-1 w-full bg-base-100 mt-2" , className)}/>
+    <div className={cn( " divider" , className)}/>
   )
 }

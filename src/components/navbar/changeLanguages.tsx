@@ -17,9 +17,12 @@ interface Props {
   lang: Locale;
   TSave : string
   TCancel : string
+  children ?: React.ReactNode 
 }
 
-export const ChangeLanguages = ({ title,TSave, TCancel, chooseLang, lang }: Props) => {
+export const ChangeLanguages = ({ 
+  title,TSave, TCancel, chooseLang, lang , children
+}: Props) => {
   const pathname = usePathname();
   const router = useRouter();
   const theme = useTheme();
@@ -39,17 +42,24 @@ export const ChangeLanguages = ({ title,TSave, TCancel, chooseLang, lang }: Prop
   return (
     <AlertDialog>
       <AlertDialogTrigger className=' w-full'>
-      <div className=' flex justify-between w-full'>
-          <div className=' flex gap-1 items-center'>
-              <Languages size={18} className=' text-neutral'/>
-              <span className=''>{title}</span>
-          </div>
-          <span className=''>{lang === "en" ? "English" : "Kinyarwanda"}</span>
-      </div>
+      {!!children ? children : (
+        <div className=' flex justify-between w-full'>
+         <div className=' flex gap-1 items-center'>
+             <Languages size={18} className=' text-neutral'/>
+             <span className=''>{title}</span>
+         </div>
+         <span className=''>{lang === "en" ? "English" : "Kinyarwanda"}</span>
+     </div>
+      )}
       </AlertDialogTrigger>
       <AlertDialogContent data-theme={theme}>
         <AlertDialogHeader>
-          <AlertDialogTitle>{chooseLang}</AlertDialogTitle>
+          <AlertDialogTitle className=' flex gap-2 items-center'>
+            <Languages size={20} className="text-neutral"/>
+            <h3 className={" font-medium"}>
+              {chooseLang}
+            </h3>
+          </AlertDialogTitle>
           <div className="flex flex-col gap-2 justify-start items-start">
             {i18n.locales.map(locale => (
               <label key={locale} className="label cursor-pointer justify-start gap-2">

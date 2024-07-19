@@ -4,7 +4,7 @@ import clientPromise from "@/lib/db";
 import { TUser } from "@/types/user";
 import { ObjectId } from "mongodb";
 
-export const getUserByEmail = async (email : string): Promise<TUser | null> => {
+export const getUserByEmail = async (email : string | null | undefined): Promise<TUser | null> => {
     const db = (await clientPromise).db();
     const user = await db
     .collection("users")
