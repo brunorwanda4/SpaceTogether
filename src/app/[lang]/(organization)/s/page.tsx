@@ -12,7 +12,6 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { BsPlusCircle } from 'react-icons/bs';
 
 export const metadata:Metadata = {
   title : "Schools"
@@ -76,38 +75,37 @@ const SchoolPage =async ({
     return { ...school, createdBy };
   }));
 
-  // const schoolsWithUserI = await Promise.all(findSchool.map(async (school) => {
-  //   const createdBy = await getUserById(school.createdBy.toString());
-  //   return { ...school, createdBy };
-  // }));
-
   return (
     <div>
        <div className=' grid grid-cols-3 gap-3'>
         {schoolsWithUser.map((school) => {
           return (
-            <div key={school.id} className=' card glass size-80 flex flex-col justify-end relative'>
-              <div className=' absolute  right-2 top-1/4 school-center flex justify-between w-full'>
-                <div className=' pl-4'>
-                  <h3 className=' font-medium text-xl  capitalize'>{school.name}</h3>
-                  <Link href={`/${lang}/s/${school.username}`} className=' text-info link-hover'>@{school.username}</Link>
-                </div>
-                <Link href={`/${lang}/s/${school.username}`}><MyImage src={school.logo} className=' avatar size-16' classname=' rounded-full'/></Link>
-              </div>
-              <div className=' w-full bg-black/20 h-3/5'>
-                <div className=' mt-12 px-2'>
-                  <p>{school.description}</p>
-                </div>
-                <Link href={`/${lang}/p/${school.createdBy?._id}`} className=' flex justify-end bottom-2 absolute  right-2'>
-                    <div className=' flex gap-1 items-center'>
-                      <span className=' text-xs font-medium'>{school.createdBy?.name}</span>
-                    <div className={cn(" avatar")}>
-                          <div className=' size-7 relative rounded-full'>
-                            <Image src={!!school.createdBy?.image ? school.createdBy?.image : "/p.jpg"} alt={cn("your user name :" , school.createdBy?.name)} fill priority/>
-                          </div>
-                      </div>
-                    </div>
+            <div key={school.id} className=' card size-80 flex flex-col relative glass '>
+              <MyImage src='/images/1.jpg' className=' w-full cursor-pointer' classname=' rounded-b-none'/>
+              <div className=' top-0 bg-black/60 absolute h-32 z-10 w-full'/>
+              <div className=' absolute  z-20 flex top-24 left-2 flex-col  flex-wrap'>
+                <div className=' flex gap-2'>
+                <Link href={`/${lang}/s/${school.username}`}><MyImage src={school.logo} className=' size-16' classname=' rounded-full' alt={school.name}/></Link>
+                <div className=' flex flex-col gap-2'>
+                  <h3 className=' font-allura font-semibold text-xl capitalize leading-5'>{school.name}</h3>
+                  <Link className=' link-hover link' href={`/${lang}/s/${school.username}`}>
+                    <span className=' text-info'>@</span>
+                    {school.username}
                   </Link>
+                </div>
+                </div>
+                  {/* deception */}
+                  <p className=' leading-3 pt-2'>{school.description}</p>
+              </div>
+              {/* created by */}
+              <div className=' absolute bottom-2 right-2'>
+                <Link className=' flex items-center gap-1 btn btn-ghost' href={`/${lang}/p/${school.createdBy?._id}`}>
+                  <div className=' flex flex-col'>
+                    <span className=' font-semibold text-sm'>{school.createdBy?.name}</span>
+                    <span className=' text-end text-xs font-medium'>directer</span>
+                  </div>
+                  <MyImage className=' size-10' classname=' rounded-full' src={!!school.createdBy?.image ? school.createdBy.image : "/p.jpg"}/>
+                </Link>
               </div>
             </div>
           )

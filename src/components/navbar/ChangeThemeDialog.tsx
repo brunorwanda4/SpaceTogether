@@ -3,6 +3,7 @@ import { AlertDialog, AlertDialogContent, AlertDialogTitle, AlertDialogTrigger }
 import { useTheme } from "@/hooks/useTheme"
 import { useContext } from "react";
 import { ThemeContext } from "@/context/changeTheme";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
 
 export const ChangeThemeDialog = () => {
   // theme
@@ -12,21 +13,21 @@ export const ChangeThemeDialog = () => {
   const themes   = ["light","pastel" , "forest", "dark", "night",]
   const otherTheme = ["cupcake","bumblebee","emerald","corporate","synthwave","retro","cyberpunk","valentine","halloween","garden","aqua","lofi","fantasy","wireframe","black","luxury","dracula","cmyk","autumn","business","acid","lemonade","coffee","winter","dim","nord","sunset",]
   return (
-    <AlertDialog>
-        <AlertDialogTrigger className="flex gap-2 btn btn-ghost btn-sm w-full justify-between">
+    <Dialog>
+        <DialogTrigger className="flex gap-2 btn btn-ghost btn-sm w-full justify-between">
            <div className=" flex gap-2 items-center">
             <BsPaletteFill size={20} className=" text-gray-500"/>
               <span>Theme</span>
            </div>
            <div className=" badge badge-outline">{theme}</div>
-        </AlertDialogTrigger>
-        <AlertDialogContent className=" max-w-max overflow-y-auto max-h-[90vh]" data-theme={theme}>
-        <AlertDialogTitle className=" flex gap-2 items-center">
+        </DialogTrigger>
+        <DialogContent className=" max-w-max overflow-y-auto max-h-[90vh]" data-theme={theme}>
+        <DialogTitle className=" flex gap-2 items-center">
             <BsPaletteFill size={20} className="text-neutral"/>
             <h3 className={" font-medium"}>
                 Choose theme 
             </h3>
-        </AlertDialogTitle>
+        </DialogTitle>
         <div className=" mt-2 overflow-x-auto flex gap-2 w-full max-w-auto max-w-max">
             {/* dark */}
            {themes.map((items) => {
@@ -47,7 +48,7 @@ export const ChangeThemeDialog = () => {
             )
            })}
         </div>
-        </AlertDialogContent>
-    </AlertDialog>
+        </DialogContent>
+    </Dialog>
   )
 }

@@ -6,6 +6,10 @@ import {
 import { SchoolAside } from "./schoolAside"
 import { Locale } from "@/i18n"
 import { getDictionary } from "@/lib/dictionary"
+import { auth } from "@/auth"
+import { FindSchoolByOwn } from "@/data/getSchool"
+import { ISchool } from "@/types/school"
+import { getUserById } from "@/data/getUserData"
 
 interface Props {
   children : React.ReactNode
@@ -13,9 +17,20 @@ interface Props {
 }
 
 export const SchoolMenu = async ({
-  children,lang
+  children,lang ,
 } : Props) => {
-  const {nav} = await getDictionary(lang)
+  const {nav} = await getDictionary(lang);
+  const user = (await auth())?.user;
+
+  const findSchool: ISchool[] | null = await FindSchoolByOwn(user?.id)
+
+    // @ts-ignore
+    const schoolsWithUser: TSchoolWithUser[] = await Promise.all(findSchool.map(async (schoolDoc) => {
+      const school = schoolDoc.toObject() as ISchool; // Convert to plain object
+      const createdBy = await getUserById(school.createdBy.toString());
+      return { ...school, createdBy };
+    }));
+
     return(
         <ResizablePanelGroup
         direction="horizontal"
@@ -28,11 +43,13 @@ export const SchoolMenu = async ({
             TFamily : nav.school.aside.family,
             TGroup : nav.school.aside.group,
             THome : nav.school.aside.home,
-            lang : lang
+            lang : lang,
            }}
            lang={lang}
            TSetting={nav.auth.settingDialog.setting}
            TMessages={nav.school.aside.messages}
+           TId={user?.id}
+           Schools={schoolsWithUser}
           />
         </ResizablePanel>
         <ResizableHandle  />

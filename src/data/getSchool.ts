@@ -2,7 +2,7 @@ import { dbConn } from "@/lib/mongoose";
 import School from "@/schema/schoolSchema";
 import { ISchool } from "@/types/school";
 
-export const FindSchoolByOwn = async (id: string | undefined): Promise<ISchool[] | null> => {
+export const FindSchoolByOwn = async (id: string |null | undefined): Promise<ISchool[] | null> => {
     if (!id) {
         throw new Error("User ID must be provided");
     }
@@ -14,8 +14,23 @@ export const FindSchoolByOwn = async (id: string | undefined): Promise<ISchool[]
     }
 
     if (school.length === 0) {
-        throw new Error(`No schools found for user ID ${id}`);
+        return null;
     }
 
     return school;
 };
+
+ export const FindSchoolByUsername = async (username : string) => {
+    if (!username) {
+        throw new Error("Username must be provided");
+    }
+
+    await dbConn();
+    const school = await School.findOne<ISchool>({ username });
+
+    if (!school) {
+        return null;
+    }
+    return school;
+};
+

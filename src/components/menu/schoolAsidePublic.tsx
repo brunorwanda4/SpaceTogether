@@ -2,13 +2,9 @@
 import { Locale } from '@/i18n'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { GoHome } from 'react-icons/go'
-import { FaPeopleGroup } from "react-icons/fa6";
-import { IoIosPeople } from "react-icons/io";
-import { IoPeople } from "react-icons/io5";
 import { cn } from '@/lib/utils';
 import { AsideLinkClassName } from '../style';
-import { FaSchool } from "react-icons/fa6";
+import { GoHomeFill } from "react-icons/go";
 
 export interface ShoolAsideProps {
     lang : Locale
@@ -19,13 +15,14 @@ export interface ShoolAsideProps {
 }
 
 export const SchoolAsidePublic = ({
-    lang, TClub , TFamily , TGroup , THome
+    lang, TClub , TFamily , TGroup , THome ,
 } : ShoolAsideProps) => {
     const pathname = usePathname();
+    
   return (
     <div className=' mt-1 flex flex-col px-1'>
         <Link className={cn(AsideLinkClassName ,)} href={`/${lang}/s`}> 
-            <FaSchool size={24} className={cn( " text-gray-500" , pathname === `/${lang}/s` && " text-warning")}/>
+            <GoHomeFill size={24} className={cn( " text-gray-500" , pathname === `/${lang}/s` && " text-warning")}/>
             <span>{THome}</span>
         </Link>
         {/* <Link className=' btn btn-sm w-full justify-start  btn-ghost hover:bg-black/20' href={`/${lang}/c`}> 
@@ -40,7 +37,6 @@ export const SchoolAsidePublic = ({
             <IoPeople size={24}/>
             <span>{TFamily}</span>
         </Link> */}
-        
     </div>
   )
 }
