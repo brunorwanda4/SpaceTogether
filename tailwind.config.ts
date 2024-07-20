@@ -18,6 +18,12 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        allura: ['Allura', 'cursive'],
+        amagro: ['Amagro', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
+        corinthia: ['Corinthia', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

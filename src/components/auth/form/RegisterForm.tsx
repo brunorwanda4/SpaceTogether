@@ -21,14 +21,16 @@ import { GetServerSideProps } from 'next';
 import { getDictionary } from '@/lib/dictionary';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Locale } from '@/i18n';
-import { BsEye, BsEyeFill } from 'react-icons/bs';
-import UseOnlineStatus from '@/hooks/useOnlineStatus';
-import Link from 'next/link';
 import { RegisterValidation } from '@/validation/registerValidation';
-import { cva } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
 import { Label } from '@/components/ui/label';
+import { regServer } from '@/server/regServer';
+import { FormMessageError, FormMessageSuccess } from './formMessagers';
+import { redirect, useRouter } from 'next/navigation';
+import { toast } from '@/components/ui/use-toast';
+import { BeatLoader } from 'react-spinners';
+import { BsCheck2Circle } from 'react-icons/bs';
 
 export interface RegisterProps {
     TPassword: string;
@@ -44,18 +46,17 @@ export interface RegisterProps {
     TMale : string
     TFmale : String
     TOther : string
+    TCreate : string
 }
 
 const RegisterForm = ({
-    lang , TPassword ,TLogin ,TDay,TMonth,TYear,TGender,TOther,TFName,TFmale,TLName,TMale,TEmail
+    lang , TPassword ,TLogin ,TDay,TMonth,TYear,TGender,TOther,TFName,TFmale,TLName,TMale,TEmail,TCreate
   } : RegisterProps) => {
     // show password
     const [seePassword , setSeePassword] = useState<boolean>(true);
     const handleSeePassword = () => {
       setSeePassword(sate => !sate)
     }
-
-    const [isPending, startTransition] = useTransition();
 
     // month
     const months ={ January: 31, February: 28, March: 31, April: 30, May: 31, June: 30, July: 31, August: 31, September: 30, October: 31, November: 30, December: 31,};
@@ -73,11 +74,47 @@ const RegisterForm = ({
         },
     });
 
-    const DivClass = ["flex gap-2 flex-col","bg-base-300 lg:min-w-60"]
+    const DivClass = ["flex gap-2 flex-col","bg-base-300 lg:min-w-60"];
+
+    const [error , setError] = useState<string | undefined>("");
+    const [success , setSuccess] = useState<string | undefined>("");
+    const [isPending , startTransition] = useTransition();
+
+    // router
+    const router = useRouter();
+
+    const onSubmit = (values : z.infer<typeof RegisterValidation>) => {
+      startTransition(() => {
+        regServer(values).then((data) => {
+          
+          if(!!data.success) {
+            toast({
+              title : "WOW! account has been created successfully",
+              description: (
+                <div className=' flex gap-2'>
+                  <BsCheck2Circle size={20} className=' text-success'/>
+                  <span>{data.success}</span>
+                </div>
+              )
+            })
+            setSuccess(data.success);
+            router.push(`/${lang}/s`)
+          }
+          if(!!data.error) {
+            toast({
+                title: "uh oh! some thing went wrong.",
+                description: `${data.error}`,
+                variant: "destructive",
+            })
+            setError(data.error);
+          }
+        })
+      })
+    }
 
   return (
     <Form {...form} >
-      <form action="" className=' flex gap-2 flex-col'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className=' flex gap-2 flex-col'>
         <div className=' flex gap-2'>
         {/* left */}
         <div className={cn(DivClass[0])}>
@@ -89,7 +126,7 @@ const RegisterForm = ({
                 <FormItem>
                 <FormLabel>{TFName}</FormLabel>
                 <FormControl>
-                    <Input className={cn(DivClass[1])} autoFocus placeholder="Rwanda" {...field} />
+                    <Input className={cn(DivClass[1])} disabled={isPending} autoFocus placeholder="Rwanda" {...field} />
                 </FormControl>
                 <FormMessage />
                 </FormItem>
@@ -103,7 +140,7 @@ const RegisterForm = ({
                 <FormItem>
                 <FormLabel>{TEmail}</FormLabel>
                 <FormControl>
-                    <Input className={cn(DivClass[1])} type='email' placeholder="example@email.com" {...field} />
+                    <Input className={cn(DivClass[1])} disabled={isPending} type='email' placeholder="example@email.com" {...field} />
                 </FormControl>
                 <FormMessage />
                 </FormItem>
@@ -122,7 +159,7 @@ const RegisterForm = ({
                         <SelectValue placeholder="11" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className=' max-h-40'>
+                    <SelectContent className=' min-h-40 max-h-60'>
                     {[...Array( 31)].map((_, index) => (
                       <SelectItem key={index + 1} value={`${index + 1}`}>
                         {index + 1}
@@ -143,7 +180,7 @@ const RegisterForm = ({
                         <SelectValue placeholder=" November" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className=' max-h-40'>
+                    <SelectContent className=' min-h-40 max-h-60'>
                       {Object.keys(months).map((items , index) => (
                         <SelectItem key={index + 1} value={items}>
                           {items}
@@ -164,7 +201,7 @@ const RegisterForm = ({
                         <SelectValue className=' text-xs' placeholder=" 2006"  />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className=' text-xs max-h-40'>
+                    <SelectContent className=' text-xs min-h-40 max-h-60'>
                       {[...Array(100)].map((_, index) => (
                         <SelectItem key={2024 - index} value={`${2024 - index}`}>
                           {2024 - index}
@@ -199,7 +236,7 @@ const RegisterForm = ({
             {/* gender */}
             <FormField control={form.control}  name="gender" render={({ field }) => (
             <FormItem className="space-y-3">
-              <FormLabel>Gender</FormLabel>
+              <FormLabel>{TGender}</FormLabel>
               <FormControl>
                 <RadioGroup disabled={isPending} onValueChange={field.onChange}  defaultValue={field.value} className="flex space-x-1">
                   <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
@@ -207,7 +244,7 @@ const RegisterForm = ({
                       <RadioGroupItem className=' border-input' value="male" />
                     </FormControl>
                     <FormLabel className="font-normal">
-                      Male
+                      {TMale}
                     </FormLabel>
                   </FormItem>
                   <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
@@ -215,14 +252,14 @@ const RegisterForm = ({
                       <RadioGroupItem className=' border-input' value="female" />
                     </FormControl>
                     <FormLabel className="font-normal">
-                      Female
+                      {TFmale}
                     </FormLabel>
                   </FormItem>
                   <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
                     <FormControl>
                       <RadioGroupItem className=' border-input' value="other" />
                     </FormControl>
-                    <FormLabel className="font-normal">Other</FormLabel>
+                    <FormLabel className="font-normal">{TOther}</FormLabel>
                   </FormItem>
                 </RadioGroup>
               </FormControl>
@@ -238,7 +275,7 @@ const RegisterForm = ({
                 <FormLabel>{TPassword}</FormLabel>
                 <FormControl>
                   <div className=' relative'>
-                    <Input className={cn(DivClass[1])} placeholder="password" type={seePassword ? "password" : "text"} {...field} />
+                    <Input className={cn(DivClass[1])} disabled={isPending} placeholder="password" type={seePassword ? "password" : "text"} {...field} />
                     <div className=' absolute right-0 top-0 items-center flex rounded-r-md cursor-pointer h-full w-6 px-1 hover:bg-neutral/40 duration-200' onClick={handleSeePassword}>
                       {seePassword ? <ImEye size={24} /> : <ImEyeBlocked size={24} />}
                     </div>
@@ -250,8 +287,10 @@ const RegisterForm = ({
           />
         </div>
         </div>
+        <FormMessageError message={error}/>
+        <FormMessageSuccess message={success}/>
         <button className=' btn btn-neutral capitalize font-semibold' type='submit'>
-          {TLogin}
+          {isPending ? <BeatLoader size={20} /> : `${TCreate}`}
         </button>
       </form>
     </Form>

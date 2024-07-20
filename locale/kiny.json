@@ -1,17 +1,28 @@
 {
     "nav" : {
-        "auth" : {
-        "settingDialog" : {
-            "setting" : "Gushyiraho",
-            "language" : "Ururimi",
-            "chooseLanguage" : {
-                "changeLanguage" : "Guhindura ururimi",
-                "save" : "hindura",
-                "cancel" : "bireke"
-            },
-            "changeTheme" : "Guhindura Amabara"
+            "auth" : {
+            "settingDialog" : {
+                "setting" : "Gushyiraho",
+                "language" : "Ururimi",
+                "chooseLanguage" : {
+                    "changeLanguage" : "Guhindura ururimi",
+                    "save" : "hindura",
+                    "cancel" : "bireke"
+                },
+                "changeTheme" : "Guhindura Amabara"
+            }
+        },
+        "school" : {
+            "createSchool" : "Shyiramo ishuri",
+            "joinSchool" : "Injira mwishuri",
+            "aside" : {
+                "home" : "Ahabanza",
+                "clubs" : "Amahuriro",
+                "group" : "Amansinda",
+                "family" : "imiryango",
+                "messages" : "Ubutumwa"
+            }
         }
-    }
     },
     "indexPage" : {
         "getStart" : "Gutagira"
@@ -40,7 +51,26 @@
                 "Gender" : "Igistina",
                 "Male" : "Umugabo",
                 "Female" : "Umugore",
-                "Other" : "Abandi"
+                "Other" : "Abandi",
+                "createAccount" : "Kora konti nshyashya"
+            }
+        },
+        "school" : {
+            "welcome" : "Mwiriwe shyiramo ishuri ryawe utagire",
+            "joinSchool" : "Shyiramo ishuri",
+            "addSchool" : "Kora ishuri",
+            "addSchoolFrom" : {
+                "name" : "Izina ry'ishuri",
+                "username" : "izina ishuri rizacya rikoresha",
+                "email" : "imeri",
+                "phone" : "Nimero ya terefone",
+                "location" : "Aho ishuri riri",
+                "website" : "urubuga rw 'ishuri",
+                "type" : "Ubumenyi ishuri ritanga",
+                "description" : "Sobanura ishuri",
+                "province" : "Intara",
+                "city" : "Akarere",
+                "logo" : "Ikirango cy'ishuri"
             }
         }
     }

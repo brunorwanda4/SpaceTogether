@@ -7,6 +7,10 @@ import { LoginDialog } from './loginDialog';
 import { RegisterDialog } from './registerDialog';
 import { RegisterProps } from './form/RegisterForm';
 import { useTheme } from '@/hooks/useTheme';
+import { signIn } from '@/auth';
+import { logout } from '@/server/logout';
+import { useRouter } from 'next/navigation';
+import { isLogin } from '@/server/isLogin';
 
 interface Props {
     indexWord : string
@@ -44,7 +48,14 @@ const AuthDialog = ({
   // click effect for change how to login
   const handleButtonClick = (choice: ChoosePropsAuth) => {
     setChoose(choice);
-  }
+  };
+
+  // router
+
+  const router = useRouter();
+
+  // if user is login
+  const user = !!isLogin();
 
   const renderContent = () => {
     switch (choose) {
@@ -95,7 +106,6 @@ const AuthDialog = ({
     }
 }
 
-
 // theme use is using 
 const theme = useTheme();
   return (
@@ -105,10 +115,7 @@ const theme = useTheme();
              {indexWord}
           </div>
       </DialogTrigger>
-      <DialogContent data-theme={theme} className=' max-w-fit  bg-base-300 card'>
-        <button className=" btn btn-error">
-          login out
-        </button>
+      <DialogContent data-theme={theme} className=' max-w-fit  bg-base-300 card '>
         {renderContent()}
       </DialogContent>
     </Dialog>

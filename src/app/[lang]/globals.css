@@ -86,5 +86,13 @@ ul {
   @apply bg-cyan-500 dark:bg-sky-900 rounded-sm
 }
 
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
 
-  
+.react-select__menu{
+  @apply text-red-500 min-h-32 h-40
+}
+.react-select__menu-list{
+  @apply text-red-500 min-h-32 h-40
+}

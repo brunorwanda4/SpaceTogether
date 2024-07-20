@@ -19,7 +19,7 @@ interface Props {
   TProvides : string,
   TForget : string,
   TRegister : string,
-  choose : (choice : ChoosePropsAuth) => void
+  choose ?: (choice : ChoosePropsAuth) => void
 }
 
 export const ChooseWhichWayCanCreateAccount = ({
@@ -30,12 +30,18 @@ export const ChooseWhichWayCanCreateAccount = ({
     <div>
       <div className=''>
         <LoginForm TForget={TForget} lang={lang} TLogin={TLogin} TPassword={TPassword} TUsername={TUsername}/>
-        {!!online &&(<button onClick={() => choose("register")} className=' mt-2 text-sm text-neutral link-hover'>{TRegister}</button>)}
+        {!!online &&(<>
+         {choose ? (
+          <button onClick={() => choose("register")} className=' mt-2 text-sm text-neutral link-hover'>{TRegister}</button>
+         ) : (
+          <Link href={`/${lang}/auth/register`} className=' mt-2 text-sm text-neutral link-hover'>{TRegister}</Link>
+         )}
+         </>)}
       </div>
       {!!online && (
         <div className=' mt-2'>
           <AuthSeverDiv>
-            <AuthProvides TProvides={TProvides}/>
+            <AuthProvides lang={lang} TProvides={TProvides}/>
           </AuthSeverDiv>
       </div> 
       )}
