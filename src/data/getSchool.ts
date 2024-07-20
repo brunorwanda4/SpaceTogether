@@ -4,13 +4,13 @@ import { ISchool } from "@/types/school";
 
 export const FindSchoolByOwn = async (id: string |null | undefined): Promise<ISchool[] | null> => {
     if (!id) {
-        throw new Error("User ID must be provided");
+        return null;
     }
     await dbConn();
     const school = await School.find<ISchool>({ createdBy: id });
 
     if (!school) {
-        throw new Error(`Could not find school for user ID ${id}`);
+        return null;
     }
 
     if (school.length === 0) {
@@ -34,3 +34,20 @@ export const FindSchoolByOwn = async (id: string |null | undefined): Promise<ISc
     return school;
 };
 
+export const getSchoolsPaid = async () : Promise<ISchool[] | null > => {
+
+    await dbConn();
+
+    const schools = await School.find<ISchool>()
+
+    if (!schools) {
+        return null;
+    }
+
+    if (schools.length === 0) {
+        return null;
+    }
+
+    return schools
+
+}

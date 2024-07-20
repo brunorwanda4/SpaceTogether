@@ -7,6 +7,7 @@ import { FindCreateSchool } from './findCreateSchool';
 import { getDictionary } from '@/lib/dictionary';
 import { Locale } from '@/i18n';
 import { getUserByEmail } from '@/data/getUserData';
+import { SchoolNavFindSchool } from './schoolNavFindSchool';
 
 interface props {
     lang : Locale;
@@ -25,7 +26,9 @@ export const SchoolNav = async ({lang} : props) => {
         <div>
             <Logo title link/>
         </div>
-        <div className=' flex gap-2 '>
+        <div className=' flex gap-2 items-center'>
+            {/* find school */}
+            <SchoolNavFindSchool lang={lang}/>
             <FindCreateSchool
              TCreate={nav.school.createSchool} 
              TJoin={nav.school.joinSchool} 

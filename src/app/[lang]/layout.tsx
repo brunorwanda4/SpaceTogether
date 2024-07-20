@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+// styles
 import "./globals.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import { ChangeTheme, ClientThemeWrapper } from "@/context/changeTheme";
 import { LanguagesProps } from "@/types/pages";

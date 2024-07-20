@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react'
 import { LuUser2 } from "react-icons/lu";
 import Image from 'next/image'
 import { cn } from '@/lib/utils'

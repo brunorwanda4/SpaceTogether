@@ -13,7 +13,7 @@ export const MessagesDropDown = () => {
             <span className=' sr-only'>Messages</span>
             <BsMessenger size={24} className=''/>
         </DropdownMenuTrigger>
-        <DropdownMenuContent data-theme={theme}>
+        <DropdownMenuContent className='border' data-theme={theme}>
             <div>
                 Messages
             </div>

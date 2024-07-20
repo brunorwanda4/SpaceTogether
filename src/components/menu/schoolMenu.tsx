@@ -8,7 +8,7 @@ import { Locale } from "@/i18n"
 import { getDictionary } from "@/lib/dictionary"
 import { auth } from "@/auth"
 import { FindSchoolByOwn } from "@/data/getSchool"
-import { ISchool } from "@/types/school"
+import { ISchool, TSchoolWithUser } from "@/types/school"
 import { getUserById } from "@/data/getUserData"
 
 interface Props {
@@ -24,13 +24,16 @@ export const SchoolMenu = async ({
 
   const findSchool: ISchool[] | null = await FindSchoolByOwn(user?.id)
 
-    // @ts-ignore
-    const schoolsWithUser: TSchoolWithUser[] = await Promise.all(findSchool.map(async (schoolDoc) => {
-      const school = schoolDoc.toObject() as ISchool; // Convert to plain object
-      const createdBy = await getUserById(school.createdBy.toString());
-      return { ...school, createdBy };
-    }));
-
+  let schoolsWithUser : TSchoolWithUser[] | undefined
+  if(!!findSchool) {
+        // @ts-ignore
+        schoolsWithUser = await Promise.all(findSchool.map(async (schoolDoc) => {
+          const school = schoolDoc.toObject() as ISchool; // Convert to plain object
+          const createdBy = await getUserById(school.createdBy.toString());
+          return { ...school, createdBy };
+        }));
+  }
+  
     return(
         <ResizablePanelGroup
         direction="horizontal"

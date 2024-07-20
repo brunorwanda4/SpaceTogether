@@ -5,22 +5,28 @@ import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
 import { CreateSchoolForm, CreateSchoolProps } from '../page/school/createSchoolForm'
 import { useTheme } from '@/hooks/useTheme'
 import { cn } from '@/lib/utils'
+import { usePathname } from 'next/navigation'
+import { Locale } from '@/i18n'
+import { BsCheck2Circle } from 'react-icons/bs'
 
 interface Props {
     TCreate : string
     TSchoolProps : CreateSchoolProps
     email : string | null | undefined
     className?: string 
+    lang : Locale
 }
 
 export const CreateSchoolDialog = ({
-    TCreate , TSchoolProps, email, className
+    TCreate , TSchoolProps, email, className , lang
 } : Props) => {
     const theme = useTheme();
+    const pathname = usePathname();
   return (
     <Dialog>
-        <DialogTrigger className={cn("btn btn-ghost w-full btn-sm" , className)}>
+        <DialogTrigger className={cn("btn btn-ghost w-full btn-sm justify-between",)}>
             {TCreate}
+            {pathname === `/${lang}/s/c` && (<BsCheck2Circle />)}
         </DialogTrigger >
         <DialogContent className='  overflow-y-auto max-h-2xl max-h-[90vh]' data-theme={theme}>
             <CreateSchoolForm

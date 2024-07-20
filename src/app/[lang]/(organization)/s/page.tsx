@@ -1,6 +1,5 @@
 import { auth} from '@/auth'
 import { CreateSchoolDialog } from '@/components/navbar/createSchoolDialog';
-import { SchoolGetSchool } from '@/components/page/school/SchoolGetStart';
 import { MyImage } from '@/components/style/myImage';
 import { FindSchoolByOwn } from '@/data/getSchool';
 import { getUserById } from '@/data/getUserData';
@@ -35,12 +34,12 @@ const SchoolPage =async ({
       <div className=' grid place-content-center min-h-[80vh] pb-12'>
       <div className=' flex justify-center h-full  school-center'>
       <div className=' flex flex-col  school-center  justify-center  w-full h-full'>
-        <p>{page.school.welcome}</p>
-        <SchoolGetSchool/>
+        <p className=' text-center'>{page.school.welcome}</p>
         <div className=' flex gap-2 mt-2'>
           <Link href={`/${lang}/s/c`} className='btn btn-sm btn-info font-medium'>Join School</Link>
           <Link href={`/${lang}/s/e`} className='btn btn-sm btn-warning font-medium'>Explorer schools</Link>
           <CreateSchoolDialog 
+              lang={lang}
               className='btn btn-sm btn-ghost text-info font-medium w-auto'
               TCreate={nav.school.createSchool} 
               email = {user.user.email}
@@ -80,7 +79,7 @@ const SchoolPage =async ({
        <div className=' grid grid-cols-3 gap-3'>
         {schoolsWithUser.map((school) => {
           return (
-            <div key={school.id} className=' card size-80 flex flex-col relative glass '>
+            <div key={school.id} className=' card size-80 flex flex-col relative glass'>
               <MyImage src='/images/1.jpg' className=' w-full cursor-pointer' classname=' rounded-b-none'/>
               <div className=' top-0 bg-black/60 absolute h-32 z-10 w-full'/>
               <div className=' absolute  z-20 flex top-24 left-2 flex-col  flex-wrap'>

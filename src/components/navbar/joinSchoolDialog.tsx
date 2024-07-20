@@ -11,7 +11,7 @@ export const JoinSchoolDialog = ({
     const theme = useTheme();
   return (
     <AlertDialog>
-        <AlertDialogTrigger className='btn btn-ghost w-full btn-sm'>
+        <AlertDialogTrigger className='btn btn-ghost w-full btn-sm justify-start'>
             {TJoin}
         </AlertDialogTrigger>
         <AlertDialogContent className={theme}>
