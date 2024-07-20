@@ -21,7 +21,7 @@ export const SchoolAsideInfo = ({
         <li>
             <details>
                 <summary>
-                    <FaSchool size={24} />
+                    <FaSchool className={cn("text-gray-500" , schoolUsername && " text-warning")} size={24} />
                     <span>School</span>
                 </summary>
                 <ul>
