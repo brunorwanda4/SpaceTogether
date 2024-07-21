@@ -41,3 +41,12 @@ export const SchoolValidation = z.object({
     }),
     createdBy : z.string(),
 })
+
+export const SchoolContactValidation = z.object({
+    phoneNumber : z.string(),
+    email : z.string(),
+    websiteURL : z.string().url(),
+    whatsapp : z.string(),
+    facebook : z.string(),
+    twitter : z.string(),
+})

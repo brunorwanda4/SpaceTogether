@@ -1,27 +1,34 @@
 "use client";
 
+import UpdateSchoolContactForm from '@/components/forms/settings/UpdateSchoolContactForm';
+import { AlertDialog, AlertDialogContent, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useTheme } from '@/hooks/useTheme';
-import { Locale } from '@/i18n'
+import { Locale } from '@/i18n';
+import { ISchool } from '@/types/school';
 import { BsPlus } from 'react-icons/bs';
 
 interface props {
     lang : Locale
+    school : ISchool
 }
 
 const UpdateSchoolContact = ({
-    lang
+    lang ,school
 } : props) => {
     const theme = useTheme();
   return (
-    <Dialog>
-      <DialogTrigger className='btn btn-sm btn-ghost btn-outline'>
+    <AlertDialog>
+      <AlertDialogTrigger className='btn btn-sm btn-ghost btn-outline'>
         <BsPlus size={20}/><span>Update contact</span>
-      </DialogTrigger>
-      <DialogContent data-theme={theme}>
-        add school contact
-      </DialogContent>
-    </Dialog>
+      </AlertDialogTrigger>
+      <AlertDialogContent data-theme={theme}>
+        <AlertDialogTitle>
+          Update school contact
+        </AlertDialogTitle>
+        <UpdateSchoolContactForm school={school}/>
+      </AlertDialogContent>
+    </AlertDialog>
   )
 }
 

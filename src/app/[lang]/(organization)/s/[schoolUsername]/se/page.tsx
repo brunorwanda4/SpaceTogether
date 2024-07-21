@@ -2,7 +2,12 @@ import SchoolNotFount from '@/components/error/schoolNotFount'
 import SchoolInfoSettings from '@/components/page/school/settings/schoolInfoSettings'
 import { Locale } from '@/i18n'
 import { getSchoolByUsername } from '@/server/getData'
+import { Metadata } from 'next'
 import React from 'react'
+
+export const metadata:Metadata = {
+  title : "School Settings"
+}
 
 interface props {
     lang : Locale
