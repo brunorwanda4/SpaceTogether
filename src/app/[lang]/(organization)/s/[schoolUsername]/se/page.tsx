@@ -17,6 +17,7 @@ const SchoolUsernameSettingPage = async ({
   return (
     <div className='p-2'>
       <SchoolInfoSettings school={school} lang={lang} username={schoolUsername}/>
+      <div className="h-screen"></div>
     </div>
   )
 }

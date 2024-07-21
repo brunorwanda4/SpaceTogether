@@ -47,7 +47,7 @@ export const ExplorePaidSchool = ({
             <Slider ref={sliderRef} {...settings} className=" mx-4">
                 {schools.map((schools) => {
                     return (
-                        <main key={schools.id} className=' h-80 card w-full bg-base-300 p-2 relative shadow-lg'>
+                        <main key={schools.id} className=' h-80 card w-full bg-base-300 p-4 relative shadow-lg '>
                             {/* change to next image */}
                             <div className=' absolute top-[45%] justify-between w-full items-center flex'>
                                 <button className='btn btn-circle btn-ghost z-40' onClick={previousImage}><BsChevronLeft size={20} className=' '/></button>

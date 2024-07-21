@@ -5,7 +5,7 @@ import Link from "next/link";
 interface Props {
     className ?: string;
     classname ?: string;
-    src : string;
+    src : string | null | undefined;
     alt ?: string;
     href ?: string;
 }
@@ -15,7 +15,7 @@ export const MyImage = ({
 } : Props) => {
     const image = ( 
         <Image 
-        src={src}
+        src={src || "p.jpg"}
         alt={cn("image alt :" , alt)}
         fill
         loading="lazy"
