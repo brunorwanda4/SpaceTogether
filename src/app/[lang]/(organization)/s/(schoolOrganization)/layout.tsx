@@ -1,7 +1,6 @@
 import { SchoolMenu } from '@/components/menu/schoolMenu'
 import { SchoolNav } from '@/components/navbar/schoolNav'
 import { Locale } from '@/i18n'
-import { LanguagesProps } from '@/types/pages'
 import React from 'react'
 
 interface Props {
@@ -17,14 +16,11 @@ const SchoolLayout = ({
   return (
     <section>
       <SchoolNav lang={lang}/>
-        <div className=''>
-          <SchoolMenu
-            lang={lang}
-          >
-              {children}
-          </SchoolMenu>
-        </div>
-        {/* <FooterOrganization/> */}
+      <SchoolMenu
+        lang={lang}
+      >
+          {children}
+      </SchoolMenu>
     </section>
   )
 }

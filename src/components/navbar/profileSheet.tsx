@@ -17,6 +17,8 @@ import { IoSettingsOutline } from 'react-icons/io5';
 import { ChangeLanguages } from './changeLanguages';
 import { Languages } from 'lucide-react';
 import { ChangeThemeDialog } from './ChangeThemeDialog';
+import { BsCheck2Circle } from "react-icons/bs";
+import { SPLine } from "../style/simpleComponents/line";
 
 interface Props {
     image : string | null | undefined,
@@ -62,7 +64,7 @@ export const ProfileSheet = ({
                 </div>
             </SheetClose>
             {/* user data */}
-            <div className='divider'/>
+            <SPLine className=" my-0"/>
             <div className='  w-full2 flex flex-col gap-2'>
                 <SheetClose onClick={() => route.push(`/${lang}/p/${TUser._id}`)} className=' flex gap-2 btn btn-ghost btn-sm w-full justify-start'>
                     <LuUser2 size={20} className={cn("text-gray-500" , pathname === `/${lang}/p/${TUser._id}` && " text-info")}/>
@@ -77,7 +79,7 @@ export const ProfileSheet = ({
                     <span>Class</span>
                 </SheetClose>
             </div>
-            <div className='divider'/>
+            <SPLine className=" my-0"/>
             <div className='w-full'>
                 <ChangeLanguages lang={lang} chooseLang={TLanguageChoose} TCancel={TLanguageCancel} TSave={TLanguageSave} title={TTLanguage}>
                     <div className='flex gap-2 items-center btn btn-ghost btn-sm w-full justify-between '>
@@ -89,9 +91,12 @@ export const ProfileSheet = ({
                     </div>
                 </ChangeLanguages>
                 <ChangeThemeDialog />
-                <SheetClose onClick={() => route.push(`/${lang}/se`)} className=' flex gap-2 btn btn-ghost btn-sm w-full justify-start cursor-pointer'>
-                    <IoSettingsOutline size={20} className={cn("text-gray-500" , pathname === `/${lang}/se` && " text-info")}/>
-                    <span>Settings</span>
+                <SheetClose className=' flex gap-2 btn btn-ghost btn-sm w-full justify-between cursor-pointer' onClick={() => route.push(`/${lang}/se`)}>
+                    <div className="flex gap-2">
+                        <IoSettingsOutline size={20} className={cn("text-gray-500",)}/>
+                        <span>Settings</span>
+                    </div>
+                    {pathname === `/${lang}/se` && <BsCheck2Circle/>}
                 </SheetClose>
             </div>
         </SheetContent>

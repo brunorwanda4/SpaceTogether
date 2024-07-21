@@ -1,4 +1,4 @@
-import { Logo } from './Logo';
+import { Logo, SchoolLogo } from './Logo';
 import { cn } from '@/lib/utils';
 import { MessagesDropDown } from './messagesDropDown';
 import { ProfileSheet } from './profileSheet';
@@ -11,9 +11,13 @@ import { SchoolNavFindSchool } from './schoolNavFindSchool';
 
 interface props {
     lang : Locale;
+    schoolUsername ?: string
+    isSe ?: string
 }
 
-export const SchoolNav = async ({lang} : props) => {
+export const SchoolNav = async ({
+    lang , schoolUsername , isSe
+} : props) => {
     const user = (await auth())?.user;
     const {nav , page} = await getDictionary(lang);
     const getUser = await getUserByEmail(user?.email);
@@ -24,7 +28,13 @@ export const SchoolNav = async ({lang} : props) => {
   return (
     <nav className={cn(`fixed flex justify-between z-50 w-full h-12 lg:px-2 md:px-2 py-1 border-b border-neutral-content shadow-md items-center bg-black/20 backdrop-blur-md`)}>
         <div>
-            <Logo title link/>
+            <SchoolLogo 
+             lang={lang} 
+             title 
+             link
+             schoolUsername={schoolUsername}
+             isSe={isSe}
+            />
         </div>
         <div className=' flex gap-2 items-center'>
             {/* find school */}

@@ -11,6 +11,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { IoSettingsOutline } from 'react-icons/io5';
 
 export const metadata:Metadata = {
   title : "Schools"
@@ -97,13 +98,17 @@ const SchoolPage =async ({
                   <p className=' leading-3 pt-2'>{school.description}</p>
               </div>
               {/* created by */}
-              <div className=' absolute bottom-2 right-2'>
+              <div className=' absolute bottom-2 right-2 w-full justify-between flex items-center'>
+                <Link className=' ml-4  btn btn-ghost btn-sm btn-circle' href={`/${lang}/s/${school.username}/se`}>
+                  <span className=' sr-only'>Settings</span>
+                  <IoSettingsOutline size={20}/>
+                </Link>
                 <Link className=' flex items-center gap-1 btn btn-ghost' href={`/${lang}/p/${school.createdBy?._id}`}>
                   <div className=' flex flex-col'>
                     <span className=' font-semibold text-sm'>{school.createdBy?.name}</span>
                     <span className=' text-end text-xs font-medium'>directer</span>
                   </div>
-                  <MyImage className=' size-10' classname=' rounded-full' src={!!school.createdBy?.image ? school.createdBy.image : "/p.jpg"}/>
+                    <MyImage className=' size-10' classname=' rounded-full' src={!!school.createdBy?.image ? school.createdBy.image : "/p.jpg"}/>
                 </Link>
               </div>
             </div>
