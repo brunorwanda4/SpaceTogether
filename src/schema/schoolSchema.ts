@@ -40,6 +40,21 @@ const SchoolSchema: Schema = new Schema({
     type: String,
     match: [/^(https?:\/\/)?([\da-z.-]+\.)+[a-z]{2,}$/, "Website URL is invalid"],
   },
+  twitter : {
+    type : String,
+    required: [false, "Twitter is not required"],
+    maxlength: [255, "Maximum character length is 23"],
+  },
+  facebook : {
+    type : String,
+    required: [false, "facebook is not required"],
+    maxlength: [255, "Maximum character length is 23"],
+  },
+  whatsapp : {
+    type : String,
+    required: [false, "whatsapp is not required"],
+    maxlength: [255, "Maximum character length is 23"],
+  },
   phoneNumber: {
     type: String,
     required: [true, "Please enter a valid phone number"],

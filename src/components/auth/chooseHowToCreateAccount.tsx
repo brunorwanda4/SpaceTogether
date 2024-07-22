@@ -5,7 +5,6 @@ import Link from 'next/link';
 import UseOnlineStatus from '@/hooks/useOnlineStatus';
 import { Locale } from '@/i18n';
 
-import { SPLine } from '../style/simpleComponents/line';
 import AuthProvides from './authProvides';
 import { AuthSeverDiv } from './authSeverDiv';
 import RegisterForm, { RegisterProps } from './form/RegisterForm';

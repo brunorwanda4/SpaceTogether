@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react'
 import { BsFacebook, BsGithub, BsGoogle } from 'react-icons/bs'
 import { SPLine } from '../style/simpleComponents/line'

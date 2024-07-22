@@ -3,7 +3,7 @@
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useTheme } from '@/hooks/useTheme'
 import { Locale } from '@/i18n'
-import { BsPen, BsPlus } from 'react-icons/bs'
+import { BsPen, } from 'react-icons/bs'
 
 interface props {
     lang : Locale

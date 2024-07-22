@@ -200,21 +200,21 @@ const SchoolInfoSettings = async ({
                           <MyImage className=' size-5' src={"/icons/whatsapp.png"}/>
                           <span className=' text-gray-500 font-medium  capitalize'>whatsapp :</span>
                         </div>
-                        <span className=' cursor-pointer' >0788720946</span>
+                        <span className=' cursor-pointer' >{school.whatsapp}</span>
                     </div>
                     <div className=' flex gap-2'>
                         <div className=' flex justify-between items-center gap-1'>
                           <MyImage className=' size-5' src={"/icons/facebook.png"}/>
                           <span className=' text-gray-500 font-medium  capitalize'>facebook:</span>
                         </div>
-                        <span className=' cursor-pointer' >{school.email}</span>
+                        <span className=' cursor-pointer' >{school.facebook}</span>
                     </div>
                     <div className=' flex gap-2'>
                         <div className=' flex justify-between items-center gap-1'>
                           <MyImage className=' size-5' src={"/icons/twitter.png"}/>
                           <span className=' text-gray-500 font-medium  capitalize'>twitter (x):</span>
                         </div>
-                        <span className=' cursor-pointer' >SOS_technical_school</span>
+                        <span className=' cursor-pointer' >{school.twitter}</span>
                     </div>
                   </div>
                 </div>

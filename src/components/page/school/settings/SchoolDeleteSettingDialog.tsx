@@ -3,9 +3,7 @@
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useTheme } from '@/hooks/useTheme'
 import { Locale } from '@/i18n'
-import { BsTrash } from 'react-icons/bs'
-import {} from "react-icons/fa"
-import { FaTrash, FaTrashCan } from 'react-icons/fa6';
+import { FaTrashCan } from 'react-icons/fa6';
 
 interface props {
     lang : Locale

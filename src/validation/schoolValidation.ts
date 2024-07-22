@@ -43,10 +43,18 @@ export const SchoolValidation = z.object({
 })
 
 export const SchoolContactValidation = z.object({
-    phoneNumber : z.string(),
-    email : z.string(),
+    phoneNumber : z.string().max(23 , {
+        message : "Phone number maximum characters are 23",
+    }),
+    email : z.string().email(),
     websiteURL : z.string().url(),
-    whatsapp : z.string(),
-    facebook : z.string(),
-    twitter : z.string(),
+    whatsapp : z.string().max(23 , {
+        message : "whatsapp number maximum characters are 23",
+    }),
+    facebook : z.string().max(255 , {
+        message : "facebook name maximum characters are 255",
+    }),
+    twitter : z.string().max(255 , {
+        message : "Twitter name maximum characters are 255",
+    }),
 })

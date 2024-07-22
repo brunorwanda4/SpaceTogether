@@ -1,13 +1,11 @@
 "use client";
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog';
 import { i18n, Locale } from '@/i18n';
 import { cn } from '@/lib/utils';
-import { LangPageProps } from '@/types/pages';
 import { Languages } from 'lucide-react';
 import { useTheme } from '@/hooks/useTheme';
 

@@ -6,7 +6,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dr
 import { useTheme } from '@/hooks/useTheme';
 import { Locale } from '@/i18n';
 import { JoinSchoolDialog } from './joinSchoolDialog';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { CreateSchoolDialog } from './createSchoolDialog';
 import { CreateSchoolProps } from '../page/school/createSchoolForm';
 

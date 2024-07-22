@@ -6,7 +6,6 @@ import UseOnlineStatus from '@/hooks/useOnlineStatus';
 import { Locale } from '@/i18n';
 
 import LoginForm from './form/LoginForm';
-import { SPLine } from '../style/simpleComponents/line';
 import AuthProvides from './authProvides';
 import { AuthSeverDiv } from './authSeverDiv';
 import { ChoosePropsAuth } from './authDialog';

@@ -5,9 +5,7 @@ import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { useTheme } from '@/hooks/useTheme';
 import UseOnlineStatus from '@/hooks/useOnlineStatus';
-import { AuthNav } from './authNav';
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from '../ui/sheet';
-import Link from 'next/link';
 import { Locale } from '@/i18n';
 import { TUser } from '@/types/user';
 import { FaPeopleGroup, FaSchool } from "react-icons/fa6";

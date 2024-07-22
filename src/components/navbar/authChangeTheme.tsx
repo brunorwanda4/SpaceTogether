@@ -2,10 +2,8 @@
 
 import { useContext, useEffect, useState } from "react";
 import { BsCheck2Circle, BsPaletteFill } from "react-icons/bs";
-import { MdDarkMode, MdLightMode, MdSettingsBrightness } from 'react-icons/md';
 
 import { ThemeContext } from "@/context/changeTheme";
-import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/useTheme";
 interface Props {
     title : string
@@ -13,7 +11,6 @@ interface Props {
 
 export const AuthChangeTheme = ({title} : Props) => {
 const {changeTheme} = useContext(ThemeContext)!;
-const [selectedTheme, setSelectedTheme] = useState<string>('system'); 
 const theme = useTheme()
 
 const themes   = ["light","pastel" , "forest", "dark", "night",]

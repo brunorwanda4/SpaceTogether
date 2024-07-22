@@ -18,6 +18,9 @@ export interface ISchool extends Document {
   students: ObjectId[];
   teachers: ObjectId[];
   headerTeacher: ObjectId;
+  facebook ?: string;
+  twitter ?: string;
+  whatsapp ?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

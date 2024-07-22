@@ -7,10 +7,6 @@ import { LoginDialog } from './loginDialog';
 import { RegisterDialog } from './registerDialog';
 import { RegisterProps } from './form/RegisterForm';
 import { useTheme } from '@/hooks/useTheme';
-import { signIn } from '@/auth';
-import { logout } from '@/server/logout';
-import { useRouter } from 'next/navigation';
-import { isLogin } from '@/server/isLogin';
 
 interface Props {
     indexWord : string
@@ -49,13 +45,6 @@ const AuthDialog = ({
   const handleButtonClick = (choice: ChoosePropsAuth) => {
     setChoose(choice);
   };
-
-  // router
-
-  const router = useRouter();
-
-  // if user is login
-  const user = !!isLogin();
 
   const renderContent = () => {
     switch (choose) {
