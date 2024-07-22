@@ -10,6 +10,9 @@ import { UpdateSchoolContactServer } from "@/server/s/updateSchoolContactServer"
 import { ISchool } from "@/types/school";
 import { SchoolContactValidation } from "@/validation/schoolValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+// @ts-ignore
+import { BeatLoader } from 'react-spinners';
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { BsCheck2Circle } from "react-icons/bs";
@@ -167,7 +170,7 @@ const UpdateSchoolContactForm = ({
         <FormMessageError message={error}/>
         <FormMessageSuccess message={success}/>
         <div className=" flex justify-end mt-2 items-center gap-2">
-          <AlertDialogAction type="submit" className=""> Update </AlertDialogAction>
+          <AlertDialogAction type="submit" className=""> {isPending ? <BeatLoader /> : "Update"}</AlertDialogAction>
           <AlertDialogCancel type="reset">Cancel</AlertDialogCancel>
         </div>
       </form>

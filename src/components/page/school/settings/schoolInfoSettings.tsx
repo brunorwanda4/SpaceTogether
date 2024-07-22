@@ -5,9 +5,7 @@ import { MyImage } from '@/components/style/myImage'
 import { PiStudentDuotone } from "react-icons/pi";
 import SchoolUpdateInfoSettingDialog from './SchoolUpdateInfoSettingDialog'
 import SchoolDeleteSettingDialog from './SchoolDeleteSettingDialog'
-import { GiTeacher } from "react-icons/gi";
 import { auth } from '@/auth';
-import AddMapDialogSettingSchool from './addMapDialogSettingSchool';
 import Link from 'next/link';
 import UpdateSchoolContact from './updateSchoolContact';
 
@@ -52,8 +50,8 @@ const SchoolInfoSettings = async ({
                 </div>
             </div>
             <div className=' flex gap-2'>
-                <SchoolUpdateInfoSettingDialog  id={school._id} username={username} lang={lang}/>
-                <SchoolDeleteSettingDialog id={school._id} username={username} lang={lang}/>
+                <SchoolUpdateInfoSettingDialog  id={school._id} username={username} lang={lang} school={school}/>
+                <SchoolDeleteSettingDialog school={school} id={school._id} username={username} lang={lang}/>
             </div>
         </div>
         {/* school school other information */}
@@ -170,8 +168,8 @@ const SchoolInfoSettings = async ({
                       <span>{school.city}</span>
                   </div>
               </div>
-              {/* add map dialog */}
-              <AddMapDialogSettingSchool lang={lang} id={school._id}/>
+              {/* TODO : add map dialog */}
+              {/* <AddMapDialogSettingSchool lang={lang} id={school._id}/> */}
             </div>
               <div className=' mt-2 flex gap-2  flex-col'>
                 <div className=' flex justify-between items-center'>

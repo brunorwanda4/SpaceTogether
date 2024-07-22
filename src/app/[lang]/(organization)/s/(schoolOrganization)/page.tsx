@@ -108,7 +108,7 @@ const SchoolPage =async ({
                     <span className=' font-semibold text-sm'>{school.createdBy?.name}</span>
                     <span className=' text-end text-xs font-medium'>directer</span>
                   </div>
-                    <MyImage className=' size-10' classname=' rounded-full' src={!!school.createdBy?.image ? school.createdBy.image : "/p.jpg"}/>
+                    <MyImage className=' size-10' classname=' rounded-full object-contain' src={!!school.createdBy?.image ? school.createdBy.image : "/p.jpg"}/>
                 </Link>
               </div>
             </div>

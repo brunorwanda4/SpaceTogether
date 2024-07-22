@@ -19,7 +19,7 @@ const SchoolSettingLayout = async ({
        schoolUsername={schoolUsername}
        isSe={"settings"}
     />
-     <SchoolMenuSettings school={school} lang={lang}>
+     <SchoolMenuSettings username={schoolUsername} school={school} lang={lang}>
       {children}
      </SchoolMenuSettings>
     </section>

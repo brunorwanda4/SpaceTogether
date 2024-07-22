@@ -2,7 +2,6 @@
 
 import UpdateSchoolContactForm from '@/components/forms/settings/UpdateSchoolContactForm';
 import { AlertDialog, AlertDialogContent, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useTheme } from '@/hooks/useTheme';
 import { Locale } from '@/i18n';
 import { ISchool } from '@/types/school';

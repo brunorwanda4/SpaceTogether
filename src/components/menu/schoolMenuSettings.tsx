@@ -9,16 +9,20 @@ import SchoolSettingsSearch from "./SchoolSettingsSearch";
 import { ISchool } from "@/types/school";
 import { MyImage } from "../style/myImage";
 import { SPLine } from "../style/simpleComponents/line";
+import SchoolNotFount from "../error/schoolNotFount";
 
 interface props {
     lang : Locale;
     children : React.ReactNode
     school : ISchool | null;
+    username : string;
 }
 export const SchoolMenuSettings = ({
-    lang , children , school
+    lang , children , school , username
 } : props) => {
-  if(!school) return null;
+  if(!school) return (
+    <SchoolNotFount lang={lang} schoolUsername={username}/>
+  );
   return (
     <ResizablePanelGroup
     direction="horizontal"
@@ -26,7 +30,7 @@ export const SchoolMenuSettings = ({
   >
     <ResizablePanel className=" h-screen w-full flex-col flex gap-2" defaultSize={20} maxSize={30} minSize={5}>
       <div className=" flex gap-1 px-1 mt-2">
-         <MyImage src={school.logo} className=" size-8 rounded-full"/>
+         <MyImage src={school.logo} className=" size-8 rounded-full" classname=" object-contain"/>
         <h2 className=" font-semibold  text-xl lg:text-2xl">Settings</h2>
       </div>
      <SchoolSettingsSearch />

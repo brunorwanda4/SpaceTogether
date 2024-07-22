@@ -60,9 +60,15 @@ export const CreateSchoolServer = async (values: z.infer<typeof SchoolValidation
             return {error : "can not create new School"};
           }
 
-          console.log("School created successfully 🌳🌳 :" + {newSchool});
+          const findSchool = await School.findOne({
+            username : username
+          })
 
-          return {succuss : " School created successfully"}
+          if(!findSchool) {
+            return ({error : "we cannot find School"});
+          }
+
+          return {succuss : " School created successfully" , schoolUsername : {username}}
     } catch (error : any) {
         console.log("Something went wrong when creating School ❤️❤️ :" ,);
         return {error :  error.message};

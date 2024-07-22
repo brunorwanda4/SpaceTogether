@@ -28,10 +28,12 @@ import { FaSchool } from "react-icons/fa6";
 import { CreateSchoolServer } from "@/server/s/createSchoolServer";
 import { useRouter } from "next/navigation";
 import { Locale } from "@/i18n";
-import { BeatLoader } from 'react-spinners';
 import { FormMessageError, FormMessageSuccess } from "@/components/auth/form/formMessagers";
 import { BsCheck2Circle } from "react-icons/bs";
 import { IoIosWarning } from "react-icons/io";
+
+// @ts-ignore
+import { BeatLoader } from 'react-spinners';
 
 export interface CreateSchoolProps {
   email : string | null | undefined
@@ -56,7 +58,7 @@ type SchoolOptionType = {
 };
 
 
-const SchoolOption: SchoolOptionType[] = [
+export const SchoolOption: SchoolOptionType[] = [
   { value: 'primary', label: 'Primary School'},
   { value: 'middle', label: 'Middle School', },
   { value: 'high', label: 'High School'},
@@ -117,7 +119,7 @@ export const CreateSchoolForm = ({
     });
 
   // classes 
-  const InputClassName =theme === "light" ? "border bg-base-300 w-full" : "bg-base-300 w-full"
+  const InputClassName = theme === "light" ? "border bg-base-300 w-full" : "bg-base-300 w-full"
 
   // multi select
   const animatedComponents = makeAnimated();
@@ -169,6 +171,7 @@ export const CreateSchoolForm = ({
               </div>
               )
             })
+            router.push(`/${lang}/s`)
           }
           if(!!data.error) {
             setError(data.error)
@@ -324,7 +327,7 @@ export const CreateSchoolForm = ({
               control={form.control}
               name="type"
               render={({ field }) => (
-                <FormItem className=" w-full bg-base-300">
+                <FormItem className=" w-full">
                   <FormLabel>{TType}</FormLabel>
                   <FormControl>
                     <AsyncSelect
@@ -380,30 +383,30 @@ export const CreateSchoolForm = ({
               )}
             />
            <FormField
-          control={form.control}
-          name="city"
-          render={({ field }) => (
-            <FormItem className="  w-full">
-              <FormLabel>{TCity}</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue="">
-                <FormControl>
-                  <SelectTrigger className={cn(InputClassName)}>
-                    <SelectValue className={cn(InputClassName)} placeholder= {cn(!!selectedProvince ? "Select a city" : "First select province")} />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent data-theme={theme}>
-                  {selectedProvince &&
-                    (provincesAndCities as any)[selectedProvince].map((city : string) => (
-                      <SelectItem key={city} value={city}>
-                        {city}
-                      </SelectItem>
-                    ))}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            control={form.control}
+            name="city"
+            render={({ field }) => (
+              <FormItem className="  w-full">
+                <FormLabel>{TCity}</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue="">
+                  <FormControl>
+                    <SelectTrigger className={cn(InputClassName)}>
+                      <SelectValue className={cn(InputClassName)} placeholder= {cn(!!selectedProvince ? "Select a city" : "First select province")} />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent data-theme={theme}>
+                    {selectedProvince &&
+                      (provincesAndCities as any)[selectedProvince].map((city : string) => (
+                        <SelectItem key={city} value={city}>
+                          {city}
+                        </SelectItem>
+                      ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           </div>
           <div>
            <FormField 

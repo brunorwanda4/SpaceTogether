@@ -65,7 +65,7 @@ const SchoolSchema: Schema = new Schema({
   type: {
     type: [String],
     enum: ["online", "primary", "middle", "vocational", "homeschooling", "boarding", "TVET", "high", "international"],
-    required: [true, "Type is required"],
+    required: [true, "Type of school is required"],
   },
   description: {
     type: String,
