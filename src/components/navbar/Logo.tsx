@@ -12,14 +12,14 @@ interface Props {
 
 export const Logo = ({link , title , className} : Props) => {
     return (
-        <div>
+        <div >
             {link ? (
                 <Link href={"/"}>
                     <div className=" flex gap-1 items-center">
                         <Image
                         src="/logo.png"
                         height={32}
-                        width ={32}
+                        width={32}
                         alt = "Space to gether logo"
                         />
                         {title && (
@@ -41,6 +41,20 @@ export const Logo = ({link , title , className} : Props) => {
                 </div>
             )}
 
+        </div>
+    )
+}
+
+export const DesktopLogo = () => {
+    return(
+        <div className=" flex gap-2">
+            <Image
+            src="/logo.png"
+            height={24}
+            width ={24}
+            alt = "Space to gether logo"
+            />
+            <h1 className={cn("capitalize font-allura font-semibold text-base",)}>Space Together</h1>
         </div>
     )
 }

@@ -25,7 +25,7 @@ interface Props {
     id : string | null | undefined,
     role : string | null | undefined,
     lang : Locale
-    TUser : TUser
+    TUser : TUser | null
     TTLanguage : string
     TLanguageSave : string
     TLanguageCancel : string
@@ -51,7 +51,8 @@ export const ProfileSheet = ({
         </SheetTrigger>
         <SheetContent className=' flex flex-col gap-2' data-theme={theme} side={"right"}>
             {/* profile */}
-            <SheetClose onClick={() => route.push(`/${lang}/p/${TUser._id}/s`)} className=' flex gap-1'>
+            {!!TUser ? (
+                <SheetClose onClick={() => route.push(`/${lang}/p/${TUser._id}/s`)} className=' flex gap-1'>
                 <div className={cn(" avatar" , online && "online")}>
                     <div className=' size-8 relative rounded-full'>
                         <Image src={!!image ? image : "/p.jpg"} alt={cn("your user name :" , name)} fill priority/>
@@ -61,22 +62,25 @@ export const ProfileSheet = ({
                     <h2 className='text-lg font-medium text-center'>{name}</h2>
                 </div>
             </SheetClose>
+            ) : null}
             {/* user data */}
             <SPLine className=" my-0"/>
-            <div className='  w-full2 flex flex-col gap-2'>
-                <SheetClose onClick={() => route.push(`/${lang}/p/${TUser._id}`)} className=' flex gap-2 btn btn-ghost btn-sm w-full justify-start'>
-                    <LuUser2 size={20} className={cn("text-gray-500" , pathname === `/${lang}/p/${TUser._id}` && " text-info")}/>
-                    <span>You Profile</span>
-                </SheetClose>
-                <SheetClose onClick={() => route.push(`/${lang}/p/${TUser._id}/s`)} className=' flex gap-2 btn btn-ghost btn-sm w-full justify-start cursor-pointer'>
-                    <FaSchool size={20} className={cn("text-gray-500" , pathname === `/${lang}/p/${TUser._id}/s` && " text-info")}/>
-                    <span>School</span>
-                </SheetClose>
-                <SheetClose onClick={() => route.push(`/${lang}/p/${TUser._id}/c`)} className=' flex gap-2 btn btn-ghost btn-sm w-full justify-start cursor-pointer' >
-                    <FaPeopleGroup size={20} className={cn("text-gray-500" , pathname === `/${lang}/p/${TUser._id}/c` && " text-info")}/>
-                    <span>Class</span>
-                </SheetClose>
-            </div>
+            {!!TUser ? (
+                 <div className='  w-full2 flex flex-col gap-2'>
+                 <SheetClose onClick={() => route.push(`/${lang}/p/${TUser._id}`)} className=' flex gap-2 btn btn-ghost btn-sm w-full justify-start'>
+                     <LuUser2 size={20} className={cn("text-gray-500" , pathname === `/${lang}/p/${TUser._id}` && " text-info")}/>
+                     <span>You Profile</span>
+                 </SheetClose>
+                 <SheetClose onClick={() => route.push(`/${lang}/p/${TUser._id}/s`)} className=' flex gap-2 btn btn-ghost btn-sm w-full justify-start cursor-pointer'>
+                     <FaSchool size={20} className={cn("text-gray-500" , pathname === `/${lang}/p/${TUser._id}/s` && " text-info")}/>
+                     <span>School</span>
+                 </SheetClose>
+                 <SheetClose onClick={() => route.push(`/${lang}/p/${TUser._id}/c`)} className=' flex gap-2 btn btn-ghost btn-sm w-full justify-start cursor-pointer' >
+                     <FaPeopleGroup size={20} className={cn("text-gray-500" , pathname === `/${lang}/p/${TUser._id}/c` && " text-info")}/>
+                     <span>Class</span>
+                 </SheetClose>
+             </div>
+            ) : null}
             <SPLine className=" my-0"/>
             <div className='w-full'>
                 <ChangeLanguages lang={lang} chooseLang={TLanguageChoose} TCancel={TLanguageCancel} TSave={TLanguageSave} title={TTLanguage}>

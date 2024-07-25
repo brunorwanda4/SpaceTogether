@@ -1,5 +1,4 @@
 import { SchoolMenu } from '@/components/menu/schoolMenu'
-import { SchoolNav } from '@/components/navbar/schoolNav'
 import { Locale } from '@/i18n'
 import React from 'react'
 
@@ -15,7 +14,6 @@ const SchoolLayout = ({
 } : Props) => {
   return (
     <section>
-      <SchoolNav lang={lang}/>
       <SchoolMenu
         lang={lang}
       >

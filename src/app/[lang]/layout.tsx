@@ -10,6 +10,7 @@ import { ChangeTheme, ClientThemeWrapper } from "@/context/changeTheme";
 import { LanguagesProps } from "@/types/pages";
 import { Toaster } from "@/components/ui/toaster"
 import { cn } from "@/lib/utils";
+import DesktopMenu from "@/components/menu/desktopMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,10 +33,11 @@ export default function RootLayout(
 ) {
   return (
     <html lang={lang}>
-      <body className={cn(inter.className , " bg-fixed")}>
+      <body className={cn(inter.className ,)}>
           <ChangeTheme>
             <ClientThemeWrapper>
-              {children}
+              <DesktopMenu lang={lang}/>
+              <div className=" pt-12">{children}</div>
               <Toaster />
             </ClientThemeWrapper>
           </ChangeTheme>

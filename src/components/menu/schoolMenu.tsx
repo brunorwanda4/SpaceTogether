@@ -37,7 +37,7 @@ export const SchoolMenu = async ({
     return(
       <ResizablePanelGroup
         direction="horizontal"
-        className="min-h-screen h-screen rounded-lg w-full fixed z-40 items-start pt-12"
+        className="min-h-screen h-screen rounded-lg w-full fixed z-40 items-start"
       > 
         <ResizablePanel className=" h-full" defaultSize={15} maxSize={30} minSize={5}>
           <SchoolAside

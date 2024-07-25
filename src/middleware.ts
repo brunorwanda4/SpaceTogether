@@ -22,7 +22,6 @@ function getLocale(request: NextRequest): Locale {
     }
     return locale as Locale;
   } catch (error) {
-    console.error('Error in getLocale:', error);
     return i18n.defaultLocale as Locale;
   }
 }
