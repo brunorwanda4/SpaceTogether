@@ -59,18 +59,18 @@ export const ExplorePaidSchool = ({
                                 <div className=' flex justify-between w-full'>
                                         <div className=' flex gap-1 items-center'>
                                             {/* logo */}
-                                            <MyImage href={`/${lang}/s/e/${schools._id}`} className=' size-11' classname=' object-contain' src={schools.logo || "/logo.png"}/>
+                                            <MyImage href={`/${lang}/s/e/${schools.username}`} className=' size-11' classname=' object-contain' src={schools.logo || "/logo.png"}/>
                                             <div>
                                                 <h3 className=' font-semibold  leading-3'>{schools.name}</h3>
-                                                <Link href={`/${lang}/s/e/${schools._id}`} className=' text-xs'><span className=' text-info'>@</span>{schools.username}</Link>
+                                                <Link href={`/${lang}/s/e/${schools.username}`} className=' text-xs'><span className=' text-info'>@</span>{schools.username}</Link>
                                             </div>
                                         </div>
                                         <div className=' flex gap-2'>
                                             <ExploreJoinSchoolDialog 
-                                              schoolId={schools._id}
+                                              schoolId={schools.username}
                                               schoolUsername={schools.username}
                                             />
-                                            <Link className=' btn btn-warning btn-sm shadow-lg' href={`/${lang}/s/e/${schools._id}/request`}>Ask Join school</Link>
+                                            <Link className=' btn btn-warning btn-sm shadow-lg' href={`/${lang}/s/e/${schools.username}/request`}>Ask Join school</Link>
                                         </div>
                                 </div>
                                 {/* description */}
@@ -111,7 +111,7 @@ export const ExplorePaidSchool = ({
                                                 <span className=' text-gray-500 font-medium '>Website:</span>
                                                 <Link href={schools.websiteURL}  target="_blank" rel="noopener noreferrer" className=' link link-hover'>{schools.websiteURL}</Link>
                                             </div>
-                                            <Link className=" link link-hover link-info" href={`/${lang}/s/e/${schools._id}`}>Read more</Link>
+                                            <Link className=" link link-hover link-info" href={`/${lang}/s/e/${schools.username}`}>Read more</Link>
                                     </div>
                                     </div>
                                 </div>

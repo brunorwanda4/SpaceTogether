@@ -77,10 +77,10 @@ const SchoolPage =async ({
 
   return (
     <div>
-       <div className=' grid grid-cols-3 gap-3'>
+       <div className=' grid grid-cols-3 gap-3 max-lg:grid-cols-2'>
         {schoolsWithUser.map((school) => {
           return (
-            <div key={school.id} className=' card size-80 flex flex-col relative glass'>
+            <div key={school.id} className=' card size-80 flex flex-col relative glass max-lg:size-72 max-md:size-60 w-full max-lg:w-full max-md:w-full'>
               <MyImage src='/images/1.jpg' className=' w-full cursor-pointer' classname=' rounded-b-none'/>
               <div className=' top-0 bg-black/60 absolute h-32 z-10 w-full'/>
               <div className=' absolute  z-20 flex top-24 left-2 flex-col  flex-wrap'>
@@ -88,14 +88,14 @@ const SchoolPage =async ({
                 <Link href={`/${lang}/s/${school.username}`}><MyImage src={school.logo} className=' size-16' classname=' rounded-full' alt={school.name}/></Link>
                 <div className=' flex flex-col gap-2'>
                   <h3 className=' font-allura font-semibold text-xl capitalize leading-5'>{school.name}</h3>
-                  <Link className=' link-hover link' href={`/${lang}/s/${school.username}`}>
+                  <Link className=' link-hover link max-md:text-xs' href={`/${lang}/s/${school.username}`}>
                     <span className=' text-info'>@</span>
                     {school.username}
                   </Link>
                 </div>
                 </div>
                   {/* deception */}
-                  <p className=' leading-3 pt-2'>{school.description}</p>
+                  <p className=' leading-3 pt-2 max-md:hidden'>{school.description}</p>
               </div>
               {/* created by */}
               <div className=' absolute bottom-2 right-2 w-full justify-between flex items-center'>

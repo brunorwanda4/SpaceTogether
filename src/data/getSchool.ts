@@ -21,9 +21,7 @@ export const FindSchoolByOwn = async (id: string |null | undefined): Promise<ISc
 };
 
  export const FindSchoolByUsername = async (username : string) => {
-    if (!username) {
-        throw new Error("Username must be provided");
-    }
+    if (!username) return null;
 
     await dbConn();
     const school = await School.findOne<ISchool>({ username });
@@ -33,6 +31,18 @@ export const FindSchoolByOwn = async (id: string |null | undefined): Promise<ISc
     }
     return school;
 };
+
+export const  FindSchoolById = async ( id : string ) => {
+    if (id) return null;
+
+    await dbConn();
+    
+    const school = await School.findById<ISchool>({_id : id});
+
+    if (!school) return null;
+
+    return school;
+}
 
 export const getSchoolsPaid = async () : Promise<ISchool[] | null > => {
 

@@ -15,10 +15,7 @@ import { Input } from "@/components/ui/input";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
-import { LoginValidation } from '@/validation/loginValidation';
 import { zodResolver } from "@hookform/resolvers/zod"
-import { GetServerSideProps } from 'next';
-import { getDictionary } from '@/lib/dictionary';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Locale } from '@/i18n';
 import { RegisterValidation } from '@/validation/registerValidation';
@@ -27,7 +24,7 @@ import { ChevronDown } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { regServer } from '@/server/regServer';
 import { FormMessageError, FormMessageSuccess } from './formMessagers';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { toast } from '@/components/ui/use-toast';
 import { BeatLoader } from 'react-spinners';
 import { BsCheck2Circle } from 'react-icons/bs';
@@ -146,9 +143,9 @@ const RegisterForm = ({
                 </FormItem>
             )}
             />
-            <div className=' flex flex-col gap-2 justify-between'>
+            <div className=' flex flex-col gap-2 justify-between '>
             <Label>Date of birth</Label>
-            <div className=' flex gap-2 justify-between'>
+            <div className=' flex gap-2 justify-between flex-row-reverse'>
               {/* day */}
               <FormField control={form.control} name="day" render={({ field }) => (
                 <FormItem>
@@ -156,7 +153,7 @@ const RegisterForm = ({
                     <FormControl>
                       <SelectTrigger className=' line h-16 bg-base-100 flex flex-col'>
                         <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TDay}</span> <ChevronDown className="h-4 w-4 opacity-50" /></FormLabel>
-                        <SelectValue placeholder="11" />
+                        <SelectValue className="bg-transparent" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent className=' min-h-40 max-h-60'>
@@ -177,7 +174,7 @@ const RegisterForm = ({
                     <FormControl>
                       <SelectTrigger className=' flex flex-col h-16 w-full bg-base-100 max-w-20'>
                       <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TMonth}</span> <ChevronDown className="h-4 w-4 opacity-50" /></FormLabel>
-                        <SelectValue placeholder=" November" />
+                        <SelectValue className="bg-transparent" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent className=' min-h-40 max-h-60'>
@@ -198,7 +195,7 @@ const RegisterForm = ({
                     <FormControl>
                       <SelectTrigger className=' line h-16 bg-base-100  flex flex-col'>
                         <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TYear}</span> <ChevronDown className="h-4 w-4 opacity-50" /></FormLabel>
-                        <SelectValue className=' text-xs' placeholder=" 2006"  />
+                        <SelectValue className=' text-xs' />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent className=' text-xs min-h-40 max-h-60'>

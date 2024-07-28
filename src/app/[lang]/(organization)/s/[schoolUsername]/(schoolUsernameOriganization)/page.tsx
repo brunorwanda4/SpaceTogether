@@ -28,7 +28,7 @@ const SchoolUsernamePage =async ({
        lang={lang}
        schoolUsername={schoolUsername}
       />
-      <div>
+      <div className=' h-screen'>
         Other information
       </div>
     </div>

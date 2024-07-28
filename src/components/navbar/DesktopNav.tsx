@@ -15,6 +15,7 @@ const DesktopNav =async ({lang} : props) => {
     const user = (await auth())?.user;
     const {nav , page} = await getDictionary(lang);
     const getUser = await getUserByEmail(user?.email);
+    if (!getUser) return null;
   return (
     <nav className=' py-1'>
       <div className=' flex gap-2 items-center'>

@@ -89,7 +89,7 @@ export const ProfileSheet = ({
                             <Languages size={20} className={cn("text-gray-500")}/>
                             <span>{TTLanguage}</span>
                         </div>
-                        <div className="badge badge-outline">{lang}</div>
+                        <span className="badge badge-outline">{lang}</span>
                     </div>
                 </ChangeLanguages>
                 <ChangeThemeDialog />

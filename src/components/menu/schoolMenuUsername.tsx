@@ -24,7 +24,7 @@ export const SchoolMenuUsername = ({
         direction="horizontal"
         className="min-h-screen h-full rounded-lg w-full fixed z-40 items-start pt-12"
       >
-        <ResizablePanel className=" h-full" defaultSize={20} maxSize={30} minSize={5}>
+        <ResizablePanel className=" h-full max-sm:hidden" defaultSize={20} maxSize={30} minSize={5}>
           <SchoolUsernameAside lang={lang} school={school} />
         </ResizablePanel>
         <ResizableHandle className=" h-screen"/>

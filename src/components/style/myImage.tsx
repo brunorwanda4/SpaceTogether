@@ -15,7 +15,7 @@ export const MyImage = ({
 } : Props) => {
     const image = ( 
         <Image 
-        src={src || "p.jpg"}
+        src={src || "/profile.svg"}
         alt={cn("image alt :" , alt)}
         fill
         loading="lazy"

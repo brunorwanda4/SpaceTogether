@@ -18,7 +18,9 @@ export const regServer = async (values : z.infer<typeof RegisterValidation>) => 
 
     const birthDate = new Date(`${year}-${month}-${day}`);
 
-    const hashPassword = await bcrypt.hash(password , 10)
+    const hashPassword = await bcrypt.hash(password , 10);
+
+    const name = FName + "_" + LName
 
     try {
     const db = (await clientPromise).db();
@@ -40,6 +42,7 @@ export const regServer = async (values : z.infer<typeof RegisterValidation>) => 
         FName : FName,
         gender : gender,
         birthDate : birthDate,
+        name : name,
     });
 
     if(!createAccount) {

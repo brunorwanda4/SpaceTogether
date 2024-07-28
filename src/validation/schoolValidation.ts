@@ -81,3 +81,43 @@ export const SchoolInfoValidation = z.object({
     }),
     type : z.array( z.string()),
 })
+
+export const SchoolAskToJoinValidation = z.object({
+    stFName : z.string().min(1 , {
+        message : "Student first name is required",
+    }).max(25 , {
+        message : "Maximum characters are 25"
+    }),
+    stLName : z.string().min(1 , {
+        message : "Student last name is required "
+    }).max(25 , {
+        message : "Maximum characters are 25"
+    }),
+    stGender : z.enum(["male", "female" , "other"]),
+    stImage : z.string(),
+    stEmail : z.string().email(),
+    stBirthDay: z.string().min(1 , {
+        message :"Select a day."
+    }),
+    stBirthMonth: z.string().min(1 , {
+        message : "Select a month." 
+    }),
+    stBirthYear: z.string().min(4 , {
+        message : "Select a year." 
+    }),
+    prName : z.string().min(1 , {
+        message : "Parent name is required "
+    }).max(25 , {
+        message : "Maximum characters are 25"
+    }),
+    prPhone : z.string().min(1 , {
+        message : "Phone number is required",
+    }).max(23 , {
+        message : "Maximum characters are 23"
+    }),
+    prEmail : z.string().email(),
+    report : z.string(),
+    description : z.string().min(1 , {
+        message : "Why do you want to join our school?"
+    }),
+})

@@ -1,9 +1,19 @@
-import React from 'react'
+import { Locale } from "@/i18n"
+import Link from "next/link"
 
-const UserPage = () => {
+interface props {
+  params : {
+    lang : Locale
+    userId : string
+  }
+}
+const UserPage = ({
+  params: {lang , userId}
+}: props) => {
   return (
     <div>
-      user id
+      user id : {userId}
+      <Link className=" btn" href={`/${lang}/s`}>School</Link>
     </div>
   )
 }

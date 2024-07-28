@@ -10,11 +10,11 @@ interface props{
 
 const DesktopMenu = ({lang} : props) => {
   return (
-    <header data-tauri-drag-region className=" flex justify-between  items-center pl-2 backdrop-blur-lg h-12 fixed z-50 w-full border-b border-neutral-content">
+    <header data-tauri-drag-region className=" flex justify-between  items-center px-2 backdrop-blur-lg h-12 fixed z-50 w-full border-b border-neutral-content">
       <DesktopLogo/>
       <div className=" gap-4 flex">
         <DesktopNav lang={lang}/>
-        <DesktopWindows />
+        {/* <DesktopWindows /> */}
       </div>
     </header>
   )

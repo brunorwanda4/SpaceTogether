@@ -4,6 +4,7 @@ import { auth } from '@/auth';
 import { getDictionary } from '@/lib/dictionary';
 import { Locale } from '@/i18n';
 import { getUserByEmail } from '@/data/getUserData';
+import SchoolNavClient from './schoolNavClient';
 
 interface props {
     lang : Locale;
@@ -22,7 +23,7 @@ export const SchoolNav = async ({
         throw Error (`Could not find user ${user?.email}`)
     }
   return (
-    <nav className={cn(`fixed flex justify-between z-50 w-full h-12 lg:px-2 md:px-2 py-1 shadow-md items-center backdrop-blur-md`)}>
+    <SchoolNavClient>
         <div>
             <SchoolLogo 
              lang={lang} 
@@ -32,6 +33,6 @@ export const SchoolNav = async ({
              isSe={isSe}
             />
         </div>
-    </nav>
+    </SchoolNavClient>
   )
 }

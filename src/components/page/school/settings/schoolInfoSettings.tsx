@@ -78,7 +78,7 @@ const SchoolInfoSettings = async ({
                     </div>
                   </div>
                   {/* teacher one */}
-                  <div className="avatar online">
+                  <div className="avatar  ">
                     <div className="w-14 rounded-full">
                       <MyImage src='/images/1.jpg'/>
                     </div>
@@ -125,7 +125,7 @@ const SchoolInfoSettings = async ({
                       <span>3</span>
                     </div>
                   </div>
-                  <div className="avatar online">
+                  <div className="avatar  ">
                     <div className="w-14 rounded-full">
                       <MyImage src={user.image}/>
                     </div>
@@ -141,7 +141,7 @@ const SchoolInfoSettings = async ({
             <div className=' stats shadow w-full'>
               <div className=' stat'>
               <div className="stat-figure">
-              <div className="avatar online">
+              <div className="avatar  ">
                 <div className="w-14 rounded-full">
                   <MyImage src={user.image}/>
                 </div>
@@ -193,27 +193,33 @@ const SchoolInfoSettings = async ({
                   </div>
                   {/* other account */}
                   <div className=' flex flex-col gap-2'>
-                    <div className=' flex gap-2'>
-                        <div className=' flex justify-between items-center gap-1'>
-                          <MyImage className=' size-5' src={"/icons/whatsapp.png"}/>
-                          <span className=' text-gray-500 font-medium  capitalize'>whatsapp :</span>
-                        </div>
-                        <span className=' cursor-pointer' >{school.whatsapp}</span>
+                    {!!school.whatsapp && (
+                      <div className=' flex gap-2'>
+                      <div className=' flex justify-between items-center gap-1'>
+                        <MyImage className=' size-5' src={"/icons/whatsapp.png"}/>
+                        <span className=' text-gray-500 font-medium  capitalize'>whatsapp :</span>
+                      </div>
+                      <span className=' cursor-pointer' >{school.whatsapp}</span>
                     </div>
-                    <div className=' flex gap-2'>
+                    )}
+                    {!!school.facebook && (
+                      <div className=' flex gap-2'>
                         <div className=' flex justify-between items-center gap-1'>
                           <MyImage className=' size-5' src={"/icons/facebook.png"}/>
                           <span className=' text-gray-500 font-medium  capitalize'>facebook:</span>
                         </div>
                         <span className=' cursor-pointer' >{school.facebook}</span>
+                      </div>
+                    )}
+                   {!!school.twitter && (
+                     <div className=' flex gap-2'>
+                     <div className=' flex justify-between items-center gap-1'>
+                       <MyImage className=' size-5' src={"/icons/twitter.png"}/>
+                       <span className=' text-gray-500 font-medium  capitalize'>twitter (x):</span>
+                     </div>
+                     <span className=' cursor-pointer' >{school.twitter}</span>
                     </div>
-                    <div className=' flex gap-2'>
-                        <div className=' flex justify-between items-center gap-1'>
-                          <MyImage className=' size-5' src={"/icons/twitter.png"}/>
-                          <span className=' text-gray-500 font-medium  capitalize'>twitter (x):</span>
-                        </div>
-                        <span className=' cursor-pointer' >{school.twitter}</span>
-                    </div>
+                   )}
                   </div>
                 </div>
             </div>

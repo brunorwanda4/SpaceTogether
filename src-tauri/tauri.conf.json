@@ -109,7 +109,7 @@
         "resizable": true,
         "title": "Space Together",
         "width": 800,
-        "decorations": false
+        "decorations": true
       }
     ]
   }

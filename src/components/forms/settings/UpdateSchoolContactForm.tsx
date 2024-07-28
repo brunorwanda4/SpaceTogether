@@ -68,9 +68,7 @@ const UpdateSchoolContactForm = ({
               </div>
             ),
           });
-          setError(data.error)
-          console.log("something went wrong to update school ❤️❤️ :" , data.error);
-          
+          setError(data.error)          
         }
       })
     })
@@ -99,7 +97,7 @@ const UpdateSchoolContactForm = ({
               <FormItem>
                 <FormLabel>Phone Number</FormLabel>
                 <FormControl>
-                  <Input {...field} type="number" placeholder="+250 7925 37274" />
+                  <Input {...field} type="number" placeholder="whatsapp number for school" />
                 </FormControl>
               </FormItem>
             )}

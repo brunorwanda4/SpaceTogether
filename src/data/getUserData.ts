@@ -11,7 +11,7 @@ export const getUserByEmail = async (email : string | null | undefined): Promise
     .findOne<TUser>({ email: email});
 
     if (!user) {
-        throw new Error(`User ${email} not found`)
+        return null;
     };
     
     return user
@@ -24,7 +24,7 @@ export const getUserByUsername = async (username : string): Promise<TUser | null
     .findOne<TUser>({ name: username});
 
     if(!user) {
-        throw new Error(`User ${username} not found`)
+        return null;
     }
 
     return user
