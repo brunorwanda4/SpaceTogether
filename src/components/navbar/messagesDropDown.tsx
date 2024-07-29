@@ -9,7 +9,7 @@ export const MessagesDropDown = () => {
     const theme = useTheme()
   return (
     <DropdownMenu>
-        <DropdownMenuTrigger className=' btn btn-circle btn-sm'>
+        <DropdownMenuTrigger className=' btn btn-circle btn-sm btn-ghost'>
             <span className=' sr-only'>Messages</span>
             <BsMessenger size={24} className=''/>
         </DropdownMenuTrigger>

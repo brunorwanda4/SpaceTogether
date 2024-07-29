@@ -41,7 +41,7 @@ export const ProfileSheet = ({
     const route = useRouter();
   return (
     <Sheet>
-        <SheetTrigger className='btn btn-circle btn-sm duration-200 hover:text-neutral'>
+        <SheetTrigger className='btn btn-circle btn-sm btn-ghost'>
             <span className=' sr-only'>profile</span>
             <div className={cn(" avatar" , online && "online")}>
                 <div className=' size-7 relative rounded-full'>

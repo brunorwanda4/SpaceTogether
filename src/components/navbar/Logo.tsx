@@ -4,6 +4,7 @@ import { getSchoolByUsername } from "@/server/getData";
 import Image from "next/image"
 import Link from "next/link";
 import { SchoolNavSheet } from "./schoolNavSheet";
+import { ISchool } from "@/types/school";
 interface Props {
     link ?: boolean;
     title ?: boolean ;
@@ -66,13 +67,14 @@ interface SchoolLogoProps {
     className ?: string;
     schoolUsername ?: string;
     isSe ?: string;
+    school : ISchool;
 }
 
-export const SchoolLogo = async ({
-    link , title, className , lang ,schoolUsername , isSe
+export const SchoolLogo =  ({
+    link , title, className , lang ,schoolUsername , isSe , school
 } : SchoolLogoProps) => {
     const defaultLogo = (
-        <div>
+        <div >
         {link ? (
             <Link href={`/${lang}/s`}>
                 <div className=" flex gap-1 items-center">
@@ -103,10 +105,6 @@ export const SchoolLogo = async ({
         </div>
     )
     
-    if(!schoolUsername) return defaultLogo;
-
-    const school = await getSchoolByUsername(schoolUsername);
-
     if(!school) return defaultLogo;
 
     return (

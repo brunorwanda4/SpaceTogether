@@ -6,6 +6,7 @@ import { getUserByEmail } from '@/data/getUserData';
 import { Locale } from '@/i18n';
 import { FindCreateSchool } from './findCreateSchool';
 import { SchoolNavFindSchool } from './schoolNavFindSchool';
+import { BsBellFill } from 'react-icons/bs';
 
 interface props {
     lang : Locale
@@ -19,6 +20,9 @@ const DesktopNav =async ({lang} : props) => {
   return (
     <nav className=' py-1'>
       <div className=' flex gap-2 items-center'>
+          <div className=' btn btn-sm btn-circle btn-ghost'>
+            <BsBellFill size={24}/>
+          </div>
             {/* find school */}
             <SchoolNavFindSchool lang={lang}/>
             <FindCreateSchool

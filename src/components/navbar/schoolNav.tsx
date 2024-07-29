@@ -1,38 +1,32 @@
-import { Logo, SchoolLogo } from './Logo';
+
+import { SchoolLogo } from './Logo';
 import { cn } from '@/lib/utils';
-import { auth } from '@/auth';
-import { getDictionary } from '@/lib/dictionary';
 import { Locale } from '@/i18n';
-import { getUserByEmail } from '@/data/getUserData';
-import SchoolNavClient from './schoolNavClient';
+import { redirect } from 'next/navigation';
+import { ISchool } from '@/types/school';
+import { UserScrollTop } from '@/hooks/scrollTop';
 
 interface props {
     lang : Locale;
     schoolUsername ?: string
-    isSe ?: string
+    isSe ?: string,
+    school : ISchool | null;
 }
 
-export const SchoolNav = async ({
-    lang , schoolUsername , isSe
+export const SchoolNav = ({
+    lang , schoolUsername , isSe , school
 } : props) => {
-    const user = (await auth())?.user;
-    const {nav , page} = await getDictionary(lang);
-    const getUser = await getUserByEmail(user?.email);
-
-    if(!getUser) {
-        throw Error (`Could not find user ${user?.email}`)
-    }
+    if(!school) return (redirect(`/${lang}/s`));
   return (
-    <SchoolNavClient>
-        <div>
-            <SchoolLogo 
-             lang={lang} 
-             title 
-             link
-             schoolUsername={schoolUsername}
-             isSe={isSe}
-            />
-        </div>
-    </SchoolNavClient>
+    <div>
+        <SchoolLogo 
+            lang={lang} 
+            title 
+            link
+            school={school}
+            schoolUsername={schoolUsername}
+            isSe={isSe}
+        />
+  </div>
   )
 }

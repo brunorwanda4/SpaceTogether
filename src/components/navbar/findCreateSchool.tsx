@@ -25,7 +25,7 @@ export const FindCreateSchool = ({
     const pathname = usePathname();
   return (
     <DropdownMenu>
-        <DropdownMenuTrigger className=' btn btn-circle btn-sm duration-200  '>
+        <DropdownMenuTrigger className=' btn btn-circle btn-sm btn-ghost  bg-base-200'>
             <span className=' sr-only'>create or join class</span>
             <BsPlus size={24} className=''/>
         </DropdownMenuTrigger>
