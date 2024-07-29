@@ -25,8 +25,11 @@ export const SchoolMenuUsername = ({
       >
         <ResizablePanel className=" h-full max-sm:hidden" defaultSize={20} maxSize={30} minSize={5}>
          <div className=" p-2">
-            <SchoolNav school={school} schoolUsername={schoolUsername} lang={lang}/>
+            <SchoolNav title school={school} schoolUsername={schoolUsername} lang={lang}/>
             <SchoolUsernameAside lang={lang} school={school} />
+         </div>
+         <div className="h-screen">
+          Bruno
          </div>
         </ResizablePanel>
         <ResizableHandle withHandle className=" h-screen"/>

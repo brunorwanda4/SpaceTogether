@@ -11,17 +11,18 @@ interface props {
     schoolUsername ?: string
     isSe ?: string,
     school : ISchool | null;
+    title ?: boolean ;
 }
 
 export const SchoolNav = ({
-    lang , schoolUsername , isSe , school
+    lang , schoolUsername , isSe , school , title
 } : props) => {
     if(!school) return (redirect(`/${lang}/s`));
   return (
     <div>
         <SchoolLogo 
             lang={lang} 
-            title 
+            title={title}
             link
             school={school}
             schoolUsername={schoolUsername}

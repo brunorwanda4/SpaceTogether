@@ -5,7 +5,7 @@ import { FaSchool } from "react-icons/fa6"
 import Link from "next/link"
 import { ISchool } from "@/types/school"
 import { usePathname } from "next/navigation"
-import { BsCheck2Circle } from "react-icons/bs";
+import { BsCheck2Circle, BsHouse, BsLayers, BsLayersFill } from "react-icons/bs";
 import { cn } from "@/lib/utils";
 import { AsideLinkClassName } from "../style";
 import { SPLine } from "../style/simpleComponents/line";
@@ -19,15 +19,44 @@ export const SchoolSettingAside = ({
 } : props) => {
     const pathname = usePathname();
     if(!school) return null;
+    const schoolPathnameSettings = `/${lang}/s/${school.username}/se`
   return (
     <div className=" w-full">
-        <div className=" flex flex-col px-1">
-            <Link className={cn(AsideLinkClassName , " justify-between w-full")} href={`/${lang}/s/${school.username}/se`}>
+        <div className=" line px-1">
+            <Link className={cn(AsideLinkClassName , " justify-between w-full")} href={`${schoolPathnameSettings}`}>
                 <div className=" flex gap-2 items-center">
                     <FaSchool size={20} className=" text-gray-500"/>
-                    <span>School</span>
+                    <span>About school</span>
                 </div>
-                {pathname === `/${lang}/s/${school.username}/se` && (<BsCheck2Circle />)}
+                {pathname === `${schoolPathnameSettings}` && (<BsCheck2Circle />)}
+            </Link>
+            <Link className={cn(AsideLinkClassName , " justify-between w-full")} href={`${schoolPathnameSettings}/cl`}>
+                <div className=" flex gap-2 items-center">
+                    {pathname === `${schoolPathnameSettings}/cl` ? <BsLayersFill size={20} className=" text-gray-500"/> : <BsLayers size={20} className=" text-gray-500"/>}
+                    <span>Classes</span>
+                </div>
+                {pathname === `${schoolPathnameSettings}/cl` && (<BsCheck2Circle />)}
+            </Link>
+            <Link className={cn(AsideLinkClassName , " justify-between w-full")} href={`${schoolPathnameSettings}/tea`}>
+                <div className=" flex gap-2 items-center">
+                    {pathname === `${schoolPathnameSettings}/tea` ? <BsLayersFill size={20} className=" text-gray-500"/> : <BsLayers size={20} className=" text-gray-500"/>}
+                    <span>Teachers</span>
+                </div>
+                {pathname === `${schoolPathnameSettings}/tea` && (<BsCheck2Circle />)}
+            </Link>
+            <Link className={cn(AsideLinkClassName , " justify-between w-full")} href={`${schoolPathnameSettings}/stu`}>
+                <div className=" flex gap-2 items-center">
+                    {pathname === `${schoolPathnameSettings}/stu` ? <BsLayersFill size={20} className=" text-gray-500"/> : <BsLayers size={20} className=" text-gray-500"/>}
+                    <span>Students</span>
+                </div>
+                {pathname === `${schoolPathnameSettings}/stu` && (<BsCheck2Circle />)}
+            </Link>
+            <Link className={cn(AsideLinkClassName , " justify-between w-full")} href={`${schoolPathnameSettings}/st`}>
+                <div className=" flex gap-2 items-center">
+                    {pathname === `${schoolPathnameSettings}/st` ? <BsLayersFill size={20} className=" text-gray-500"/> : <BsLayers size={20} className=" text-gray-500"/>}
+                    <span>Staffs</span>
+                </div>
+                {pathname === `${schoolPathnameSettings}/st` && (<BsCheck2Circle />)}
             </Link>
         </div>
         <SPLine className=" my-0"/>

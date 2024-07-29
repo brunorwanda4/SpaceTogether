@@ -97,7 +97,7 @@ const SchoolPage =async ({
                   {/* deception */}
                   <p className=' leading-3 pt-2 max-md:hidden'>{school.description}</p>
               </div>
-              {/* created by */}
+              {/* created by */} 
               <div className=' absolute bottom-2 right-2 w-full justify-between flex items-center'>
                 <Link className=' ml-4  btn btn-ghost btn-sm btn-circle' href={`/${lang}/s/${school.username}/se`}>
                   <span className=' sr-only'>Settings</span>

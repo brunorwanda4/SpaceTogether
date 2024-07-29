@@ -67,7 +67,7 @@ interface SchoolLogoProps {
     className ?: string;
     schoolUsername ?: string;
     isSe ?: string;
-    school : ISchool;
+    school : ISchool | null;
 }
 
 export const SchoolLogo =  ({
@@ -110,7 +110,7 @@ export const SchoolLogo =  ({
     return (
         <div className=" flex gap-2 items-center">
             <SchoolNavSheet lang={lang}/>
-            <Link href={`/${lang}/s/${schoolUsername}`}>
+            <Link href={`/${lang}/s/${school.username}`}>
                 <div className=" flex gap-1 items-center">
                     <Image
                     src={school.logo}

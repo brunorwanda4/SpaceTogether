@@ -10,6 +10,7 @@ import { ISchool } from "@/types/school";
 import { MyImage } from "../style/myImage";
 import { SPLine } from "../style/simpleComponents/line";
 import SchoolNotFount from "../error/schoolNotFount";
+import { SchoolNav } from "../navbar/schoolNav";
 
 interface props {
     lang : Locale;
@@ -26,11 +27,11 @@ export const SchoolMenuSettings = ({
   return (
     <ResizablePanelGroup
     direction="horizontal"
-    className="min-h-screen h-full rounded-lg w-full fixed z-40 items-start pt-12"
+    className="min-h-screen h-full rounded-lg w-full fixed z-40 items-start"
   >
-    <ResizablePanel className=" h-screen w-full flex-col flex gap-2" defaultSize={20} maxSize={30} minSize={5}>
+    <ResizablePanel className=" h-screen w-full flex-col flex gap-2 overflow-y-auto max-h-screen" defaultSize={20} maxSize={30} minSize={5}>
       <div className=" flex gap-1 px-1 mt-2">
-         <MyImage src={school.logo} className=" size-8 rounded-full" classname=" object-contain"/>
+         <SchoolNav school={school} lang={lang}/>
         <h2 className=" font-semibold  text-xl lg:text-2xl">Settings</h2>
       </div>
      <SchoolSettingsSearch />

@@ -24,7 +24,7 @@ export const SchoolNavSheet = ({
         <SheetTrigger className=' btn btn-circle btn-sm btn-ghost'>
             <IoMdMenu size={20}/>
         </SheetTrigger>
-        <SheetContent side={"left"} data-theme={theme}>
+        <SheetContent className=' px-2' side={"left"} data-theme={theme}>
             <SheetTitle>
                 <Logo link title/>
             </SheetTitle>
