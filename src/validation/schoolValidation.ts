@@ -121,3 +121,16 @@ export const SchoolAskToJoinValidation = z.object({
         message : "Why do you want to join our school?"
     }),
 })
+
+export const SchoolClassValidation = z.object({
+    name : z.string().min(1 , {
+        message : "Please enter class name "
+    }).max(25 , {
+        message : "maximum characters are 25"
+    }),
+    username : z.string().min(1 , {
+        message : "username is required"
+    }).max(15 , {
+        message : "maximum characters are 15"
+    })
+})

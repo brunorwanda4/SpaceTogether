@@ -4,11 +4,9 @@ import { MyImage } from '@/components/style/myImage';
 import { FindSchoolByOwn } from '@/data/getSchool';
 import { getUserById } from '@/data/getUserData';
 import { getDictionary } from '@/lib/dictionary';
-import { cn } from '@/lib/utils';
 import { LanguagesProps } from '@/types/pages';
 import { ISchool, TSchoolWithUser } from '@/types/school';
 import { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { IoSettingsOutline } from 'react-icons/io5';
@@ -80,7 +78,7 @@ const SchoolPage =async ({
        <div className=' grid grid-cols-3 gap-3 max-lg:grid-cols-2'>
         {schoolsWithUser.map((school) => {
           return (
-            <div key={school.id} className=' card size-80 flex flex-col relative glass max-lg:size-72 max-md:size-60 w-full max-lg:w-full max-md:w-full'>
+            <div key={school.id} className=' card size-80 flex flex-col relative glass max-lg:size-72 max-md:size-60 w-full max-lg:w-full max-md:w-full shadow-lg'>
               <MyImage src='/images/1.jpg' className=' w-full cursor-pointer' classname=' rounded-b-none'/>
               <div className=' top-0 bg-black/60 absolute h-32 z-10 w-full'/>
               <div className=' absolute  z-20 flex top-24 left-2 flex-col  flex-wrap'>
@@ -114,6 +112,9 @@ const SchoolPage =async ({
             </div>
           )
         })}
+       </div>
+       <div className=' h-screen'>
+
        </div>
     </div>
   )

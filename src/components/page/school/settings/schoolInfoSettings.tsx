@@ -8,6 +8,7 @@ import SchoolDeleteSettingDialog from './SchoolDeleteSettingDialog'
 import { auth } from '@/auth';
 import Link from 'next/link';
 import UpdateSchoolContact from './updateSchoolContact';
+import { redirect } from 'next/navigation';
 
 interface props {
     lang : Locale
@@ -19,8 +20,9 @@ const SchoolInfoSettings = async ({
     lang, username , school
 } : props) => {
   const user = (await auth())?.user
-  if (!user) return null
-  if(!school) return null
+  if (!user) return redirect(`/${lang}/`);
+  if(!school) return redirect(`/${lang}/s`);
+  const schoolPathnameSettings = `/${lang}/s/${school.username}/se`;
   return (
     <div className=' flex gap-4 flex-col'>
       <div className='  flex justify-between w-full items-center'>
@@ -63,7 +65,7 @@ const SchoolInfoSettings = async ({
                <PiStudentDuotone size={25}/>
               </div>
               <div className="stat-title">Total Students</div>
-              <div className="stat-value">2.4K</div>
+              <Link href={`${schoolPathnameSettings}/stu`} className="stat-value">2.4K</Link>
               <div className="stat-desc">549 more than this Year</div>
             </div>
 
@@ -86,7 +88,7 @@ const SchoolInfoSettings = async ({
                 </div>
               </div>
               <div className="stat-title">Total Teachers</div>
-              <div className="stat-value">200</div>
+              <Link href={`${schoolPathnameSettings}/tea`} className="stat-value w-auto">200</Link>
               <div className="stat-desc">43 more than this Year</div>
             </div>
 
@@ -108,7 +110,7 @@ const SchoolInfoSettings = async ({
                 </div>
               </div>
               <div className="stat-title">Total Staffs</div>
-              <div className="stat-value">86</div>
+              <Link href={`${schoolPathnameSettings}/st`} className="stat-value">86</Link>
               <div className="stat-desc">12 this year</div>
             </div>
           </div>
