@@ -26,7 +26,7 @@ const SchoolUsernameSettingPage = async ({
       <div className=' w-full flex mt-4 gap-2'>
         {/* left */}
         <div className=' line w-full'>
-          <SchoolAboutTrainingSetting lang={lang} school={school}/>
+          <SchoolAboutTrainingSetting username={schoolUsername} lang={lang} school={school}/>
         </div>
         {/* right */}
         <div className=' w-full'>

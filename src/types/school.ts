@@ -28,3 +28,9 @@ export interface ISchool extends Document {
 export interface TSchoolWithUser extends Omit<ISchool, 'createdBy'> {
   createdBy: TUser | null;
 }
+
+export interface TClass {
+  name : string;
+  username : string;
+  category : "online" | "primary" | "middle" | "vocational" | "homeschooling" | "boarding" | "TVET" | "high" | "international"
+}

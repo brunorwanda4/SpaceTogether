@@ -10,6 +10,8 @@ export const SchoolValidation = z.object({
         message : "username are not required",
     }).max(50, {
         message : "maximum characters are 50",
+    }).regex(/^[a-zA-Z0-9_]+$/ , {
+        message : " username can only contain letters, numbers, and underscores"
     }),
     logo : z.string().min(1 , {
         message : "Logo are required",
@@ -132,5 +134,12 @@ export const SchoolClassValidation = z.object({
         message : "username is required"
     }).max(15 , {
         message : "maximum characters are 15"
-    })
+    }).regex(/^[a-zA-Z0-9_]+$/ , {
+        message : "Username must contain only alphanumeric characters and underscores",
+    }),
+    category : z.string().min(1 , {
+        message : "Training is required",
+    }).max(15 , {
+        message : "maximum characters are 15"
+    }),
 })

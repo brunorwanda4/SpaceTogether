@@ -1,21 +1,22 @@
 import { ISchool } from "@/types/school"
-import { AddSchoolTrainingSettingDialog } from "./AddSchoolTrainingSettingDialog"
 import { AddClassDialogSettingSchool } from "./addClassDialogSettingSchool"
 import { IoIosWarning } from "react-icons/io"
 import { Locale } from "@/i18n"
+import Link from "next/link"
 
 interface props {
   school : ISchool
   lang : Locale
+  username: string
 }
 const SchoolAboutTrainingSetting = ({
-  school , lang
+  school , lang , username
 } : props) => {
   return (
     <div className="card w-full bg-base-300 min-h-80 shadow-lg p-2">
       <div className=" flex justify-between">
         <h3 className="text-xl font-bold lg:text-xl">Training Setting </h3>
-        <AddSchoolTrainingSettingDialog school={school} />
+        <AddClassDialogSettingSchool lang={lang} school={school} />
       </div>
       <p className=" text-gray-500">The training it show all class for school have you can add class all remove.</p>
       <div className=" line mt-2">
@@ -27,7 +28,6 @@ const SchoolAboutTrainingSetting = ({
                 <span className=" capitalize">{items}</span>
                 <span>School</span>
               </h4>
-              <AddClassDialogSettingSchool lang={lang} school={school} name={items}/>
             </div>
             <div>
               <div className=" flex gap-2 mt-2">
@@ -39,7 +39,9 @@ const SchoolAboutTrainingSetting = ({
         )
       })}
       </div>
-      <p className=" mt-2 flex items-center gap-2 text-gray-500"><IoIosWarning/>If you delete class it will take 1 week to delete it!</p>
+      <div className=" justify-end flex">
+      <Link className=" btn btn-sm " href={`/${lang}/s/${username}/se/cl`}>Show more classes settings</Link>
+      </div>
     </div>
   )
 }
