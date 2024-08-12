@@ -40,7 +40,7 @@ export const SchoolMenuSettings = ({
     </ResizablePanel>
     <ResizableHandle className=" h-screen"/>
     <ResizablePanel className=" w-full" defaultSize={75}>
-      <main className="px-1 max-h-screen overflow-y-auto p-2">
+      <main className="px-1 max-h-screen overflow-y-auto p-2 ">
         {children}
       </main>
     </ResizablePanel>

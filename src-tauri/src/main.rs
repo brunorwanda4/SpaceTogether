@@ -89,6 +89,32 @@ async fn insert_class(class: models::school_class) -> MongoDBResponse {
 }
 
 
+// #[tauri::command]
+// async fn get_all_classes() -> MongoDBResponse<Vec<models::school_class>> {
+//     match libs::connect_to_mongodb().await {
+//         Ok(client) => {
+//             match server::get_all_classes(&client).await {
+//                 Ok(classes) => MongoDBResponse {
+//                     success: true,
+//                     message: "Classes fetched successfully.".to_string(),
+//                     data: Some(classes),
+//                 },
+//                 Err(e) => MongoDBResponse {
+//                     success: false,
+//                     message: format!("Failed to fetch classes: {}", e),
+//                     data: None,
+//                 },
+//             }
+//         },
+//         Err(e) => MongoDBResponse {
+//             success: false,
+//             message: format!("Failed to connect to MongoDB: {}", e),
+//             data: None,
+//         },
+//     }
+// }
+
+
 fn main() {
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![

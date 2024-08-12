@@ -3,21 +3,23 @@ import { AddClassSettingSchoolForm } from "@/components/forms/settings/addClassS
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import { useTheme } from "@/hooks/useTheme";
 import { Locale } from "@/i18n"
+import { cn } from "@/lib/utils";
 import { ISchool } from "@/types/school"
 import { BsPlus } from "react-icons/bs"
 
 interface props {
     school : ISchool,
     lang : Locale,
+    className ?: string
 }
 
 export const AddClassDialogSettingSchool = ({
-    school , lang
+    school , lang , className
 } : props) => {
     const theme = useTheme();
   return (
     <AlertDialog>
-        <AlertDialogTrigger className=" btn btn-sm btn-outline">
+        <AlertDialogTrigger className={cn("btn btn-sm btn-outline" , className)}>
             <BsPlus size={20}/><span>Add new school class</span>
         </AlertDialogTrigger>
         <AlertDialogContent data-theme={theme}>

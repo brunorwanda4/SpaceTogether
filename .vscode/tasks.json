@@ -1,0 +1,28 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "bun",
+			"script": "next start",
+			"problemMatcher": [],
+			"label": "Start project 🌳",
+			"detail": "bunx tauri dev - package.json",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+				
+			}
+		},
+		{
+			"type": "bun",
+			"script": "next dev",
+			"problemMatcher": [],
+			"label": "bun: dev",
+			"detail": "bun run next dev - package.json",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}

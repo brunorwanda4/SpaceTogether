@@ -14,7 +14,7 @@ const AskCreateSchoolChildrenDialog = () => {
     const theme = useTheme()
   return (
     <Dialog>
-      <DialogTrigger className=' btn btn-ghost btn-sm flex gap-2'>
+      <DialogTrigger className=' btn btn-outline btn-sm flex gap-2'>
         <BsPlus size={20}/>
         <span>Add school relationship</span>
       </DialogTrigger>

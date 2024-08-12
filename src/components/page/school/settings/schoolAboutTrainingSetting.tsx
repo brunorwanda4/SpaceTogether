@@ -40,7 +40,7 @@ const SchoolAboutTrainingSetting = ({
       })}
       </div>
       <div className=" justify-end flex">
-      <Link className=" btn btn-sm " href={`/${lang}/s/${username}/se/cl`}>Show more classes settings</Link>
+      <Link className=" btn btn-sm " href={`/${lang}/s/${username}/se/cl`}>See more classes settings</Link>
       </div>
     </div>
   )
