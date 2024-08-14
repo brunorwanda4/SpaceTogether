@@ -1,11 +1,11 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import React, { createContext, useState, useEffect, useContext, ReactNode } from "react";
+import { createContext, useState, useEffect, useContext, ReactNode } from "react";
 
 export const ThemeContext = createContext<{ theme: string; changeTheme: (theme: string) => void } | null>(null);
 
-export const ChangeTheme = ({ children }: { children: ReactNode }) => {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const [theme, setTheme] = useState("light");
     const [isMounted, setIsMounted] = useState(false);
 

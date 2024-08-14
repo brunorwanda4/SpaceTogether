@@ -6,8 +6,11 @@ import clientPromise from "@/lib/db";
 import { RegisterValidation } from "@/validation/registerValidation";
 import { NextResponse } from "next/server";
 import z from "zod";
+import { Locale } from '@/i18n';
+import { loginServer } from './loginServer';
+import { LoginValidation } from '@/validation/loginValidation';
 
-export const regServer = async (values : z.infer<typeof RegisterValidation>) => {
+export const regServer = async (values : z.infer<typeof RegisterValidation> , lang : Locale) => {
     const validation = RegisterValidation.safeParse(values)
 
     if(!validation.success) {
@@ -49,19 +52,17 @@ export const regServer = async (values : z.infer<typeof RegisterValidation>) => 
         return {error : "Failed to create account"}
     }
 
-    const login = async (email : string , password : string) => {
-        await signIn("credentials", {
-            email,
-            password,
-        })
-    };
+    const login = await signIn("credentials", {
+        username : email,
+        password,
+        redirectTo : `/${lang}/s`
+    })
 
-    if(!login) {
-        return {error : "Failed to login"}
+    if (!login) {
+        return {error : "Failed to login "};
     }
 
-    return {success : " account created successfully && Login successful "};
-
+    return {success : " account created successfully , Login successful!"};
     } catch (error : any) {
         return {error : error.message}
     }

@@ -13,10 +13,11 @@ import { usePathname, useRouter } from 'next/navigation';
 import { MdOutlineFlightClass } from "react-icons/md";
 import { IoSettingsOutline } from 'react-icons/io5';
 import { ChangeLanguages } from './changeLanguages';
-import { Languages } from 'lucide-react';
+import { Languages, LogOutIcon } from 'lucide-react';
 import { ChangeThemeDialog } from './ChangeThemeDialog';
-import { BsCheck2Circle } from "react-icons/bs";
+import { BsCheck2Circle, BsPerson, BsPersonFill } from "react-icons/bs";
 import { SPLine } from "../style/simpleComponents/line";
+import { logout } from "@/server/logout";
 
 interface Props {
     image : string | null | undefined,
@@ -68,7 +69,7 @@ export const ProfileSheet = ({
             {!!TUser ? (
                  <div className='  w-full2 flex flex-col gap-2'>
                  <SheetClose onClick={() => route.push(`/${lang}/p/${TUser._id}`)} className=' flex gap-2 btn btn-ghost btn-sm w-full justify-start'>
-                     <LuUser2 size={20} className={cn("text-gray-500" , pathname === `/${lang}/p/${TUser._id}` && " text-info")}/>
+                    {pathname === `/${lang}/p/${TUser._id}` ? <BsPersonFill size={20} className={cn("text-info")}/> : <LuUser2 size={20} className={cn("text-gray-500")}/>}
                      <span>You Profile</span>
                  </SheetClose>
                  <SheetClose onClick={() => route.push(`/${lang}/p/${TUser._id}/s`)} className=' flex gap-2 btn btn-ghost btn-sm w-full justify-start cursor-pointer'>
@@ -100,6 +101,13 @@ export const ProfileSheet = ({
                     </div>
                     {pathname === `/${lang}/se` && <BsCheck2Circle/>}
                 </SheetClose>
+            </div>
+            <SPLine className=" my-0"/>
+            <div>
+                <button className=" btn text-error btn-ghost btn-sm w-full justify-start flex gap-2" onClick={() => logout()}>
+                    <LogOutIcon size={20} className=" text-gray-500"/>
+                    <span>Login out</span>
+                </button>
             </div>
         </SheetContent>
     </Sheet>

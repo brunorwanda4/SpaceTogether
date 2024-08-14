@@ -31,18 +31,17 @@ const SchoolSettingClassPage = async ({
        <AddClassDialogSettingSchool school={school} lang={lang} />
       </div>
       <div className={cn(CardSettingsClassName , " mt-4")}>
-      <div>
+      <div className=" flex flex-col gap-2">
           {school.type.map((items) => {
             return (
-              <div key={items} className="join w-full join-horizontal">
-                <div className="collapse collapse-arrow join-item border-base-300 border">
-                  <input type="radio" name={"my-accordion-4"} defaultChecked />
-                  <div className="collapse-title text-xl font-medium">{items}</div>
-                  <div className="collapse-content">
-                    <p>{items}</p>
-                  </div>
-                </div>
-              </div>
+              <Accordion key={items} type="single" collapsible>
+              <AccordionItem className="" value={items}>
+                <AccordionTrigger className=" bg-base-200 px-2">{items}</AccordionTrigger>
+                <AccordionContent className=" border-none px-2 bg-base-200">
+                  Yes. It adheres to the WAI-ARIA design pattern.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
             )
           })}
         </div>

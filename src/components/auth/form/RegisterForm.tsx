@@ -20,7 +20,6 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Locale } from '@/i18n';
 import { RegisterValidation } from '@/validation/registerValidation';
 import { cn } from '@/lib/utils';
-import { ChevronDown } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { regServer } from '@/server/regServer';
 import { FormMessageError, FormMessageSuccess } from './formMessagers';
@@ -28,6 +27,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from '@/components/ui/use-toast';
 import { BeatLoader } from 'react-spinners';
 import { BsCheck2Circle } from 'react-icons/bs';
+import { useTheme } from '@/hooks/useTheme';
 
 export interface RegisterProps {
     TPassword: string;
@@ -54,6 +54,9 @@ const RegisterForm = ({
     const handleSeePassword = () => {
       setSeePassword(sate => !sate)
     }
+
+    // themes
+    const themes= useTheme();
 
     // month
     const months ={ January: 31, February: 28, March: 31, April: 30, May: 31, June: 30, July: 31, August: 31, September: 30, October: 31, November: 30, December: 31,};
@@ -82,7 +85,7 @@ const RegisterForm = ({
 
     const onSubmit = (values : z.infer<typeof RegisterValidation>) => {
       startTransition(() => {
-        regServer(values).then((data) => {
+        regServer(values , lang).then((data) => {
           
           if(!!data.success) {
             toast({
@@ -152,11 +155,11 @@ const RegisterForm = ({
                   <Select disabled={isPending} onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger className=' line h-16 bg-base-100 flex flex-col'>
-                        <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TDay}</span> <ChevronDown className="h-4 w-4 opacity-50" /></FormLabel>
+                        <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TDay}</span></FormLabel>
                         <SelectValue className="bg-transparent" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className=' min-h-40 max-h-60'>
+                    <SelectContent data-theme={themes} className=' min-h-40 max-h-60'>
                     {[...Array( 31)].map((_, index) => (
                       <SelectItem key={index + 1} value={`${index + 1}`}>
                         {index + 1}
@@ -173,11 +176,11 @@ const RegisterForm = ({
                   <Select disabled={isPending} onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger className=' flex flex-col h-16 w-full bg-base-100 max-w-20'>
-                      <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TMonth}</span> <ChevronDown className="h-4 w-4 opacity-50" /></FormLabel>
+                      <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TMonth}</span></FormLabel>
                         <SelectValue className="bg-transparent" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className=' min-h-40 max-h-60'>
+                    <SelectContent data-theme={themes} className=' min-h-40 max-h-60'>
                       {Object.keys(months).map((items , index) => (
                         <SelectItem key={index + 1} value={items}>
                           {items}
@@ -194,11 +197,11 @@ const RegisterForm = ({
                   <Select disabled={isPending} onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger className=' line h-16 bg-base-100  flex flex-col'>
-                        <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TYear}</span> <ChevronDown className="h-4 w-4 opacity-50" /></FormLabel>
+                        <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TYear}</span></FormLabel>
                         <SelectValue className=' text-xs' />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className=' text-xs min-h-40 max-h-60'>
+                    <SelectContent data-theme={themes} className=' text-xs min-h-40 max-h-60'>
                       {[...Array(100)].map((_, index) => (
                         <SelectItem key={2024 - index} value={`${2024 - index}`}>
                           {2024 - index}

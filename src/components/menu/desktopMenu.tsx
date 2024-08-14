@@ -3,12 +3,16 @@ import { DesktopLogo,} from "../navbar/Logo"
 import { Locale } from "@/i18n"
 import DesktopWindows from "../navbar/DesktopWindows"
 import {appWindow} from "@tauri-apps/api/window";
+import { auth } from "@/auth";
 
 interface props{
     lang : Locale
 }
 
-const DesktopMenu = ({lang} : props) => {
+const DesktopMenu = async ({lang} : props) => {
+  const user = (await auth())?.user;
+
+  if (!user) return null;
   return (
     <header data-tauri-drag-region className=" flex justify-between  items-center px-2 backdrop-blur-lg h-12 fixed z-50 w-full border-b border-neutral-content">
       <DesktopLogo/>

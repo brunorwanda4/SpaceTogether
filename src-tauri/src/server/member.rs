@@ -1,4 +1,4 @@
-use mongodb::{Client, options::ClientOptions, error::Result, Collection};
+use mongodb::{Client, error::Result, Collection};
 use crate::models::SchoolMember;
 
 pub async fn insert_school_member(client: &Client, member: SchoolMember) -> Result<()> {

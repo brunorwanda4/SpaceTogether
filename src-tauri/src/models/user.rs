@@ -1,3 +1,5 @@
+#![allow(unused)]
+
 use core::num;
 
 use serde::{Serialize, Deserialize};

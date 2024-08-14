@@ -21,11 +21,11 @@ const DesktopNav =async ({lang} : props) => {
   return (
     <nav className=' py-1'>
       <div className=' flex gap-2 items-center'>
+          {/* find school */}
+          <SchoolNavFindSchool lang={lang}/>
           <div className=' btn btn-sm btn-circle btn-ghost'>
             <BsBellFill size={24}/>
           </div>
-            {/* find school */}
-            <SchoolNavFindSchool lang={lang}/>
             <FindCreateSchool
              TCreate={nav.school.createSchool} 
              TJoin={nav.school.joinSchool} 

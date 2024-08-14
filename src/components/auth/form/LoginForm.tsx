@@ -27,6 +27,8 @@ import { toast } from '@/components/ui/use-toast';
 import { FormMessageError, FormMessageSuccess } from './formMessagers';
 import { redirect } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import { BeatLoader } from 'react-spinners';
+import { TUser } from '@/types/user';
 
 interface Props {
     TPassword: string;
@@ -66,9 +68,9 @@ const LoginForm = ({
 
   const onSubmit = (value : z.infer<typeof LoginValidation>) => {
     startTransition(() => {
-      loginServer(value).then((data) => {
+      loginServer(value , lang).then((data) => {
           
-        if(!!data.success) {
+        if(data.success) {
           toast({
             description: `${data.success}`
           })
@@ -124,9 +126,10 @@ const LoginForm = ({
         />
         {!!online && <Link className='link-hover text-sm duration-300 text-neutral leading-4' href={`/${lang}/auth/forgetPassword`}>{TForget}</Link>}
         <FormMessageError message={error}/>
+        
         <FormMessageSuccess message={success}/>
         <button className=' btn btn-neutral capitalize font-semibold' type='submit'>
-          {TLogin}
+          {isPending ? <BeatLoader/> : `${TLogin}`}
         </button>
       </form>
     </Form>

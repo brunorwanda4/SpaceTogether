@@ -6,7 +6,7 @@ import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { ChangeTheme, ClientThemeWrapper } from "@/context/changeTheme";
+import { ClientThemeWrapper, ThemeProvider } from "@/context/changeTheme";
 import { LanguagesProps } from "@/types/pages";
 import { Toaster } from "@/components/ui/toaster"
 import { cn } from "@/lib/utils";
@@ -34,13 +34,12 @@ export default function RootLayout(
   return (
     <html lang={lang}>
       <body className={cn(inter.className ,)}>
-          <ChangeTheme>
+          <ThemeProvider>
+          <DesktopMenu lang={lang}/>
             <ClientThemeWrapper>
-              <DesktopMenu lang={lang}/>
-              <div className=" pt-12">{children}</div>
-              <Toaster />
+              {children}
             </ClientThemeWrapper>
-          </ChangeTheme>
+          </ThemeProvider>
       </body>
     </html>
   );

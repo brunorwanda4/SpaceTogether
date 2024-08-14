@@ -1,3 +1,4 @@
+#![allow(unused)]
 use serde::{Serialize , Deserialize};
 
 use mongodb::bson::{doc , Document};

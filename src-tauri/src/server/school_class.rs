@@ -1,5 +1,4 @@
-use mongodb::{Client, options::ClientOptions, error::Result, Collection};
-use mongodb::bson::{doc, oid::ObjectId, Document, DateTime};
+use mongodb::{Client, error::Result, Collection};
 
 use crate::models::school_class;
 
