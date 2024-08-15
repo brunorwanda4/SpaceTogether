@@ -49,12 +49,14 @@ export const Logo = ({link , title , className} : Props) => {
 export const DesktopLogo = () => {
     return(
         <div className=" flex gap-2">
+           <div className=" size-8 relative">
             <Image
-            src="/logo.png"
-            height={24}
-            width ={24}
-            alt = "Space to gether logo"
-            />
+                src="/logo.png"
+                fill
+                className="object-contain"
+                alt = "Space to gether logo"
+                />
+           </div>
             <h1 className={cn("capitalize font-allura font-semibold text-base",)}>Space Together</h1>
         </div>
     )

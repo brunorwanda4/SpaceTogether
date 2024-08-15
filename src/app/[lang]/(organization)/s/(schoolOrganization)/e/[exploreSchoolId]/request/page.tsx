@@ -24,9 +24,7 @@ const RequestToJoinSchoolPage = async ({
         lang={lang}
         school={school}
         />
-        <AskToJoinSchool 
-          school = {school}
-         />
+        <AskToJoinSchool school ={school}/>
       </main>
       <div className=" h-screen">
       </div>

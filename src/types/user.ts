@@ -5,6 +5,7 @@ export interface TUser {
     image : string;
     password: string;
     role : "direct" | "teacher" | "student"
+    gender ?: "male" | "female" | "other";
 }
 
 export type TURole = "direct" | "teacher" | "student"

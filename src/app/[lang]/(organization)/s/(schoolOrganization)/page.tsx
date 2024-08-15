@@ -20,45 +20,65 @@ const SchoolPage =async ({
 } : LanguagesProps) => {
 
   const {page , nav} = await getDictionary(lang)
-  const user = await auth()
+  const user = (await auth())?.user;
   
   if(!user) {
     redirect(`/${lang}`)
   }
 
-  const findSchool: ISchool[] | null = await FindSchoolByOwn(user.user.id)
+
+  const findSchool: ISchool[] | null = await FindSchoolByOwn(user.id);
 
   if(!findSchool) {
      return (
       <div className=' grid place-content-center min-h-[80vh] pb-12'>
+        {/* <div className=' mb-4'>
+          <div>
+            <h3 className=' text-xl font-bold'>Hello You can make your profile look cool <span className=' text-2xl'>😎</span> </h3>
+          </div>
+          {!userAvatar && (
+            <div>
+              {[...Array(avatar)].map((items : number , index : number) => {
+                return (
+                  <div key={items}>
+                    <MyImage src={`/profiles/${avatarLocation}/${index + 1}.png`} classname=' object-cover'/>
+                  </div>
+                )
+              })}
+              Bruno
+            </div>
+          )}
+        </div> */}
       <div className=' flex justify-center h-full  school-center'>
       <div className=' flex flex-col  school-center  justify-center  w-full h-full'>
         <p className=' text-center'>{page.school.welcome}</p>
         <div className=' flex gap-2 mt-2'>
           <Link href={`/${lang}/s/c`} className='btn btn-sm btn-info font-medium'>Join School</Link>
           <Link href={`/${lang}/s/e`} className='btn btn-sm btn-warning font-medium'>Explorer schools</Link>
-          <CreateSchoolDialog 
-              lang={lang}
-              className='btn btn-sm btn-ghost text-info font-medium w-auto'
-              TCreate={nav.school.createSchool} 
-              email = {user.user.email}
-              TSchoolProps={{
-              lang : lang,
-              TCity : page.school.addSchoolFrom.city,
-              TDescription : page.school.addSchoolFrom.description,
-              TEmail : page.school.addSchoolFrom.email,
-              TCreateBy : user.user.id,
-              TPhone : page.school.addSchoolFrom.phone,
-              TName : page.school.addSchoolFrom.name,
-              TLocation : page.school.addSchoolFrom.location,
-              TLogo : page.school.addSchoolFrom.logo,
-              TProvince : page.school.addSchoolFrom.province,
-              TType : page.school.addSchoolFrom.type,
-              TUsername : page.school.addSchoolFrom.username,
-              TWebsite : page.school.addSchoolFrom.website,
-              email : user.user.email,
-           }}
-          />
+          <div className=' w-auto'>
+            <CreateSchoolDialog 
+                lang={lang}
+                className='btn btn-sm btn-ghost text-info font-medium w-auto'
+                TCreate={nav.school.createSchool} 
+                email = {user.email}
+                TSchoolProps={{
+                lang : lang,
+                TCity : page.school.addSchoolFrom.city,
+                TDescription : page.school.addSchoolFrom.description,
+                TEmail : page.school.addSchoolFrom.email,
+                TCreateBy : user.id,
+                TPhone : page.school.addSchoolFrom.phone,
+                TName : page.school.addSchoolFrom.name,
+                TLocation : page.school.addSchoolFrom.location,
+                TLogo : page.school.addSchoolFrom.logo,
+                TProvince : page.school.addSchoolFrom.province,
+                TType : page.school.addSchoolFrom.type,
+                TUsername : page.school.addSchoolFrom.username,
+                TWebsite : page.school.addSchoolFrom.website,
+                email : user.email,
+            }}
+            />
+          </div>
         </div>
       </div>
       </div>

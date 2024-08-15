@@ -56,7 +56,7 @@
             }
         },
         "school" : {
-            "welcome" : "Hello add a school and get start",
+            "welcome" : "Make new school or find new one or join it",
             "joinSchool" : "Join school",
             "addSchool" : "Add School",
             "addSchoolFrom" : {

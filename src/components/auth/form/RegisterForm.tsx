@@ -23,7 +23,7 @@ import { cn } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
 import { regServer } from '@/server/regServer';
 import { FormMessageError, FormMessageSuccess } from './formMessagers';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { toast } from '@/components/ui/use-toast';
 import { BeatLoader } from 'react-spinners';
 import { BsCheck2Circle } from 'react-icons/bs';
@@ -83,9 +83,12 @@ const RegisterForm = ({
     // router
     const router = useRouter();
 
+    // pathname
+    const nexUrl = usePathname();
+
     const onSubmit = (values : z.infer<typeof RegisterValidation>) => {
       startTransition(() => {
-        regServer(values , lang).then((data) => {
+        regServer(values , lang , nexUrl).then((data) => {
           
           if(!!data.success) {
             toast({
@@ -98,7 +101,7 @@ const RegisterForm = ({
               )
             })
             setSuccess(data.success);
-            router.push(`/${lang}/s`)
+            router.push(`/${lang}/auth/login`)
           }
           if(!!data.error) {
             toast({
@@ -194,7 +197,7 @@ const RegisterForm = ({
               {/* year */}
             <FormField control={form.control} name="year" render={({ field }) => (
                 <FormItem>
-                  <Select disabled={isPending} onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select disabled={isPending} onValueChange={field.onChange} >
                     <FormControl>
                       <SelectTrigger className=' line h-16 bg-base-100  flex flex-col'>
                         <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TYear}</span></FormLabel>
@@ -203,7 +206,7 @@ const RegisterForm = ({
                     </FormControl>
                     <SelectContent data-theme={themes} className=' text-xs min-h-40 max-h-60'>
                       {[...Array(100)].map((_, index) => (
-                        <SelectItem key={2024 - index} value={`${2024 - index}`}>
+                        <SelectItem key={2024 - index} value={`${2024 - index}`} defaultValue={`${field.value}`}>
                           {2024 - index}
                         </SelectItem>
                       ))}

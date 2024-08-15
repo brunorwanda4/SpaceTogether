@@ -48,7 +48,8 @@ export const getUserByEmailOrUsername = async (username : string | null | undefi
 }
 
 
-export const getUserById = async (id: string): Promise<TUser | null> => {
+export const getUserById = async (id: string | undefined | null): Promise<TUser | null> => {
+    if (!id) return null;
     const db = (await clientPromise).db();
     const user = await db
         .collection("users")

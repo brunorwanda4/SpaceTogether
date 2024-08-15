@@ -8,7 +8,7 @@ import { SchoolAsideInfo } from "./schoolAsideInfo";
 import { SPLine } from "../style/simpleComponents/line";
 import { TSchoolWithUser } from "@/types/school";
 
-interface Props{
+export interface SchoolAsideProps{
     lang : Locale
     ShoolAsideProps : ShoolAsideProps
     TSetting :string
@@ -19,7 +19,7 @@ interface Props{
 
 export const SchoolAside = ({
     lang , ShoolAsideProps , TSetting , TMessages , TId , Schools
-} : Props) => {
+} : SchoolAsideProps) => {
   const {schoolUsername} = useParams() as { schoolUsername: string };
 
   return (

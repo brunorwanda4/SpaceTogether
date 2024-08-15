@@ -106,10 +106,10 @@ const AskToJoinSchool = ({
         <h3 className="  font-semibold  text-2xl text-center">Ask place on <strong>{school.name}</strong>!</h3>
         <Form {...form}>
             <form className=" mt-2" onSubmit={form.handleSubmit(onSubmit)}>
-                <div className=" flex w-full justify-between gap-2">
+                <div className=" flex w-full justify-between gap-2 max-md:flex-col">
                     <div className=" w-full">
                         <div className=" flex gap-2 flex-col w-full max-md:gap-2 ">
-                            <div className=" flex gap-2 w-full">
+                            <div className=" flex gap-2 w-full max-md:flex-col">
                                 <FormField
                                 control={form.control}
                                 name="stFName"
@@ -138,14 +138,14 @@ const AskToJoinSchool = ({
                                 />
                             </div>
                             {/* gender */}
-                            <div className=" flex">
-                                <div className=" flex gap-2 w-1/2 justify-between">
+                            <div className=" flex max-md:flex-col max-md:w-full">
+                                <div className=" flex gap-2 w-1/2 justify-between max-md:flex-col max-md:w-full">
                                     <FormField control={form.control}  name="stGender" render={({ field }) => (
                                     <FormItem className="space-y-3">
                                     <FormLabel>student Gender</FormLabel>
                                     <FormControl>
                                         <RadioGroup disabled={isPending} onValueChange={field.onChange}  defaultValue={field.value} className="flex space-x-1">
-                                        <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2 ">
+                                        <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2 justify-center">
                                             <FormControl>
                                             <RadioGroupItem className=' border-input' value="male" />
                                             </FormControl>
@@ -264,7 +264,7 @@ const AskToJoinSchool = ({
                                </div>
                                 </div>
                                 {/* student report */}
-                                <div className=" w-1/2 ">
+                                <div className=" w-1/2 max-md:w-full">
                                     <FormField
                                         control={form.control}
                                         name="stEmail"
@@ -272,7 +272,7 @@ const AskToJoinSchool = ({
                                             <FormItem className=" w-full">
                                             <FormLabel>Student email</FormLabel>
                                             <FormControl>
-                                                <Input type="email" className={cn(" cursor-pointer")} disabled={isPending} placeholder="email@example.com" {...field} />
+                                                <Input type="email" className={cn(" cursor-pointer max-md:w-full")} disabled={isPending} placeholder="email@example.com" {...field} />
                                             </FormControl>
                                             <FormMessage />
                                             </FormItem>
@@ -283,7 +283,7 @@ const AskToJoinSchool = ({
                         </div>
                         {/* parent information */}
                         <div className=" flex flex-col">
-                            <div className=" flex gap-2">
+                            <div className=" flex gap-2 max-md:flex-col">
                                 <FormField
                                     control={form.control}
                                     name="prName"
@@ -302,7 +302,7 @@ const AskToJoinSchool = ({
                                     name="report"
                                     render={({ field }) => (
                                         <FormItem className=" w-full">
-                                        <FormLabel>Student Reports</FormLabel>
+                                        <FormLabel>Student Report </FormLabel>
                                         <FormControl>
                                             <Input className={cn(" cursor-pointer")} disabled={isPending} type="file" placeholder="Rwanda" {...field} />
                                         </FormControl>
@@ -312,7 +312,7 @@ const AskToJoinSchool = ({
                                 />
                             </div>
                             {/* parent email email  */}
-                            <div className=" flex gap-2">
+                            <div className=" flex gap-2 max-md:flex-col">
                                 <FormField
                                     control={form.control}
                                     name="prEmail"
@@ -373,7 +373,7 @@ const AskToJoinSchool = ({
                                 </FormItem>
                             )}
                             />
-                        </div>
+                    </div>
                 </div>
                 <FormMessageError message={error}/>
                 <FormMessageSuccess message={success}/>

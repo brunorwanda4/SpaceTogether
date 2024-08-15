@@ -1,8 +1,8 @@
-"use client";
-
+import { auth } from "@/auth";
 import { UserScrollTop } from "@/hooks/scrollTop";
 import { Locale } from "@/i18n"
 import Link from "next/link"
+import { redirect } from "next/navigation";
 
 interface props {
   params : {
@@ -10,16 +10,23 @@ interface props {
     userId : string
   }
 }
-const UserPage = ({
+const UserPage =async ({
   params: {lang , userId}
 }: props) => {
-  const scroll = UserScrollTop();
+  const user = ( await auth())?.user;
+  if (!user) redirect(`/${lang}`);
+
+ 
   return (
     <div>
       user id : {userId}
       <Link className=" btn" href={`/${lang}/s`}>School</Link>
+
+      <div>
+        {user.image}
+      </div>
+
       <div className=" h-screen"> </div>
-      <div className=" h-screen"> {scroll ? <span className=" text-success">Use is scroll</span> : <span className=" text-error">Can no work</span>} </div>
       <div className=" h-screen"> </div>
     </div>
   )

@@ -11,29 +11,31 @@ const ExploreAskToJoin = ({
     school , lang
 } : props) => {
   return (
-    <div className=" flex  justify-between w-full">
-      <div className=" flex items-center gap-2">
-        <MyImage src={school.logo} className=" size-14" classname=" object-contain"/>
-        <div className=" flex flex-col gap-1 ">
-            <h3 className=" text-lg font-bold">{school.name}</h3>
-            <span className="  font-semibold text-sm"><span className=" text-neutral">@</span>{school.username}</span>
+    <div className=" flex  justify-between w-full max-md:flex-col">
+      <div className=" flex gap-2">
+        <div className=" flex items-center gap-2">
+            <MyImage src={school.logo} className=" size-14" classname=" object-contain"/>
+            <div className=" flex flex-col gap-1 ">
+                <h3 className=" text-lg font-bold">{school.name}</h3>
+                <span className="  font-semibold text-sm"><span className=" text-neutral">@</span>{school.username}</span>
+            </div>
         </div>
-      </div>
-      {/* combination  */}
-      <div className=" flex flex-col gap-2 items-center">
-        <h5 className=" font-semibold">Combination</h5>
-        <div className=" flex gap-2">
-            {school.type.map((type) => {
-                return (
-                    <span className=" badge badge-outline" key={type}>
-                        {type}
-                    </span>
-                )
-            })}
+        {/* combination  */}
+        <div className=" flex flex-col gap-2 items-center ">
+            <h5 className=" font-semibold">Combination</h5>
+            <div className=" flex gap-2">
+                {school.type.map((type) => {
+                    return (
+                        <span className=" badge badge-outline" key={type}>
+                            {type}
+                        </span>
+                    )
+                })}
+            </div>
         </div>
       </div>
       {/* main contact */}
-      <div className=" flex gap-2">
+      <div className=" flex gap-2 max-md:mt-2">
       <div className=' flex flex-col gap-2'>
             <div className=' flex gap-2'>
                 <span className=' text-gray-500 font-medium '>Phone number :</span>
