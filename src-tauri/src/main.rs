@@ -67,7 +67,7 @@ async fn insert_school_member(member : models::SchoolMember) ->MongoDBResponse {
 }
 
 #[tauri::command]
-async fn insert_class(class: models::school_class) -> MongoDBResponse {
+async fn insert_class(class: models::SchoolClass) -> MongoDBResponse {
     match libs::connect_to_mongodb().await {
         Ok(client) => {
             match server::insert_class(&client, class).await {

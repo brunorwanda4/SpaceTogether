@@ -20,15 +20,20 @@ import { useTheme } from "@/hooks/useTheme";
 import { Textarea } from "@/components/ui/textarea";
 import { FormMessageError, FormMessageSuccess } from "@/components/auth/form/formMessagers";
 import { Label } from "@/components/ui/label";
+import { TUser } from "@/types/user";
+import { AskToJoinSchoolServer } from "@/server/s/askTojoinSchoolServer";
+import { BsCheck2Circle } from "react-icons/bs";
+import { toast } from "@/components/ui/use-toast";
 
 
 
 interface props {
     school : ISchool
+    user_id : string | undefined
 };
 
 const AskToJoinSchool = ({
-    school
+    school , user_id
 } : props) => {
     const [error , setError] = useState<string | undefined>("");
     const [success , setSuccess] = useState<string | undefined>("");
@@ -85,18 +90,32 @@ const AskToJoinSchool = ({
         }
     })
 
+
     const onSubmit = (values : z.infer<typeof SchoolAskToJoinValidation>) => {
         startTransition(  async () => {
-            try {
-                const savePath = await save();
-                if (!savePath) {
-                    return;
-                };
-                await invoke("save_file" , {path : savePath , contents : values})
-            } catch (error : any) {
-                console.log("error to save file from tauri ❤️❤️:" ,{error})
-            }
-            console.log("form values 🌳🌳 :" , {values});
+            AskToJoinSchoolServer(values , school , user_id).then((data) => {
+          
+                if(!!data?.success) {
+                  toast({
+                    title : `WOW! You have send request to join ${school.name}`,
+                    description: (
+                      <div className=' flex gap-2'>
+                        <BsCheck2Circle size={20} className=' text-success'/>
+                        <span>{data.success}</span>
+                      </div>
+                    )
+                  })
+                  setSuccess(data.success);
+                }
+                if(!!data?.error) {
+                  toast({
+                      title: "uh oh! some thing went wrong.",
+                      description: `${data.error}`,
+                      variant: "destructive",
+                  })
+                  setError(data.error);
+                }
+              })
         })
     }
 
@@ -375,8 +394,10 @@ const AskToJoinSchool = ({
                             />
                     </div>
                 </div>
-                <FormMessageError message={error}/>
-                <FormMessageSuccess message={success}/>
+                <div className=" mt-2 flex flex-col gap-2">
+                    <FormMessageError message={error}/>
+                    <FormMessageSuccess message={success}/>
+                </div>
                 {/* send request */}
                 <div className=" mt-2">
                     <button type="submit" className=" btn btn-neutral w-full">

@@ -25,7 +25,7 @@
     "@react-three/fiber": "^8.16.8",
     "@types/react-slick": "^0.23.13",
     "bcryptjs": "^2.4.3",
-    "caniuse-lite": "",
+    "caniuse-lite": "^1.0.30001651",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.17",

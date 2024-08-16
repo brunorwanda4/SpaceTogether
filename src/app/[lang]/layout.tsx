@@ -35,9 +35,10 @@ export default function RootLayout(
     <html lang={lang}>
       <body className={cn(inter.className ,)}>
           <ThemeProvider>
-          <DesktopMenu lang={lang}/>
             <ClientThemeWrapper>
+            <DesktopMenu lang={lang}/>
               {children}
+              <Toaster/>
             </ClientThemeWrapper>
           </ThemeProvider>
       </body>

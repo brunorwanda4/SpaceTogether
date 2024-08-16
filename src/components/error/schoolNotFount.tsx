@@ -21,7 +21,7 @@ const SchoolNotFount = ({
           <p>We couldn{`'`}t find a school with the username <span className=' text-error font-semibold'>{schoolUsername}</span></p>
           <div>
             <Link className=' btn btn-info group/linkBack' href={`/${lang}/s`}>
-              <FaArrowLeftLong className='group-hover/linkBack:scale-x-110 duration-200'/> Go back on home page
+              <FaArrowLeftLong className='group-hover/linkBack:scale-x-110 duration-200'/> Back on home page
             </Link>
           </div>
         </div>

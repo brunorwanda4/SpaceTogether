@@ -34,3 +34,20 @@ export interface TClass {
   username : string;
   category : "online" | "primary" | "middle" | "vocational" | "homeschooling" | "boarding" | "TVET" | "high" | "international"
 }
+
+
+export interface TSchoolRequestToJoin {
+  studentFirstName : string;
+  studentLastName : string;
+  studentGender : "male" | "female" | "other",
+  studentImage ?: string;
+  studentEmail : string;
+  studentBirthDate : Date;
+  studentReport ?: string;
+  parentName : string;
+  parentPhone : string;
+  senderId : string;
+  seen : boolean 
+  createdAt?: Date;
+  updatedAt?: Date;
+}

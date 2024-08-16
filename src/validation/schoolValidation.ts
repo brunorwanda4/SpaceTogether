@@ -112,8 +112,8 @@ export const SchoolAskToJoinValidation = z.object({
     }).max(25 , {
         message : "Maximum characters are 25"
     }),
-    prPhone : z.string().min(1 , {
-        message : "Phone number is required",
+    prPhone : z.string().min(10 , {
+        message : "min characters are 10",
     }).max(23 , {
         message : "Maximum characters are 23"
     }),

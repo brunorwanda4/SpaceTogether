@@ -1,5 +1,6 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
-import { ISchool } from '@/types/school';
+import { ISchool, TSchoolRequestToJoin } from '@/types/school';
+import { boolean } from 'zod';
 
 const SchoolSchema: Schema = new Schema({
   name: {
@@ -99,3 +100,78 @@ const SchoolSchema: Schema = new Schema({
 const School: Model<ISchool> = mongoose.models.School || mongoose.model<ISchool>("School", SchoolSchema);
 
 export default School;
+
+
+const schoolRequestToJoinSchema = new Schema ({
+  student_first_name : {
+    type : String,
+    required : [true , "Student first name required"],
+    minle : [1 , "Student first name must be at least 1 character"],
+    maxlength : [25 , "Student first name must be at most 25 characters"],
+  },
+  student_last_name : {
+    type : String,
+    required : [true , "Student first name required"],
+    minlength : [1 , "Student first name must be at least 1 character"],
+    maxlength : [25 , "Student first name must be at most 25 characters"],
+  },
+  student_gender : {
+    type : String,
+    enum : ["male" , "female" , "other"],
+    required : [true , "Student gender required"],
+  },
+  student_image : {
+    type : String,
+  },
+  student_email : {
+    type : String,
+    required : [true , "Student email required"],
+    match : [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Email is invalid"],
+  },
+  student_birth : {
+    type : Date,
+    required : [true , "Student birth day required"],
+  },
+  student_report : {
+    type : String,
+  },
+  parent_name : {
+    type : String,
+    required : [true , "Parent name required"],
+    minlength : [1 , "Parent name must be at least 1 character"],
+    maxlength : [50 , "Parent name must be at least 50 characters"],
+  },
+  parent_email : {
+    type : String,
+    required : [true , "Parent email required"],
+    match : [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Email is invalid"],
+  },
+  parent_phone : {
+    type : String,
+    required : [true , "Parent phone required"],
+    minlength : [10 , "Parent phone must be at least 10 characters"],
+    maxlength : [23  , "Parent phone must be at most 23 characters"],
+  },
+  description : {
+    type : String,
+    required : [true , "Description required"],
+    maxlength : [255 , "Description max length 255 characters"],
+  },
+  school_id : {
+    type : mongoose.Schema.ObjectId,
+    ref : "schools",
+  },
+  sender_id : {
+    type : mongoose.Schema.ObjectId,
+    ref : "users",
+    required : [true , "sender id is required"],
+  },
+  seen : {
+    type : Boolean,
+    default : false,
+  }
+}, {
+  timestamps : true
+})
+
+export const SchoolRequestToJoin: Model<TSchoolRequestToJoin> = mongoose.models.SchoolRequestToJoin || mongoose.model("SchoolRequestToJoin" , schoolRequestToJoinSchema);
