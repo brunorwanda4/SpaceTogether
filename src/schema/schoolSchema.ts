@@ -160,6 +160,7 @@ const schoolRequestToJoinSchema = new Schema ({
   school_id : {
     type : mongoose.Schema.ObjectId,
     ref : "schools",
+    required : [true , "School id required"],
   },
   sender_id : {
     type : mongoose.Schema.ObjectId,

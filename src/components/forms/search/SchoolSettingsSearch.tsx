@@ -1,5 +1,5 @@
 import { FiSearch } from "react-icons/fi"
-import { Input } from "../ui/input"
+import { Input } from "../../ui/input"
 
 const SchoolSettingsSearch = () => {
   return (

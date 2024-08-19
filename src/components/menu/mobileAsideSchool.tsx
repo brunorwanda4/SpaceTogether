@@ -20,8 +20,8 @@ export const MobileAsideSchool = ({
     const theme = useTheme();
   return (
     <Sheet>
-        <SheetTrigger className=" md:hidden">
-            <button className=" btn btn-ghost max-md:flex hidden btn-sm btn-circle"><Menu size={20}/></button>
+        <SheetTrigger className=" md:hidden btn btn-ghost max-md:flex hidden btn-sm btn-circle">
+            <Menu size={20}/>
         </SheetTrigger>
         <SheetContent data-theme={theme} side={"left"}>
             <SheetTitle className=" pb-4">

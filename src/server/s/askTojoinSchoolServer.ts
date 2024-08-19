@@ -37,12 +37,12 @@ export const AskToJoinSchoolServer = async (values : z.infer<typeof SchoolAskToJ
             parent_email : prEmail,
             parent_phone : prPhone,
             description,
-            school_id : school.id,
+            school_id : school._id,
             sender_id  : user_id
         })
 
         if (!!sendRequest) {
-            return { success : "Request have been sent successfully"};
+            return { success : "Request have been sent successfully , you will have feedback on your Parents email or student email"};
         }
     } catch (error : any) {
         console.error("Some thing went #%d :" + error);

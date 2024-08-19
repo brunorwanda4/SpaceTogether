@@ -2,6 +2,7 @@ import { TUser } from './user';
 import { Document, ObjectId } from 'mongoose';
 
 export interface ISchool extends Document {
+  _id : string
   name: string;
   username: string;
   logo: string;

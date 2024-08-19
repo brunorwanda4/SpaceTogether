@@ -5,11 +5,11 @@ import { FaSchool } from "react-icons/fa6"
 import Link from "next/link"
 import { ISchool } from "@/types/school"
 import { usePathname } from "next/navigation"
-import { BsCheck2Circle, BsHouse, BsLayers, BsLayersFill } from "react-icons/bs";
+import { BsCheck2Circle, BsClipboardPlus, BsLayers, BsLayersFill } from "react-icons/bs";
 import { cn } from "@/lib/utils";
 import { AsideLinkClassName } from "../style";
 import { SPLine } from "../style/simpleComponents/line";
-import { FaChalkboardTeacher } from "react-icons/fa";
+import { FaChalkboardTeacher,  } from "react-icons/fa";
 import { PiStudentDuotone } from "react-icons/pi";
 import { FaPeopleGroup } from "react-icons/fa6";
 
@@ -63,7 +63,13 @@ export const SchoolSettingAside = ({
             </Link>
         </div>
         <SPLine className=" my-0"/>
-        
+        <Link className={cn(AsideLinkClassName , " justify-between w-full")} href={`${schoolPathnameSettings}/req`}>
+            <div className=" flex gap-2 items-center">
+                {pathname === `${schoolPathnameSettings}/req` ? <BsClipboardPlus size={20} className=" text-gray-500"/> : <BsClipboardPlus size={20} className=" text-gray-500"/>}
+                <span>Requests</span>
+            </div>
+            {pathname === `${schoolPathnameSettings}/req` && (<BsCheck2Circle />)}
+        </Link>
     </div>
   )
 }

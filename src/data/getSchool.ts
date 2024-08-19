@@ -1,6 +1,6 @@
 import { dbConn } from "@/lib/mongoose";
-import School from "@/schema/schoolSchema";
-import { ISchool } from "@/types/school";
+import School, { SchoolRequestToJoin } from "@/schema/schoolSchema";
+import { ISchool, TSchoolRequestToJoin } from "@/types/school";
 
 export const FindSchoolByOwn = async (id: string |null | undefined): Promise<ISchool[] | null> => {
     if (!id) {
@@ -59,5 +59,19 @@ export const getSchoolsPaid = async () : Promise<ISchool[] | null > => {
     }
 
     return schools
+}
+
+export const getSchoolRequest = async (id : string) : Promise<TSchoolRequestToJoin [] | null> => {
+
+    try {
+        await dbConn();
+
+        const request = await SchoolRequestToJoin.find<TSchoolRequestToJoin>({school_id : id});
+        
+        return request
+    } catch (error : any) {
+        console.log("error" + error)
+        return null
+    }
 
 }

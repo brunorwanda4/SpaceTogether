@@ -5,7 +5,7 @@ import {
     ResizablePanelGroup,
 } from "@/components/ui/resizable"
 import { SchoolSettingAside } from "./schoolSettingAside";
-import SchoolSettingsSearch from "./SchoolSettingsSearch";
+import SchoolSettingsSearch from "../forms/search/SchoolSettingsSearch";
 import { ISchool } from "@/types/school";
 import { MyImage } from "../style/myImage";
 import { SPLine } from "../style/simpleComponents/line";

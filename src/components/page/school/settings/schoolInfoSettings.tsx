@@ -82,7 +82,7 @@ const SchoolInfoSettings = async ({
                   {/* teacher one */}
                   <div className="avatar  ">
                     <div className="w-14 rounded-full">
-                      <MyImage src='/images/1.jpg'/>
+                      <MyImage  className=' size-14 rounded-full' classname=' rounded-full' src='/images/1.jpg'/>
                     </div>
                   </div>
                 </div>
@@ -104,7 +104,7 @@ const SchoolInfoSettings = async ({
                   {/* teacher one */}
                   <div className="avatar">
                     <div className="w-14 rounded-full">
-                      <MyImage src='/images/1.jpg'/>
+                      <MyImage  className=' size-14 rounded-full' classname=' rounded-full' src='/images/1.jpg'/>
                     </div>
                   </div>
                 </div>
@@ -127,9 +127,9 @@ const SchoolInfoSettings = async ({
                       <span>3</span>
                     </div>
                   </div>
-                  <div className="avatar  ">
+                  <div className="avatar items-center justify-center flex">
                     <div className="w-14 rounded-full">
-                      <MyImage src={user.image}/>
+                      <MyImage className=' size-14 rounded-full' classname=' rounded-full' src={user.image}/>
                     </div>
                   </div>
                 </div>
@@ -143,9 +143,9 @@ const SchoolInfoSettings = async ({
             <div className=' stats shadow w-full'>
               <div className=' stat'>
               <div className="stat-figure">
-              <div className="avatar  ">
-                <div className="w-14 rounded-full">
-                  <MyImage src={user.image}/>
+              <div className="">
+                <div className=" relative rounded-full">
+                  <MyImage src={user.image} className=' rounded-full size-14' classname=' rounded-full'/>
                 </div>
               </div>
                 </div>

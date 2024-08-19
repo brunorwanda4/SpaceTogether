@@ -142,19 +142,9 @@ const AskToJoinSchool = ({
                                     </FormItem>
                                 )}
                                 />
-                                <FormField
-                                control={form.control}
-                                name="stLName"
-                                render={({ field }) => (
-                                    <FormItem className=" w-full">
-                                    <FormLabel>Student last name </FormLabel>
-                                    <FormControl>
-                                        <Input className={cn()} disabled={isPending} placeholder="Rwanda" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                    </FormItem>
-                                )}
-                                />
+                                <div className=" w-1/2">
+                                    
+                                </div>
                             </div>
                             {/* gender */}
                             <div className=" flex max-md:flex-col max-md:w-full">

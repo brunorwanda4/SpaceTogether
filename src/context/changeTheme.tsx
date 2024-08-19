@@ -11,9 +11,9 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
+        setIsMounted(true);  // Only run once on mount
         const storedTheme = localStorage.getItem("theme") || "dark";
         setTheme(storedTheme);
-        setIsMounted(true);  // Only run once on mount
     }, []);
 
     const changeTheme = (theme: string) => {
