@@ -18,7 +18,6 @@ interface Props {
 
 const page = async ({params : {lang}} : Props) => {
   const {page} = await getDictionary(lang);
-
   return (
     <AuthDivPage lang={lang} title={page.auth.loginTitle}>
       <ChooseWhichWayCanCreateAccount 

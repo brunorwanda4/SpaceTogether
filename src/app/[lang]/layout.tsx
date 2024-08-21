@@ -6,11 +6,12 @@ import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { ClientThemeWrapper, ThemeProvider } from "@/context/changeTheme";
+import { ThemeProvider } from "@/context/changeTheme";
 import { LanguagesProps } from "@/types/pages";
 import { Toaster } from "@/components/ui/toaster"
 import { cn } from "@/lib/utils";
 import DesktopMenu from "@/components/menu/desktopMenu";
+import { ClientThemeWrapper } from "@/context/ClientThemeWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,9 +37,11 @@ export default function RootLayout(
       <body className={cn(inter.className ,)}>
           <ThemeProvider>
             <ClientThemeWrapper>
-            <DesktopMenu lang={lang}/>
-              {children}
-              <Toaster/>
+              <div>
+                <DesktopMenu lang={lang}/>
+                {children}
+                <Toaster/>
+              </div>
             </ClientThemeWrapper>
           </ThemeProvider>
       </body>

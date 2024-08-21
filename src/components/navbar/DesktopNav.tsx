@@ -8,6 +8,7 @@ import { FindCreateSchool } from './findCreateSchool';
 import { SchoolNavFindSchool } from './schoolNavFindSchool';
 import { BsBellFill } from 'react-icons/bs';
 import { redirect } from 'next/navigation';
+import { Auth } from 'mongodb';
 
 interface props {
     lang : Locale

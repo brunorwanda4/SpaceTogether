@@ -24,6 +24,7 @@ export interface ISchool extends Document {
   whatsapp ?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  database ?: string;
 }
 
 export interface TSchoolWithUser extends Omit<ISchool, 'createdBy'> {

@@ -70,7 +70,7 @@ const LoginForm = ({
     startTransition(() => {
       loginServer(value , lang).then((data) => {
           
-        if(data.success) {
+        if(!!data?.success) {
           toast({
             description: `${data.success}`
           })

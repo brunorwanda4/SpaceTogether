@@ -157,6 +157,10 @@ const schoolRequestToJoinSchema = new Schema ({
     required : [true , "Description required"],
     maxlength : [255 , "Description max length 255 characters"],
   },
+  database : {
+    type : String,
+    required : [false , "school database is not required"],
+  },
   school_id : {
     type : mongoose.Schema.ObjectId,
     ref : "schools",

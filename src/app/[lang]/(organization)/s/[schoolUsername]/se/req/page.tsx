@@ -36,7 +36,7 @@ const SchoolRequestSettingPage = async ({
                 <SchoolSettingRequestsSearch />
             </div>
             <div className=" px-2 mt-1 flex gap-2">
-                <span className="">{requests?.length}</span> 
+                <span className=" font-semibold">{requests?.length}</span> 
                 <span>Request for team 1</span>
             </div>
 

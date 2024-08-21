@@ -14,7 +14,7 @@ export const JoinSchoolDialog = ({
         <AlertDialogTrigger className='btn btn-ghost w-full btn-sm justify-start'>
             {TJoin}
         </AlertDialogTrigger>
-        <AlertDialogContent className={theme}>
+        <AlertDialogContent data-theme={theme}>
             join school
         </AlertDialogContent>
     </AlertDialog>
