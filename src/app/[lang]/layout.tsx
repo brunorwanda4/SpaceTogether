@@ -12,6 +12,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { cn } from "@/lib/utils";
 import DesktopMenu from "@/components/menu/desktopMenu";
 import { ClientThemeWrapper } from "@/context/ClientThemeWrapper";
+import ProgressBar from "@/context/progressBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,6 +40,7 @@ export default function RootLayout(
             <ClientThemeWrapper>
               <div>
                 <DesktopMenu lang={lang}/>
+                {/* <ProgressBar/> */}
                 {children}
                 <Toaster/>
               </div>

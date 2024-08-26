@@ -101,3 +101,21 @@ input[type=number]::-webkit-inner-spin-button {
 .react-select__menu-list{
   @apply text-red-500 min-h-32 h-40
 }
+
+/* loading bar */
+
+.loading-bar {
+  position: 'fixed';
+    top: 48px;
+    left: 0;
+    width: '100%';
+    height: '4px';
+    transition: 'width 0.2s ease-in-out';
+}
+
+/* messages-aside-bar */
+
+.messages-aside-bar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--fallback-n,oklch(var(--n)/var(--tw-text-opacity)));
+}

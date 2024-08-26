@@ -13,13 +13,14 @@ interface Props {
 export const MyImage = ({
     className, classname , src , alt ,  href
 } : Props) => {
-    const image = ( 
+    const image = (
         <Image 
         src={src || "/profile.svg"}
         alt={cn("image alt :" , alt)}
         fill
         loading="lazy"
         className={cn(" object-cover rounded-md", classname)}
+        sizes="100vw"
        />
     )
 

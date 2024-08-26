@@ -21,8 +21,8 @@ const MessagePage = async ({
   };
   // TODO: fetch and display messages
   return (
-    <div>
-      messages page
+    <div className=" ">
+      hello you
     </div>
   )
 }
