@@ -97,16 +97,16 @@ const MessagesAsideClient = ({
     return (
         <div className="flex w-full">
             <aside className="bg-base-300 w-14 h-full min-w-14 p-1 flex flex-col gap-2">
-                <Link href={`/${lang}/s`} className="btn btn-ghost btn-sm">
+                <Link data-tip="Home" href={`/${lang}/s`} className=" tooltip tooltip-right btn btn-ghost btn-sm">
                     <GoHomeFill size={24} className=" text-gray-500"/>
                 </Link>
-                <button onClick={() => handleChangeMessages("default")} className="btn btn-ghost btn-sm">
+                <button onClick={() => handleChangeMessages("default")} data-tip="Chart" className="tooltip tooltip-right btn btn-ghost btn-sm">
                     <BsChatFill size={24} className={cn("text-gray-500" ,choose === "default" && " text-warning")}/>
                 </button>
-                <button onClick={() => handleChangeMessages("group")} className="btn btn-ghost btn-sm">
+                <button onClick={() => handleChangeMessages("group")} data-tip="Groups" className="tooltip tooltip-right btn btn-ghost btn-sm">
                     <BsPeopleFill size={24} className={cn("text-gray-500" ,choose === "group" && " text-warning")}/>
                 </button>
-                <button onClick={() => handleChangeMessages("request")} className="btn btn-ghost btn-sm">
+                <button onClick={() => handleChangeMessages("request")} data-tip="Requests messages" className="tooltip tooltip-right btn btn-ghost btn-sm">
                     <BsChatDotsFill size={24} className={cn("text-gray-500" ,choose === "request" && " text-warning")}/>
                 </button>
             </aside>
@@ -216,12 +216,12 @@ export const MessagesAsideDefault = ({
 
     const fake_carousel_items = fake_active_user.map((items, index) => (
         <div id={`slide${index}`} className="carousel-item relative" key={index}>
-            <div>
+            {/* <div className=" ">
                 <MyImage className={cn("size-12  avatar" , items.status === "online" && items.status)} classname=" rounded-full" src={items.image ? items.image : "/p.jpg"} />
                 <div className=" font-medium text-xs">
                     {items.name}
                 </div>
-            </div>
+            </div> */}
             {/* <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
                 <a href={`#slide${index === 0 ? last_active_user : index - 1}`} className="btn btn-circle btn-sm btn-neutral">❮</a>
                 <a href={`#slide${index === last_active_user ? 0 : index + 1}`} className="btn btn-circle btn-sm btn-neutral">❯</a>

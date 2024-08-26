@@ -31,7 +31,7 @@ export const FindCreateSchool = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent className=' w-40 min-h-20 border' data-theme={theme}>
             <div>
-                <JoinSchoolDialog TJoin={TJoin}/>
+                <JoinSchoolDialog email={email} className=' btn btn-ghost w-full btn-sm justify-between ' />
                 <Link className='btn btn-ghost w-full btn-sm justify-between ' href={`/${lang}/s/e`}>Explore school{pathname === `/${lang}/s/e` && (<BsCheck2Circle />)}</Link>
                 <CreateSchoolDialog 
                 TCreate={TCreate}

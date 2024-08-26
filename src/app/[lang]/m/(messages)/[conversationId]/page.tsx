@@ -21,7 +21,8 @@ const MessagesConversationIdPage = ({
                     className=" size-10"
                     classname=" rounded-full"
                     alt="Tailwind CSS chat bubble component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                    src="/p.jpg"
+                    />
                 </div>
               </div>
               <div className="chat-header">
@@ -38,10 +39,10 @@ const MessagesConversationIdPage = ({
                 <MyImage
                   className=" size-10"
                   alt="Tailwind CSS chat bubble component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                  src="/p.jpg" />
               </div>
             </div>
-            <div className="chat-header">
+            <div className="chat-header gap-1">
               Anakin
               <time className="text-xs opacity-50">12:46</time>
             </div>

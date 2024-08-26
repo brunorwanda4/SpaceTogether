@@ -6,7 +6,7 @@ import { BsPlus } from "react-icons/bs"
 export const MessagesForm = () => {
   const [content , setContent] = useState<String | null>(null);
 
-  const handleContent = (event: React.FormEvent< HTMLSpanElement>) => {
+  const handleContent = (event: React.FormEvent<HTMLSpanElement>) => {
     setContent(event.currentTarget.textContent || "");
   }
 
@@ -15,53 +15,17 @@ export const MessagesForm = () => {
       <div className="  btn btn-circle btn-sm btn-neutral">
         <BsPlus size={20}/>
       </div>
-      <div className=" w-full">
-        <p className="w-full bg-neutral rounded-md min-h-10 h-10" contentEditable onInput={handleContent}>
-            <span>{content}</span>
+      <div className="w-full bg-neutral rounded-md min-h-10 h-10 max-h-32 p-2">
+        <p className=" h-full w-full">
+            <span 
+            inputMode="text"
+             contentEditable 
+             onInput={handleContent} 
+             className=" outline-none h-full w-full">
+              {!!content ? content : (<span className=" text-gray-500 ">Type a message...</span>)}
+            </span>
         </p>
       </div>
     </div>
   )
 }
-
-
-
-// const EditableTextComponent= () => {
-//   const [content, setContent] = useState<string>('Edit this text...');
-
-//   const handleInput = (event: React.FormEvent<HTMLParagraphElement | HTMLSpanElement>) => {
-//     setContent(event.currentTarget.textContent || '');
-//   };
-
-//   return (
-//     <div>
-//       <p
-//         contentEditable
-//         onInput={handleInput}
-//         style={{
-//           border: '1px solid #ccc',
-//           padding: '8px',
-//           minHeight: '100px',
-//           whiteSpace: 'pre-wrap',
-//         }}
-//       >
-//         {content}
-//       </p>
-//       <span
-//         contentEditable
-//         onInput={handleInput}
-//         style={{
-//           border: '1px solid #ccc',
-//           padding: '8px',
-//           minHeight: '100px',
-//           display: 'inline-block',
-//           whiteSpace: 'pre-wrap',
-//         }}
-//       >
-//         {content}
-//       </span>
-//     </div>
-//   );
-// };
-
-// export default EditableTextComponent;

@@ -25,7 +25,7 @@ export const MessagesMenu = async ({
     <ResizablePanelGroup
         direction="horizontal"
         className="min-h-screen h-screen rounded-lg w-full fixed z-40 items-start"
-      > 
+      >
         <ResizablePanel className=" h-full max-sm:hidden md:flex" defaultSize={25} maxSize={35} minSize={8}>
           <MessagesAsideClient lang={lang}/>
         </ResizablePanel>

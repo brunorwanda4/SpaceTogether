@@ -19,7 +19,6 @@ const DesktopMenu = async ({lang} : props) => {
   const user = (await auth())?.user;
   const {nav} = await getDictionary(lang);
 
-
   const findSchool: ISchool[] | null = await FindSchoolByOwn(user?.id)
 
     let schoolsWithUser : TSchoolWithUser[] | undefined
