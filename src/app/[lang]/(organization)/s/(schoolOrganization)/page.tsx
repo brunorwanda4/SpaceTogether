@@ -37,7 +37,7 @@ const SchoolPage =async ({
       <div className=' flex flex-col  school-center  justify-center  w-full h-full'>
         <p className=' text-center'>{page.school.welcome}</p>
         <div className=' flex gap-2 mt-2'>
-          <JoinSchoolDialog/>
+          <JoinSchoolDialog email={user.email}/>
           <Link href={`/${lang}/s/e`} className='btn btn-sm btn-warning'>Explorer schools</Link>
           <div className=' w-auto'>
             <CreateSchoolDialog 

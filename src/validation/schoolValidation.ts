@@ -143,3 +143,17 @@ export const SchoolClassValidation = z.object({
         message : "maximum characters are 15"
     }),
 })
+
+export const JoinSchoolValidation = z.object({
+    schoolName : z.string().min(1 , {
+        message : "school name is required",
+    }).max(50 , {
+        message : "school name max characters are 50"
+    }),
+    userEmail : z.string().email().min(1 , {
+        message : "User email is required",
+    }),
+    code : z.string().min(1 , {
+        message : "Code is required",
+    })
+})
