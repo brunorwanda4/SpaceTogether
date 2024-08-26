@@ -28,7 +28,7 @@ export const CreateSchoolDialog = ({
             {TCreate}
             {pathname === `/${lang}/s/c` && (<BsCheck2Circle />)}
         </DialogTrigger >
-        <DialogContent className='  overflow-y-auto max-h-2xl max-h-[90vh]' data-theme={theme}>
+        <DialogContent className='  overflow-y-auto max-h-2xl max-h-[90vh] max-md:w-full max-md:max-w-full max-md:max-h-screen' data-theme={theme}>
             <CreateSchoolForm
              TCreateBy={TSchoolProps.TCreateBy}
              lang={TSchoolProps.lang}

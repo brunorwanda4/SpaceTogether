@@ -1,22 +1,9 @@
-import { AlertDialog, AlertDialogContent, AlertDialogTrigger } from '../ui/alert-dialog'
-import { useTheme } from '@/hooks/useTheme';
+import { MyAlertDialog } from "../ui/my-components"
 
-interface props {
-    TJoin : string;
-}
-
-export const JoinSchoolDialog = ({
-    TJoin
-} : props) => {
-    const theme = useTheme();
+export const JoinSchoolDialog = () => {
   return (
-    <AlertDialog>
-        <AlertDialogTrigger className='btn btn-ghost w-full btn-sm justify-start'>
-            {TJoin}
-        </AlertDialogTrigger>
-        <AlertDialogContent data-theme={theme}>
-            join school
-        </AlertDialogContent>
-    </AlertDialog>
+    <MyAlertDialog classname=" btn btn-sm btn-info" icon={"Join school"}>
+        <div> bruno join school</div>
+    </MyAlertDialog>
   )
 }

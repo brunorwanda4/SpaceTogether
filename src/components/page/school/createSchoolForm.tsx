@@ -200,7 +200,7 @@ export const CreateSchoolForm = ({
             <span>Add School</span>
           </h2>
        </div>
-        <div className=" w-full">
+        <div className=" w-full max-sm:flex max-sm:flex-col">
         <FormField
             control={form.control}
             name="logo"
@@ -244,9 +244,9 @@ export const CreateSchoolForm = ({
             />
         </div>
         {/* other in put name and username */}
-        <div className=" w-full">
+        <div className=" w-full max-sm:flex max-sm:flex-col">
           {/* name and username */}
-          <div className=" mt-2 flex gap-4 w-full">
+          <div className=" mt-2 flex gap-4 w-full  max-sm:flex max-sm:flex-col max-sm:gap-2">
             <FormField 
             name="name"
             control={form.control}
@@ -277,7 +277,7 @@ export const CreateSchoolForm = ({
             />
           </div>
           {/* email and phone number */}
-          <div className=" mt-2 flex gap-4 w-full">
+          <div className=" mt-2 flex gap-4 w-full max-sm:flex max-sm:flex-col max-sm:gap-2">
             <FormField 
             name="phoneNumber"
             control={form.control}
@@ -308,7 +308,7 @@ export const CreateSchoolForm = ({
             />
           </div>
           {/* school website and type */}
-          <div className=" mt-2 flex gap-4 w-full">
+          <div className=" mt-2 flex gap-4 w-full max-sm:flex max-sm:flex-col max-sm:gap-2">
             <FormField 
             name="websiteURL"
             control={form.control}
@@ -351,7 +351,7 @@ export const CreateSchoolForm = ({
           </div>
           {/* country , province and city */}
           {/* TODO : ADD OTHER COUNTRIES */}
-          <div className=" mt-2 flex gap-4 w-full ">
+          <div className=" mt-2 flex gap-4 w-full  max-sm:flex max-sm:flex-col max-sm:gap-2">
           <FormField
               control={form.control}
               name="province"

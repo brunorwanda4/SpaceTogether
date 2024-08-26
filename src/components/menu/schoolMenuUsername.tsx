@@ -35,7 +35,6 @@ export const SchoolMenuUsername = ({
         <ResizableHandle withHandle className=" h-screen"/>
         <ResizablePanel className=" w-full" defaultSize={75}>
           <main className="px-1 max-h-screen overflow-y-auto">
-            <ClassNavStudent lang={lang} school={school} />
             {children}
           </main>
         </ResizablePanel>

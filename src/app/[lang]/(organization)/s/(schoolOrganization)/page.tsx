@@ -1,5 +1,6 @@
 import { auth} from '@/auth'
 import { CreateSchoolDialog } from '@/components/navbar/createSchoolDialog';
+import { JoinSchoolDialog } from '@/components/navbar/joinSchoolDialog';
 import { MyImage } from '@/components/style/myImage';
 import { FindSchoolByOwn } from '@/data/getSchool';
 import { getUserById } from '@/data/getUserData';
@@ -32,28 +33,11 @@ const SchoolPage =async ({
   if(!findSchool) {
      return (
       <div className=' grid place-content-center min-h-[80vh] pb-12'>
-        {/* <div className=' mb-4'>
-          <div>
-            <h3 className=' text-xl font-bold'>Hello You can make your profile look cool <span className=' text-2xl'>😎</span> </h3>
-          </div>
-          {!userAvatar && (
-            <div>
-              {[...Array(avatar)].map((items : number , index : number) => {
-                return (
-                  <div key={items}>
-                    <MyImage src={`/profiles/${avatarLocation}/${index + 1}.png`} classname=' object-cover'/>
-                  </div>
-                )
-              })}
-              Bruno
-            </div>
-          )}
-        </div> */}
       <div className=' flex justify-center h-full  school-center'>
       <div className=' flex flex-col  school-center  justify-center  w-full h-full'>
         <p className=' text-center'>{page.school.welcome}</p>
         <div className=' flex gap-2 mt-2'>
-          <Link href={`/${lang}/s/c`} className='btn btn-sm btn-info font-medium'>Join School</Link>
+          <JoinSchoolDialog/>
           <Link href={`/${lang}/s/e`} className='btn btn-sm btn-warning font-medium'>Explorer schools</Link>
           <div className=' w-auto'>
             <CreateSchoolDialog 
