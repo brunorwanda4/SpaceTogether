@@ -1,6 +1,6 @@
 "use client";
 import SchoolUsernamePage from "@/app/[lang]/(organization)/s/[schoolUsername]/(schoolUsernameOriganization)/page";
-import ClassStudentPage from "@/app/[lang]/(organization)/s/[schoolUsername]/(schoolUsernameOriganization)/stu/page";
+import ClassStudentPage from "@/app/[lang]/(organization)/s/[schoolUsername]/(schoolUsernameOriganization)/[classUsername]/stu/page";
 import { Locale } from "@/i18n";
 import { cn } from "@/lib/utils";
 import { ISchool } from "@/types/school"
@@ -10,11 +10,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsHandIndex, BsHandIndexFill, BsLayers, BsLayersFill, BsLightning, BsLightningFill, BsPeople, BsPeopleFill, BsTable, BsTabletFill } from "react-icons/bs";
 import StudentClassExercisePage from "../page/school/class/student/studentClassExercisePage";
-import StudentClassHomeworkPage from "../page/school/class/student/StudentClassHomeworkPage";
-import StudentClassStudentPage from "../page/school/class/student/StudentClassStudentPage";
-import StudentClassTeachersPage from "../page/school/class/student/StudentClassTeachersPage";
 import StudentClassTimeTablePage from "../page/school/class/student/StudentClassTimeTablePage";
 import SchoolClassStudentPage from "../page/school/class/student/schoolClasshomePage";
+import StudentClassHomeworkPage from "../page/school/class/student/studentClassHomeworkPage";
+import StudentClassStudentPage from "../page/school/class/student/studentClassStudentPage";
+import StudentClassTeachersPage from "../page/school/class/student/studentClassTeachersPage";
 
 interface props {
     school : ISchool;

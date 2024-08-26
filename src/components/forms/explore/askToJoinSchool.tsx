@@ -76,7 +76,7 @@ const AskToJoinSchool = ({
         defaultValues : {
             prName : "",
             stFName : "",
-            stLName : "",
+            student_class : "",
             stBirthDay : "",
             stBirthMonth : "",
             stBirthYear : "",
@@ -128,7 +128,7 @@ const AskToJoinSchool = ({
                 <div className=" flex w-full justify-between gap-2 max-md:flex-col">
                     <div className=" w-full">
                         <div className=" flex gap-2 flex-col w-full max-md:gap-2 ">
-                            <div className=" flex gap-2 w-full max-md:flex-col">
+                            <div className=" flex gap-2 w-full max-md:flex-col ">
                                 <FormField
                                 control={form.control}
                                 name="stFName"
@@ -142,9 +142,19 @@ const AskToJoinSchool = ({
                                     </FormItem>
                                 )}
                                 />
-                                <div className=" w-1/2">
-                                    
-                                </div>
+                                <FormField
+                                    control={form.control}
+                                    name="student_class"
+                                    render={({ field }) => (
+                                        <FormItem className=" w-full">
+                                        <FormLabel>Class you need</FormLabel>
+                                        <FormControl>
+                                            <Input className={cn()} disabled={isPending} placeholder="S1" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                             </div>
                             {/* gender */}
                             <div className=" flex max-md:flex-col max-md:w-full">

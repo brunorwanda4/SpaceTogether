@@ -1,11 +1,8 @@
 import SchoolNotFount from '@/components/error/schoolNotFount';
 import { SchoolHomeNews } from '@/components/page/school/home/schoolHomeNews';
-import { MyImage } from '@/components/style/myImage'
 import { Locale } from '@/i18n';
 import { getSchoolByUsername } from '@/server/getData'
-import Link from 'next/link'
 import React from 'react'
-import { FaArrowLeftLong } from "react-icons/fa6";
 
 interface Props {
     params : {

@@ -6,6 +6,8 @@ import { Locale } from '@/i18n'
 import { getSchoolByUsername } from '@/server/getData'
 import { Metadata } from 'next'
 import React from 'react'
+import { auth } from '@/auth'
+import { redirect } from 'next/navigation'
 
 export const metadata:Metadata = {
   title : "School Settings"
@@ -18,6 +20,9 @@ interface props {
 const SchoolUsernameSettingPage = async ({
      params : {schoolUsername , lang}
 } : props) => {
+  const user = (await auth())?.user;
+  if (!user) return redirect(`/${lang}/auth/login`);
+
   const school = await getSchoolByUsername(schoolUsername);
   if(!school) return <SchoolNotFount lang={lang} schoolUsername={schoolUsername}/>
   return (

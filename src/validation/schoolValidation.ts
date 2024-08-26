@@ -90,8 +90,8 @@ export const SchoolAskToJoinValidation = z.object({
     }).max(25 , {
         message : "Maximum characters are 25"
     }),
-    stLName : z.string().min(1 , {
-        message : "Student last name is required "
+    student_class : z.string().min(1 , {
+        message : "Class you need is required "
     }).max(25 , {
         message : "Maximum characters are 25"
     }),

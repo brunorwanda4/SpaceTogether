@@ -38,7 +38,7 @@ const SchoolPage =async ({
         <p className=' text-center'>{page.school.welcome}</p>
         <div className=' flex gap-2 mt-2'>
           <JoinSchoolDialog/>
-          <Link href={`/${lang}/s/e`} className='btn btn-sm btn-warning font-medium'>Explorer schools</Link>
+          <Link href={`/${lang}/s/e`} className='btn btn-sm btn-warning'>Explorer schools</Link>
           <div className=' w-auto'>
             <CreateSchoolDialog 
                 lang={lang}
