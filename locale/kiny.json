@@ -40,9 +40,9 @@
                 "register" : "Kora konti nshyashya"
             },
             "register" : {
-                "registerTitle" : "Kora konti nshyashya",
+                "registerTitle" : "Aho uri aho turi",
                 "login" : "Injira muri konti yawe",
-                "FName" : "Izina ryambere",
+                "FName" : "Amazina yawe",
                 "LName" : "Izina ryanyuma",
                 "email" : "imeri",
                 "year" :"Imyaka",

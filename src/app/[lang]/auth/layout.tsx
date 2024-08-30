@@ -6,8 +6,8 @@ import React from 'react'
 const Layout = async ({children , params : {lang}} : LanguagesProps) => {
   const {nav} = await getDictionary(lang)
   return (
-    <section className=" px-2 max-lg:px-1">
-        <AuthNav 
+    <section className=" w-full">
+        <AuthNav
          lang={lang}
          TCancel={nav.auth.settingDialog.chooseLanguage.cancel}
          TSave={nav.auth.settingDialog.chooseLanguage.save}

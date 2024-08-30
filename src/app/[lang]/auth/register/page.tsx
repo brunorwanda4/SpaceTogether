@@ -2,6 +2,7 @@ import { auth } from '@/auth';
 import { AuthDivPage } from '@/components/auth/authDivForm';
 import { ChooseHowToCreateAccount } from '@/components/auth/chooseHowToCreateAccount';
 import { Logo } from '@/components/navbar/Logo'
+import { MyImage } from '@/components/style/myImage';
 import { getDictionary } from '@/lib/dictionary'
 import { LangPageProps, LanguagesProps } from '@/types/pages';
 import { Metadata } from 'next';
@@ -23,7 +24,7 @@ const page = async ({ params : {lang} } : LanguagesProps) => {
   return (
     <AuthDivPage lang={lang} title={page.auth.register.registerTitle}>
       <ChooseHowToCreateAccount 
-         lang={lang} 
+         lang={lang}
          TRegister={page.auth.register.login} 
          TForget={page.auth.loginForm.forgetPassword} 
          TProvides={page.auth.loginForm.provides} 

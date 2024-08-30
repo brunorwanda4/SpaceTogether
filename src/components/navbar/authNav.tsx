@@ -25,19 +25,19 @@ export const AuthNav = ({
 } : Props) => {
     const theme = useTheme();
   return (
-    <nav className=' fixed z-50 flex justify-end w-full p-2 max-lg:p-2'>
+    <nav className=' fixed z-50 flex justify-end w-full p-2 max-lg:p-2 px-2 max-lg:px-1'>
         <div className=' flex gap-2'>
             <Dialog>
                 <DialogTrigger className=' btn btn-square'>
                     <BsGearFill size={24} className=''/>
                     <span className=' sr-only'>{TSetting}</span>
                 </DialogTrigger>
-                <DialogContent data-theme={theme} className=' bg-base-300 '>
+                <DialogContent data-theme={theme} className=' bg-base-300 max-md:left-[50%] max-md:top-[50%] max-sm:w-[95%] max-sm:max-w-[95%]'>
                     <DialogTitle>
                         {TSetting}
                     </DialogTitle>
                     <SPLine />
-                    <div className=''>
+                    <div className=' '>
                         <ChangeLanguages 
                          TSave={TSave} 
                          TCancel={TCancel} 

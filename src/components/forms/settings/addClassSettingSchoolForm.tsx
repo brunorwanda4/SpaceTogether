@@ -36,10 +36,10 @@ export function AddClassSettingSchoolForm({
       category:"",
       username: "",
     },
-    mode: 'onBlur',
-    reValidateMode: 'onChange',
     shouldFocusError: true,
     shouldUnregister: true,
+    mode: "onChange",
+    reValidateMode: 'onChange',
     criteriaMode: 'firstError',
   });
 

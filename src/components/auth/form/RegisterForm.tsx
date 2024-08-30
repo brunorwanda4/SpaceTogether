@@ -2,15 +2,7 @@
 import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import z from "zod";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
+import {Form,FormControl,FormDescription,FormField,FormItem,FormLabel,FormMessage,} from "@/components/ui/form"
 import { Input } from "@/components/ui/input";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 
@@ -21,13 +13,14 @@ import { Locale } from '@/i18n';
 import { RegisterValidation } from '@/validation/registerValidation';
 import { cn } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
-import { regServer } from '@/server/regServer';
+// import { regServer } from '@/server/regServer';
 import { FormMessageError, FormMessageSuccess } from './formMessagers';
 import { usePathname, useRouter } from 'next/navigation';
 import { toast } from '@/components/ui/use-toast';
 import { BeatLoader } from 'react-spinners';
 import { BsCheck2Circle } from 'react-icons/bs';
 import { useTheme } from '@/hooks/useTheme';
+import { create_user } from '@/controllers/user_controller';
 
 export interface RegisterProps {
     TPassword: string;
@@ -66,12 +59,13 @@ const RegisterForm = ({
         defaultValues : {
           email : "",
           password : "",
-          FName : "",
-          LName: "",
-          day : "",
-          month : "",
-          year : "",
+          name : "",         
         },
+        shouldFocusError : true,
+        shouldUnregister : true,
+        criteriaMode : "firstError",
+        reValidateMode : "onChange",
+        mode : "onChange"
     });
 
     const DivClass = ["flex gap-2 flex-col","bg-base-300 lg:min-w-60"];
@@ -86,9 +80,10 @@ const RegisterForm = ({
     // pathname
     const nexUrl = usePathname();
 
-    const onSubmit = (values : z.infer<typeof RegisterValidation>) => {
+    const onSubmit = async (values : z.infer<typeof RegisterValidation>) => {
+      
       startTransition(() => {
-        regServer(values , lang , nexUrl).then((data) => {
+        create_user(values).then((data) => {
           
           if(!!data.success) {
             toast({
@@ -101,7 +96,7 @@ const RegisterForm = ({
               )
             })
             setSuccess(data.success);
-            router.push(`/${lang}/auth/login`)
+            // router.push(`/${lang}/auth/login`)
           }
           if(!!data.error) {
             toast({
@@ -114,22 +109,20 @@ const RegisterForm = ({
         })
       })
     }
-
   return (
     <Form {...form} >
       <form onSubmit={form.handleSubmit(onSubmit)} className=' flex gap-2 flex-col'>
-        <div className=' flex gap-2'>
         {/* left */}
         <div className={cn(DivClass[0])}>
             {/* first name */}
             <FormField
             control={form.control}
-            name="FName"
+            name="name"
             render={({ field }) => (
                 <FormItem>
                 <FormLabel>{TFName}</FormLabel>
                 <FormControl>
-                    <Input className={cn(DivClass[1])} disabled={isPending} autoFocus placeholder="Rwanda" {...field} />
+                    <Input className={cn(DivClass[1] , "")} disabled={isPending} autoFocus placeholder="Your full name" {...field} />
                 </FormControl>
                 <FormMessage />
                 </FormItem>
@@ -149,126 +142,6 @@ const RegisterForm = ({
                 </FormItem>
             )}
             />
-            <div className=' flex flex-col gap-2 justify-between '>
-            <Label>Date of birth</Label>
-            <div className=' flex gap-2 justify-between flex-row-reverse'>
-              {/* day */}
-              <FormField control={form.control} name="day" render={({ field }) => (
-                <FormItem>
-                  <Select disabled={isPending} onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger className=' line h-16 bg-base-100 flex flex-col'>
-                        <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TDay}</span></FormLabel>
-                        <SelectValue className="bg-transparent" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent data-theme={themes} className=' min-h-40 max-h-60'>
-                    {[...Array( 31)].map((_, index) => (
-                      <SelectItem key={index + 1} value={`${index + 1}`}>
-                        {index + 1}
-                      </SelectItem>
-                    ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}/>
-              {/* month */}
-            <FormField control={form.control}  name="month" render={({ field }) => (
-                <FormItem>
-                  <Select disabled={isPending} onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger className=' flex flex-col h-16 w-full bg-base-100 max-w-20'>
-                      <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TMonth}</span></FormLabel>
-                        <SelectValue className="bg-transparent" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent data-theme={themes} className=' min-h-40 max-h-60'>
-                      {Object.keys(months).map((items , index) => (
-                        <SelectItem key={index + 1} value={items}>
-                          {items}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}/>
-              {/* year */}
-            <FormField control={form.control} name="year" render={({ field }) => (
-                <FormItem>
-                  <Select disabled={isPending} onValueChange={field.onChange} >
-                    <FormControl>
-                      <SelectTrigger className=' line h-16 bg-base-100  flex flex-col'>
-                        <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TYear}</span></FormLabel>
-                        <SelectValue className=' text-xs' />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent data-theme={themes} className=' text-xs min-h-40 max-h-60'>
-                      {[...Array(100)].map((_, index) => (
-                        <SelectItem key={2024 - index} value={`${2024 - index}`} defaultValue={`${field.value}`}>
-                          {2024 - index}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}/>
-            </div>
-          </div>
-        </div>
-        {/* right */}
-        <div className={cn(DivClass[0])}>
-          {/* Last name */}
-          <FormField
-            control={form.control}
-            name="LName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{TLName}</FormLabel>
-                <FormControl>
-                  <div className=' relative'>
-                    <Input className={cn(DivClass[1])} placeholder="Bruno" type={"text"} {...field} />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-            />
-            {/* gender */}
-            <FormField control={form.control}  name="gender" render={({ field }) => (
-            <FormItem className="space-y-3">
-              <FormLabel>{TGender}</FormLabel>
-              <FormControl>
-                <RadioGroup disabled={isPending} onValueChange={field.onChange}  defaultValue={field.value} className="flex space-x-1">
-                  <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
-                    <FormControl>
-                      <RadioGroupItem className=' border-input' value="male" />
-                    </FormControl>
-                    <FormLabel className="font-normal">
-                      {TMale}
-                    </FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
-                    <FormControl>
-                      <RadioGroupItem className=' border-input' value="female" />
-                    </FormControl>
-                    <FormLabel className="font-normal">
-                      {TFmale}
-                    </FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
-                    <FormControl>
-                      <RadioGroupItem className=' border-input' value="other" />
-                    </FormControl>
-                    <FormLabel className="font-normal">{TOther}</FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}/>
           {/* password */}
           <FormField
             control={form.control}
@@ -289,7 +162,6 @@ const RegisterForm = ({
             )}
           />
         </div>
-        </div>
         <FormMessageError message={error}/>
         <FormMessageSuccess message={success}/>
         <button className=' btn btn-neutral capitalize font-semibold' type='submit'>
@@ -301,3 +173,111 @@ const RegisterForm = ({
 }
 
 export default RegisterForm
+
+
+
+// const gender_and_dithDate = () => {
+//   <div className=' flex flex-1 gap-2'>
+//                 <div className=' flex flex-col gap-2 justify-between '>
+//                 <Label>Date of birth</Label>
+//                 <div className=' flex gap-2 justify-between flex-row-reverse'>
+//                   {/* day */}
+//                   <FormField control={form.control} name="day" render={({ field }) => (
+//                     <FormItem>
+//                       <Select disabled={isPending} onValueChange={field.onChange} defaultValue={field.value}>
+//                         <FormControl>
+//                           <SelectTrigger className=' line h-16 bg-base-100 flex flex-col'>
+//                             <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TDay}</span></FormLabel>
+//                             <SelectValue className="bg-transparent" />
+//                           </SelectTrigger>
+//                         </FormControl>
+//                         <SelectContent data-theme={themes} className=' min-h-40 max-h-60'>
+//                         {[...Array( 31)].map((_, index) => (
+//                           <SelectItem key={index + 1} value={`${index + 1}`}>
+//                             {index + 1}
+//                           </SelectItem>
+//                         ))}
+//                         </SelectContent>
+//                       </Select>
+//                       <FormMessage />
+//                     </FormItem>
+//                   )}/>
+//                   {/* month */}
+//                 <FormField control={form.control}  name="month" render={({ field }) => (
+//                     <FormItem>
+//                       <Select disabled={isPending} onValueChange={field.onChange} defaultValue={field.value}>
+//                         <FormControl>
+//                           <SelectTrigger className=' flex flex-col h-16 w-full bg-base-100 max-w-20'>
+//                           <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TMonth}</span></FormLabel>
+//                             <SelectValue className="bg-transparent" />
+//                           </SelectTrigger>
+//                         </FormControl>
+//                         <SelectContent data-theme={themes} className=' min-h-40 max-h-60'>
+//                           {Object.keys(months).map((items , index) => (
+//                             <SelectItem key={index + 1} value={items}>
+//                               {items}
+//                             </SelectItem>
+//                           ))}
+//                         </SelectContent>
+//                       </Select>
+//                       <FormMessage />
+//                     </FormItem>
+//                   )}/>
+//                   {/* year */}
+//                 <FormField control={form.control} name="year" render={({ field }) => (
+//                     <FormItem>
+//                       <Select disabled={isPending} onValueChange={field.onChange} >
+//                         <FormControl>
+//                           <SelectTrigger className=' line h-16 bg-base-100  flex flex-col'>
+//                             <FormLabel className=' text-xs flex items-center gap-1 justify-center max-w-12'><span>{TYear}</span></FormLabel>
+//                             <SelectValue className=' text-xs' />
+//                           </SelectTrigger>
+//                         </FormControl>
+//                         <SelectContent data-theme={themes} className=' text-xs min-h-40 max-h-60'>
+//                           {[...Array(100)].map((_, index) => (
+//                             <SelectItem key={2024 - index} value={`${2024 - index}`} defaultValue={`${field.value}`}>
+//                               {2024 - index}
+//                             </SelectItem>
+//                           ))}
+//                         </SelectContent>
+//                       </Select>
+//                       <FormMessage />
+//                     </FormItem>
+//                   )}/>
+//                 </div>
+//               </div>
+//                 {/* gender */}
+//                 <FormField control={form.control}  name="gender" render={({ field }) => (
+//                 <FormItem className="space-y-3">
+//                   <FormLabel>{TGender}</FormLabel>
+//                   <FormControl>
+//                     <RadioGroup disabled={isPending} onValueChange={field.onChange}  defaultValue={field.value} className="flex space-x-1">
+//                       <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
+//                         <FormControl>
+//                           <RadioGroupItem className=' border-input' value="male" />
+//                         </FormControl>
+//                         <FormLabel className="font-normal">
+//                           {TMale}
+//                         </FormLabel>
+//                       </FormItem>
+//                       <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
+//                         <FormControl>
+//                           <RadioGroupItem className=' border-input' value="female" />
+//                         </FormControl>
+//                         <FormLabel className="font-normal">
+//                           {TFmale}
+//                         </FormLabel>
+//                       </FormItem>
+//                       <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
+//                         <FormControl>
+//                           <RadioGroupItem className=' border-input' value="other" />
+//                         </FormControl>
+//                         <FormLabel className="font-normal">{TOther}</FormLabel>
+//                       </FormItem>
+//                     </RadioGroup>
+//                   </FormControl>
+//                   <FormMessage />
+//                 </FormItem>
+//               )}/>
+//             </div>
+// }

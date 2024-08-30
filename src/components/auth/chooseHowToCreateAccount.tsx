@@ -49,7 +49,7 @@ export const ChooseHowToCreateAccount = ({
          {choose ? (
           <button onClick={() => choose("login")} className=' mt-2 text-sm text-neutral link-hover'>{TLogin}</button>
          ) : (
-          <Link href={`/${lang}/auth/register`} className=' mt-2 text-sm text-neutral link-hover'>{TLogin}</Link>
+          <Link href={`/${lang}/auth/login`} className=' mt-2 text-sm text-neutral link-hover'>{TLogin}</Link>
          )}
          </>)}
       </div>

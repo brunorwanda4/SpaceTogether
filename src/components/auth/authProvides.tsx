@@ -13,9 +13,9 @@ const AuthProvides = ({TProvides , lang} : Props) => {
   return (
     <div className=' mt-2'>
         <div className=' flex gap-2'>
-            <SPLine />
-            <h4 className=' text-xs'>{TProvides}</h4>
-            <SPLine />
+            <SPLine className='w-full  divider'/>
+              <h4 className=' text-xs'>{TProvides}</h4>
+            <SPLine className='w-full  divider'/>
           </div>
         <div className=' flex justify-center gap-2 mt-2'>
         <button onClick={() => loginAuthProvider({provides : "github" , locale : lang})} className=' btn btn-circle btn-neutral'>

@@ -40,9 +40,9 @@
                 "register" : " Create new account"
             },
             "register" : {
-                "registerTitle" : "Create new account",
+                "registerTitle" : "Where you are where we are",
                 "login" : "Login",
-                "FName" : "First name",
+                "FName" : "Your full name",
                 "LName" : "Last name",
                 "email" : "Email",
                 "year" :"Year",
