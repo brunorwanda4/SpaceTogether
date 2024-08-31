@@ -29,6 +29,7 @@ import { redirect } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { BeatLoader } from 'react-spinners';
 import { TUser } from '@/types/user';
+import { ChoosePropsAuth } from '../authDialog';
 
 interface Props {
     TPassword: string;
@@ -36,10 +37,11 @@ interface Props {
     lang : Locale
     TLogin : string;
     TForget : string;
+    choose ?: (choice : ChoosePropsAuth) => void
 }
 
 const LoginForm = ({
-  lang ,TForget, TPassword ,TLogin , TUsername
+  lang ,TForget, TPassword ,TLogin , TUsername ,
 } : Props) => {
   // see password
   const [seePassword , setSeePassword] = useState<boolean>(true);
@@ -124,7 +126,9 @@ const LoginForm = ({
             </FormItem>
           )}
         />
-        {!!online && <Link className='link-hover text-sm duration-300 text-neutral leading-4' href={`/${lang}/auth/forgetPassword`}>{TForget}</Link>}
+        <div className=' flex justify-start'>
+          {!!online && <Link className='link-hover text-sm duration-300 text-neutral-content leading-4 btn btn-sm btn-link' href={`/${lang}/auth/forgetPassword`}>{TForget}</Link>}
+        </div>
         <FormMessageError message={error}/>
         
         <FormMessageSuccess message={success}/>

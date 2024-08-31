@@ -35,7 +35,7 @@
                 "username" : "Username or you email",
                 "password" : "Password",
                 "login" : "Login",
-                "provides" : "provides",
+                "provides" : "Login with",
                 "forgetPassword" : "Forget Password",
                 "register" : " Create new account"
             },

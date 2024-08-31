@@ -35,12 +35,12 @@
                 "username" : "Izina ukoresha cyangwa imeri yawe",
                 "password" : "Ijambo banga",
                 "login" : "Koresha konti yawe",
-                "provides" : "koresha",
+                "provides" : "Injira ukoresheje",
                 "forgetPassword" : "Kwibangirwa ijambo banga",
                 "register" : "Kora konti nshyashya"
             },
             "register" : {
-                "registerTitle" : "Aho uri aho turi",
+                "registerTitle" : "Aho uri, aho turi",
                 "login" : "Injira muri konti yawe",
                 "FName" : "Amazina yawe",
                 "LName" : "Izina ryanyuma",

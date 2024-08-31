@@ -14,7 +14,7 @@ const AuthProvides = ({TProvides , lang} : Props) => {
     <div className=' mt-2'>
         <div className=' flex gap-2'>
             <SPLine className='w-full  divider'/>
-              <h4 className=' text-xs'>{TProvides}</h4>
+              <h4 className=' text-xs min-w-24 items-center flex justify-center'>{TProvides}</h4>
             <SPLine className='w-full  divider'/>
           </div>
         <div className=' flex justify-center gap-2 mt-2'>

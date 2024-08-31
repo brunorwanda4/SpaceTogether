@@ -83,7 +83,7 @@ export const AuthDivPage = ({
         <div className='p-5 w-[34rem] max-md:absolute max-md:items-center max-md:h-full max-md:justify-center max-md:top- max-md:z-40 max-md:w-full'>
           <div className=' items-center justify-center max-md:h-full max-w-full max-md:flex max-md:flex-col'>
             <div className=' flex justify-center mb-4'>
-                <Logo title/>
+                <Logo title link className=' z-50'/>
             </div>
             <main className={cn("max-md:card max-md:backdrop-blur-xl max-md:shadow-md max-md:min-w-96 max-md:w-full max-md:bg-black/40 max-md:border max-md:p-4 max-md:min-h-60 max-md:h-auto max-md:max-w-xl",classname)}>
                 <div>

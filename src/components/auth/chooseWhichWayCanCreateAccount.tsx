@@ -28,12 +28,12 @@ export const ChooseWhichWayCanCreateAccount = ({
   return (
     <div>
       <div className=''>
-        <LoginForm TForget={TForget} lang={lang} TLogin={TLogin} TPassword={TPassword} TUsername={TUsername}/>
+        <LoginForm choose={choose} TForget={TForget} lang={lang} TLogin={TLogin} TPassword={TPassword} TUsername={TUsername}/>
         {!!online &&(<>
          {choose ? (
-          <button onClick={() => choose("register")} className=' mt-2 text-sm text-neutral link-hover'>{TRegister}</button>
+          <button onClick={() => choose("register")} className=' mt-2 text-sm text-neutral-content btn btn-sm btn-link'>{TRegister}</button>
          ) : (
-          <Link href={`/${lang}/auth/register`} className=' mt-2 text-sm text-neutral link-hover'>{TRegister}</Link>
+          <Link href={`/${lang}/auth/register`} className=' mt-2 text-sm text-neutral-content btn-sm btn btn-link'>{TRegister}</Link>
          )}
          </>)}
       </div>

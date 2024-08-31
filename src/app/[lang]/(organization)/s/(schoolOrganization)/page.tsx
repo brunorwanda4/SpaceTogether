@@ -24,7 +24,7 @@ const SchoolPage =async ({
   const user = (await auth())?.user;
   
   if(!user) {
-    redirect(`/${lang}`)
+    redirect(`/${lang}/auth/login`)
   }
 
 

@@ -4,12 +4,8 @@
  */
 
 export const AuthRouter = [
-    "/en/login",
-    "/kiny/login",
-    "/en/register",
-    "/kiny/register",
-    "/en/forgetPassword",
-    "/kiny/forgetPassword",
+    "/login",
+    "/register",
 ];
 
 /**
@@ -18,15 +14,13 @@ export const AuthRouter = [
  */
 
 export const PublicRouter = [
-    "/en",
-    "/kiny",
+    "/"
 ]
 
 /**
  * the default auth router
  * @type {string}
  */
-
-export const AuthDefault = "/api";
+export const AuthDefault = "/api/auth";
 
 export const DefaultRoute = "/en"

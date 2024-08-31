@@ -18,7 +18,7 @@ export const MyImage = ({
         src={src || "/profile.svg"}
         alt={cn("image alt :" , alt)}
         fill
-        loading="lazy"
+        priority
         className={cn(" object-cover rounded-md", classname)}
         sizes="100vw"
        />

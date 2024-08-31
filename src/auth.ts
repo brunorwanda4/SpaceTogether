@@ -7,6 +7,11 @@ import { TURole } from "./types/user"
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   callbacks : {
+    async signIn({user , account}) {
+      if (account?.provider !== "credentials") return true;
+      
+      return true
+    },
     async session({token , session}) {
       if(!token) return token;
 

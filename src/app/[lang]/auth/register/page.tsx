@@ -16,11 +16,11 @@ export const metadata:Metadata = {
 const page = async ({ params : {lang} } : LanguagesProps) => {
  const {page} = await getDictionary(lang);
 
-  const login = await auth();
+  const user = (await auth())?.user;
 
-  if(!!login) {
+  if(!!user) {
     redirect(`/${lang}/s`)
-  }
+  };
   return (
     <AuthDivPage lang={lang} title={page.auth.register.registerTitle}>
       <ChooseHowToCreateAccount 
