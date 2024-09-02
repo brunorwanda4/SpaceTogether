@@ -42,6 +42,7 @@
             "register" : {
                 "registerTitle" : "Where you are where we are",
                 "login" : "Login",
+                "CPassword" : "Confirm Password",
                 "FName" : "Your full name",
                 "LName" : "Last name",
                 "email" : "Email",

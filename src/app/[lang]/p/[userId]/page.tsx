@@ -1,6 +1,8 @@
 import { auth } from "@/auth";
 import { UserScrollTop } from "@/hooks/scrollTop";
 import { Locale } from "@/i18n"
+import { IUser } from "@/types/user";
+import { invoke } from "@tauri-apps/api/tauri";
 import Link from "next/link"
 import { redirect } from "next/navigation";
 
@@ -10,13 +12,17 @@ interface props {
     userId : string
   }
 }
-const UserPage =async ({
+const ProfilePage =async ({
   params: {lang , userId}
 }: props) => {
   const user = ( await auth())?.user;
-  if (!user) redirect(`/${lang}`);
 
+  if (!user) return redirect(`/${lang}`);
+
+  // const tauri_user = await invoke("api_user_authentication_create", {id : user.id});
  
+  // const get_user_tauri = await invoke("api_user_data_get", {id : user.id});
+
   return (
     <div>
       user id : {userId}
@@ -26,10 +32,12 @@ const UserPage =async ({
         {user.image}
       </div>
 
+      {/* user form tauri is {tauri_user.UserModel.name}; */}
+
       <div className=" h-screen"> </div>
       <div className=" h-screen"> </div>
     </div>
   )
 }
 
-export default UserPage
+export default ProfilePage

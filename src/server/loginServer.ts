@@ -26,13 +26,17 @@ export const loginServer = async (
     }
 
 
-    await signIn("credentials", {
+    const login = await signIn("credentials", {
         username,
         password,
         redirectTo : `/${lang}/s`
     })
 
-    return {success : "Login successful "};
+    if (login) {
+        return {success : "Login successful "};
+    } else {
+        return {error : " Something went wrong"};
+    }
 
    } catch (error : any) {
     if (error instanceof AuthError) {

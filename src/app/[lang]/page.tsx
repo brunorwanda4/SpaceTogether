@@ -4,6 +4,8 @@ import { AuthNav } from "@/components/navbar/authNav";
 import AuthDialog from "@/components/auth/authDialog";
 import { auth, signIn, signOut } from "@/auth";
 import { redirect } from "next/navigation";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const Home = async ({params : {lang}} : LanguagesProps) =>{
   const { indexPage, page , nav } = await getDictionary(lang);
@@ -41,6 +43,7 @@ const Home = async ({params : {lang}} : LanguagesProps) =>{
            TTitleLogin={page.auth.loginTitle}
            TTRegister={page.auth.register.registerTitle}
            registerProp={{
+            TCPassword :page.auth.register.CPassword,
             TPassword: page.auth.loginForm.password,
             lang: lang,
             TLogin: page.auth.loginForm.login,
@@ -58,6 +61,14 @@ const Home = async ({params : {lang}} : LanguagesProps) =>{
           }}
           />
         </div>
+        <Link href={`/${lang}/auth/register`} className=" btn btn-secondary">
+           register 
+           <ArrowRight size={20} />
+        </Link>
+        <Link href={`/${lang}/auth/login`} className=" btn btn-secondary">
+           Login
+           <ArrowRight size={20} />
+        </Link>
       </div>
     </div>
   );

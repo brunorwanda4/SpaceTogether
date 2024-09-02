@@ -3,16 +3,24 @@
 
 // use std::fmt::format;
 
-// use std::fs;
 use mongodb::bson::doc;
-// use tauri::{generate_handler, Manager};
 use serde::Serialize;
 
+// my functions
+use crate::api::user_api::api_user_action::api_user_create_new;
+use crate::api::user_api::api_use_data::api_user_data_get;
 
-// import pages;
+use crate::api::school_api::class_api::class_action::class_action_insert_new;
+use crate::handlers::school_handlers::class_handlers::handler_class_action::handler_class_insert_new;
+
+// folders
 mod server;
 mod models;
 mod libs;
+mod api;
+mod handlers;
+mod errors;
+// pages;
 
 #[derive(Serialize)]
 struct MongoDBResponse {
@@ -21,106 +29,14 @@ struct MongoDBResponse {
 }
 
 
-#[tauri::command]
-async fn insert_use(user: models::User) -> MongoDBResponse {
-    match libs::connect_to_mongodb().await {
-        Ok(client) => {
-            match libs::insert_user(&client, user).await {
-                Ok(_) => MongoDBResponse {
-                    success: true,
-                    message: "User data insert successfully.".to_string(),
-                },
-                Err(e) => MongoDBResponse {
-                    success: false,
-                    message: format!("Failed to insert user data: {}", e),
-                },
-            }
-        },
-        Err(e) => MongoDBResponse {
-            success: false,
-            message: format!("Failed to connect to MongoDB: {}", e),
-        },
-    }
-}
-
-#[tauri::command]
-async fn insert_school_member(member : models::SchoolMember) ->MongoDBResponse {
-    match libs::connect_to_mongodb().await {
-        Ok(client) => {
-            match server::insert_school_member(&client, member).await {
-                Ok(_) => MongoDBResponse{
-                    success : true,
-                    message: "School member was successfully inserted".to_string(),
-                },
-                Err(err) => MongoDBResponse{
-                    success : false,
-                    message : format!("Failed to insert member in storage error is : {}", err)
-                }
-            }
-        }
-        Err(err) => MongoDBResponse{
-            success : false,
-            message : format!("Failed to connect to MongoDB: {}", err)
-        }
-    }
-
-}
-
-#[tauri::command]
-async fn insert_class(class: models::SchoolClass) -> MongoDBResponse {
-    match libs::connect_to_mongodb().await {
-        Ok(client) => {
-            match server::insert_class(&client, class).await {
-                Ok(_) => MongoDBResponse {
-                    success: true,
-                    message: "Class inserted successfully.".to_string(),
-                },
-                Err(e) => MongoDBResponse {
-                    success: false,
-                    message: format!("Failed to insert class: {}", e),
-                },
-            }
-        },
-        Err(e) => MongoDBResponse {
-            success: false,
-            message: format!("Failed to connect to MongoDB: {}", e),
-        },
-    }
-}
-
-
-// #[tauri::command]
-// async fn get_all_classes() -> MongoDBResponse<Vec<models::school_class>> {
-//     match libs::connect_to_mongodb().await {
-//         Ok(client) => {
-//             match server::get_all_classes(&client).await {
-//                 Ok(classes) => MongoDBResponse {
-//                     success: true,
-//                     message: "Classes fetched successfully.".to_string(),
-//                     data: Some(classes),
-//                 },
-//                 Err(e) => MongoDBResponse {
-//                     success: false,
-//                     message: format!("Failed to fetch classes: {}", e),
-//                     data: None,
-//                 },
-//             }
-//         },
-//         Err(e) => MongoDBResponse {
-//             success: false,
-//             message: format!("Failed to connect to MongoDB: {}", e),
-//             data: None,
-//         },
-//     }
-// }
-
-
 fn main() {
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![
-        insert_use,
-        insert_school_member,
-        insert_class,
+        class_action_insert_new,
+        // api_user_authentication_create,
+        api_user_data_get,
+        handler_class_insert_new,
+        api_user_create_new,
     ])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

@@ -1,4 +1,4 @@
-#![allow(unused)]
+pub mod user_model;
 mod user;
 mod school;
 

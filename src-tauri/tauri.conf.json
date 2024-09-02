@@ -105,10 +105,13 @@
     "windows": [
       {
         "fullscreen": false,
+        "theme" : "Dark",
         "height": 600,
         "resizable": true,
-        "title": "Space Together",
+        "title": "space-together",
         "width": 800,
+        "minWidth": 640,
+        "minHeight": 320,
         "decorations": true
       }
     ]

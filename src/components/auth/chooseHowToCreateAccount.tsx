@@ -30,6 +30,7 @@ export const ChooseHowToCreateAccount = ({
     <div>
       <div className=''>
         <RegisterForm 
+         TCPassword={registerProp.TCPassword}
          TFName={registerProp.TFName} 
          TEmail={registerProp.TEmail} 
          TLName={registerProp.TLName} 

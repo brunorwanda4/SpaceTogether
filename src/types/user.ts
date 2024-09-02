@@ -9,3 +9,13 @@ export interface TUser {
 }
 
 export type TURole = "direct" | "teacher" | "student"
+
+export interface IUser {
+    id  ?: string,
+    name : string,
+    email : string,
+    password ?: string,
+    gender ?: string,
+    image ?: string,
+    birth_date ?: string,
+}

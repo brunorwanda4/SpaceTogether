@@ -9,5 +9,9 @@ export const RegisterValidation = z.object({
     password: z.string().min(8, {
         message: "Password is required, minimum characters are 8"
     }),
+    confirmPassword: z.string(),
     email : z.string().email({message : "Email is required"}),
+}).refine(data => data.password === data.confirmPassword , {
+    path : ["confirmPassword"],
+    message : "Password must be matches",
 });

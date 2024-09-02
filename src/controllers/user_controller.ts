@@ -48,7 +48,7 @@ export const create_user = async (value: z.infer<typeof RegisterValidation>) => 
 
         // Assuming the API response is:
         // { "insertedId": { "$oid": "66d16f6ccc107fad81de92e8" } }
-        const insertedId = data.insertedId?.$oid;
+        const insertedId : string = data.insertedId?.$oid;
 
         if (!insertedId) {
             return { error: "User creation succeeded, but no ID was returned." };

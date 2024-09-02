@@ -33,6 +33,7 @@ const page = async ({ params : {lang} } : LanguagesProps) => {
          TUsername={page.auth.loginForm.username} 
          registerProp={{
           TPassword: page.auth.loginForm.password,
+          TCPassword : page.auth.register.CPassword,
           lang: lang,
           TLogin: page.auth.loginForm.login,
           TLName: page.auth.register.LName,

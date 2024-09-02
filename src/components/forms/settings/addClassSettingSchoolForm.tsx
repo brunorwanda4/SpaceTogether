@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { invoke } from '@tauri-apps/api/tauri';
 import { FormMessageError, FormMessageSuccess } from '@/components/auth/form/formMessagers';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -15,6 +15,7 @@ import { toast } from '@/components/ui/use-toast';
 import { AlertDialogCancel } from '@/components/ui/alert-dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useTheme } from '@/hooks/useTheme';
+import { IoIosWarning } from 'react-icons/io';
 interface props {
     school : ISchool;
     lang : string;
@@ -27,6 +28,7 @@ export function AddClassSettingSchoolForm({
 } : props) {
   const [error , setError] = useState<string | undefined>("");
   const [success , setSuccess] = useState<string | undefined>("");
+  const [isPending , startTransition] = useTransition();
   const theme = useTheme();
 
   const form = useForm<FormData>({
@@ -43,29 +45,48 @@ export function AddClassSettingSchoolForm({
     criteriaMode: 'firstError',
   });
 
-  const onSubmit = async (values : z.infer<typeof SchoolClassValidation>) => {
+  const onSubmit = (values : z.infer<typeof SchoolClassValidation>) => {
+      startTransition(async () => {
         try {
-            const res = await invoke<{message : string}>("insert_class" , {class : values});
-            if(!!res.message){
-                toast({
-                    title : "WOW! class has been created successfully",
-                    description: (
-                      <div className=' flex gap-2'>
-                        <BsCheck2Circle size={20} className=' text-success'/>
-                        <span>{res.message}</span>
-                      </div>
-                    )
-                  })
-                  setSuccess(res.message);
-         }
+          const res = await invoke<{message : string , success : boolean}>("handler_class_insert_new" , {class : values});
+          if(res.success){
+              toast({
+                  title : "WOW! class has been created successfully",
+                  description: (
+                    <div className=' flex gap-2'>
+                      <BsCheck2Circle size={20} className=' text-success'/>
+                      <span>{res.message}</span>
+                    </div>
+                  )
+                })
+                setSuccess(res.message);
+          }else {
+            toast({
+              title : "uh oh! some thing went wrong.",
+              description: (
+                <div className=' flex gap-2'>
+                  <IoIosWarning size={20} className=' text-error'/>
+                  <span>{res.message}</span>
+                </div>
+              ),
+              variant : "destructive"
+            })
+            setError(res.message);
+          }
         } catch (err : any) {
             toast({
                 title: "uh oh! some thing went wrong.",
-                description: `${err}`,
+                description: (
+                <div className=' flex gap-2'>
+                  <IoIosWarning size={20} className=' text-error'/>
+                  <span>{err}</span>
+                </div>
+              ),
                 variant: "destructive",
             })
             setError(err);
         }
+      })
 
     };
 
@@ -131,7 +152,7 @@ export function AddClassSettingSchoolForm({
             <FormMessageError message={error} />
         </div>
         <div className=" flex justify-end mt-2 items-center gap-2">
-          <button type="submit" className="btn btn-neutral btn-sm"> Add new school</button>
+          <button type="submit" className="btn btn-neutral btn-sm" disabled={isPending}> Add new school {isPending && <span className='loading-spinner'/>}</button>
           <AlertDialogCancel type="reset">Cancel</AlertDialogCancel>
         </div>
       </form>

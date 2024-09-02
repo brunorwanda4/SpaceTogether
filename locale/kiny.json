@@ -42,6 +42,7 @@
             "register" : {
                 "registerTitle" : "Aho uri, aho turi",
                 "login" : "Injira muri konti yawe",
+                "CPassword" : "Subiramo ijambo banga",
                 "FName" : "Amazina yawe",
                 "LName" : "Izina ryanyuma",
                 "email" : "imeri",

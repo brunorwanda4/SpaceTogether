@@ -2,18 +2,14 @@
 import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import z from "zod";
-import {Form,FormControl,FormDescription,FormField,FormItem,FormLabel,FormMessage,} from "@/components/ui/form"
+import {Form,FormControl,FormField,FormItem,FormLabel,FormMessage,} from "@/components/ui/form"
 import { Input } from "@/components/ui/input";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod"
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Locale } from '@/i18n';
 import { RegisterValidation } from '@/validation/registerValidation';
 import { cn } from '@/lib/utils';
-import { Label } from '@/components/ui/label';
-// import { regServer } from '@/server/regServer';
 import { FormMessageError, FormMessageSuccess } from './formMessagers';
 import { usePathname, useRouter } from 'next/navigation';
 import { toast } from '@/components/ui/use-toast';
@@ -37,10 +33,11 @@ export interface RegisterProps {
     TFmale : String
     TOther : string
     TCreate : string
+    TCPassword : string
 }
 
 const RegisterForm = ({
-    lang , TPassword ,TLogin ,TDay,TMonth,TYear,TGender,TOther,TFName,TFmale,TLName,TMale,TEmail,TCreate
+    lang , TPassword ,TLogin ,TDay,TMonth,TYear,TGender,TOther,TFName,TFmale,TLName,TMale,TEmail,TCreate, TCPassword
   } : RegisterProps) => {
     // show password
     const [seePassword , setSeePassword] = useState<boolean>(true);
@@ -74,15 +71,17 @@ const RegisterForm = ({
     const [success , setSuccess] = useState<string | undefined>("");
     const [isPending , startTransition] = useTransition();
 
-    // router
-    const router = useRouter();
-
-    // pathname
-    const nexUrl = usePathname();
-
     const onSubmit = async (values : z.infer<typeof RegisterValidation>) => {
-      
+      const validation = RegisterValidation.safeParse(values);
+      if (validation.success) {
+        return setError("All fields are required")
+      };
       startTransition(() => {
+        // try {
+          
+        // } catch (error : any) {
+          
+        // }
         create_user(values).then((data) => {
           
           if(!!data.success) {
@@ -149,6 +148,24 @@ const RegisterForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{TPassword}</FormLabel>
+                <FormControl>
+                  <div className=' relative'>
+                    <Input className={cn(DivClass[1])} disabled={isPending} placeholder="password" type={seePassword ? "password" : "text"} {...field} />
+                    <div className=' absolute right-0 top-0 items-center flex rounded-r-md cursor-pointer h-full w-6 px-1 hover:bg-neutral/40 duration-200' onClick={handleSeePassword}>
+                      {seePassword ? <ImEye size={24} /> : <ImEyeBlocked size={24} />}
+                    </div>
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{TCPassword}</FormLabel>
                 <FormControl>
                   <div className=' relative'>
                     <Input className={cn(DivClass[1])} disabled={isPending} placeholder="password" type={seePassword ? "password" : "text"} {...field} />
