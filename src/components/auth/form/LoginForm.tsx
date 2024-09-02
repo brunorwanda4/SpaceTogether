@@ -79,7 +79,7 @@ const LoginForm = ({
           setSuccess(data.success);
           router.push(`/${lang}/s`)
         }
-        if(!!data.error) {
+        if(!!data?.error) {
           toast({
               title: "uh oh! some thing went wrong.",
               description: `${data.error}`,

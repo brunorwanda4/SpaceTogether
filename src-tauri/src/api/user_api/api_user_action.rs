@@ -26,7 +26,7 @@ pub async fn api_user_create_new(user: UserModel) -> CreateUserResult {
                     if let Some(inserted_id) = json["insertedId"]["$oid"].as_str() {
                         return CreateUserResult {
                             success: true,
-                            message: format!("User created with ID: {}", inserted_id),
+                            message: format!("{}", inserted_id),
                         };
                     }
                 }

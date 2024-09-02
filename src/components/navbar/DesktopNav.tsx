@@ -8,7 +8,6 @@ import { FindCreateSchool } from './findCreateSchool';
 import { SchoolNavFindSchool } from './schoolNavFindSchool';
 import { BsBellFill } from 'react-icons/bs';
 import { redirect } from 'next/navigation';
-import { Auth } from 'mongodb';
 
 interface props {
     lang : Locale
@@ -19,6 +18,8 @@ const DesktopNav =async ({lang} : props) => {
     const {nav , page} = await getDictionary(lang);
     const getUser = await getUserByEmail(user?.email);
     if (!getUser) return redirect(`/${lang}`);
+    
+    // const path = param
   return (
     <nav className=' py-1'>
       <div className=' flex gap-2 items-center'>

@@ -19,6 +19,8 @@ import { useTheme } from '@/hooks/useTheme';
 import { create_user } from '@/controllers/user_controller';
 import { IoIosWarning } from 'react-icons/io';
 import { invoke } from '@tauri-apps/api/tauri';
+import { signIn } from '@/auth';
+import { AuthError } from 'next-auth';
 
 export interface RegisterProps {
     TPassword: string;
@@ -52,6 +54,9 @@ const RegisterForm = ({
       setSeePassword(sate => !sate)
     }
 
+    // router
+    const router = useRouter();
+
     // themes
     const themes= useTheme();
 
@@ -71,6 +76,7 @@ const RegisterForm = ({
         reValidateMode : "onChange",
         mode : "onChange"
     });
+    
 
     const DivClass = ["flex gap-2 flex-col","bg-base-300 lg:min-w-60"];
 
@@ -83,12 +89,14 @@ const RegisterForm = ({
       if (!validation.success) {
         return setError("All fields are required")
       };
+
+      const {email , name , password} = validation.data;
       startTransition(async () => {
         const validation = RegisterValidation.safeParse(values);
         if (!validation.success) return setError("All fields are required");
 
         try {
-          const res = await invoke<{message : string , success : boolean}>("api_user_create_new" , {user : values});
+          const res = await invoke<{message : string , success : boolean}>("api_user_create_new" , {user : {email , password , name}});
           
           if (res.success) {
             toast({
@@ -96,11 +104,12 @@ const RegisterForm = ({
               description: (
                 <div className=' flex gap-2'>
                   <BsCheck2Circle size={20} className=' text-success'/>
-                  <span>{res.message}</span>
+                  <span>You have been create account!</span>
                 </div>
               )
             })
-            setSuccess(res.message);
+            setSuccess(res.message);            
+            return router.push(`/auth/onboarding/${res.message}`)
           } else {
             toast({
               title: "uh oh! some thing went wrong.",
