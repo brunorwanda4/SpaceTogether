@@ -17,6 +17,8 @@ import { BeatLoader } from 'react-spinners';
 import { BsCheck2Circle } from 'react-icons/bs';
 import { useTheme } from '@/hooks/useTheme';
 import { create_user } from '@/controllers/user_controller';
+import { IoIosWarning } from 'react-icons/io';
+import { invoke } from '@tauri-apps/api/tauri';
 
 export interface RegisterProps {
     TPassword: string;
@@ -41,6 +43,11 @@ const RegisterForm = ({
   } : RegisterProps) => {
     // show password
     const [seePassword , setSeePassword] = useState<boolean>(true);
+    const [seePasswordConfirm , setSeePasswordConfirm] = useState<boolean>(true);
+
+    const handlerSeePasswordConfirm = () => {
+      setSeePasswordConfirm(sate => !sate)
+    }
     const handleSeePassword = () => {
       setSeePassword(sate => !sate)
     }
@@ -73,39 +80,53 @@ const RegisterForm = ({
 
     const onSubmit = async (values : z.infer<typeof RegisterValidation>) => {
       const validation = RegisterValidation.safeParse(values);
-      if (validation.success) {
+      if (!validation.success) {
         return setError("All fields are required")
       };
-      startTransition(() => {
-        // try {
+      startTransition(async () => {
+        const validation = RegisterValidation.safeParse(values);
+        if (!validation.success) return setError("All fields are required");
+
+        try {
+          const res = await invoke<{message : string , success : boolean}>("api_user_create_new" , {user : values});
           
-        // } catch (error : any) {
-          
-        // }
-        create_user(values).then((data) => {
-          
-          if(!!data.success) {
+          if (res.success) {
             toast({
-              title : "WOW! account has been created successfully",
+              title : "WOW! Account has been created successfully",
               description: (
                 <div className=' flex gap-2'>
                   <BsCheck2Circle size={20} className=' text-success'/>
-                  <span>{data.success}</span>
+                  <span>{res.message}</span>
                 </div>
               )
             })
-            setSuccess(data.success);
-            // router.push(`/${lang}/auth/login`)
-          }
-          if(!!data.error) {
+            setSuccess(res.message);
+          } else {
             toast({
-                title: "uh oh! some thing went wrong.",
-                description: `${data.error}`,
+              title: "uh oh! some thing went wrong.",
+              description: (
+              <div className=' flex gap-2'>
+                <IoIosWarning size={20} className=' text-error'/>
+                <span>{res.message}</span>
+              </div>
+              ),
                 variant: "destructive",
             })
-            setError(data.error);
+            setError(res.message);
           }
-        })
+        } catch (err: any) {
+          toast({
+            title: "uh oh! some thing went wrong.",
+            description: (
+            <div className=' flex gap-2'>
+              <IoIosWarning size={20} className=' text-error'/>
+              <span>{err}</span>
+            </div>
+            ),
+              variant: "destructive",
+          })
+          setError(err);
+        }
       })
     }
   return (
@@ -168,9 +189,9 @@ const RegisterForm = ({
                 <FormLabel>{TCPassword}</FormLabel>
                 <FormControl>
                   <div className=' relative'>
-                    <Input className={cn(DivClass[1])} disabled={isPending} placeholder="password" type={seePassword ? "password" : "text"} {...field} />
-                    <div className=' absolute right-0 top-0 items-center flex rounded-r-md cursor-pointer h-full w-6 px-1 hover:bg-neutral/40 duration-200' onClick={handleSeePassword}>
-                      {seePassword ? <ImEye size={24} /> : <ImEyeBlocked size={24} />}
+                    <Input className={cn(DivClass[1])} disabled={isPending} placeholder="password" type={seePasswordConfirm ? "password" : "text"} {...field} />
+                    <div className=' absolute right-0 top-0 items-center flex rounded-r-md cursor-pointer h-full w-6 px-1 hover:bg-neutral/40 duration-200' onClick={handlerSeePasswordConfirm}>
+                      {seePasswordConfirm ? <ImEye size={24} /> : <ImEyeBlocked size={24} />}
                     </div>
                   </div>
                 </FormControl>

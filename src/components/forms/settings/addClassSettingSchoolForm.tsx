@@ -50,16 +50,16 @@ export function AddClassSettingSchoolForm({
         try {
           const res = await invoke<{message : string , success : boolean}>("handler_class_insert_new" , {class : values});
           if(res.success){
-              toast({
-                  title : "WOW! class has been created successfully",
-                  description: (
-                    <div className=' flex gap-2'>
-                      <BsCheck2Circle size={20} className=' text-success'/>
-                      <span>{res.message}</span>
-                    </div>
-                  )
-                })
-                setSuccess(res.message);
+            toast({
+                title : "WOW! class has been created successfully",
+                description: (
+                  <div className=' flex gap-2'>
+                    <BsCheck2Circle size={20} className=' text-success'/>
+                    <span>{res.message}</span>
+                  </div>
+                )
+              })
+              setSuccess(res.message);
           }else {
             toast({
               title : "uh oh! some thing went wrong.",
