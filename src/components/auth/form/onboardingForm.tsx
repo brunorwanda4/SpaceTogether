@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/lib/utils";
-import { OnboardingValidation } from "@/validation/registerValidation";
+import { OnboardingSocialMediaValidation, OnboardingValidation } from "@/validation/registerValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChangeEvent, useState, useTransition } from "react";
 import { useForm } from "react-hook-form"
@@ -14,10 +14,19 @@ import z from "zod";
 import { FormMessageError, FormMessageSuccess } from "./formMessagers";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { ChoosePropsOnboarding } from "@/app/[lang]/auth/onboarding/[onboardingUserId]/page";
+import { BsFacebook, BsInstagram, BsLinkedin, BsSnapchat, BsTwitter, BsTwitterX, BsWhatsapp } from "react-icons/bs";
+import { PiSnapchatLogoFill } from "react-icons/pi";
 
 type onboardingValidation= z.infer<typeof OnboardingValidation>;
 
-const OnboardingForm = () => {
+interface OnboardingProps {
+  choose : (choose : ChoosePropsOnboarding) => void;
+}
+
+export const OnboardingForm = ({
+  choose
+} : OnboardingProps) => {
   const [error , setError] = useState<string | undefined>("");
   const [success , setSuccess] = useState<string | undefined>("");
   const [isPending , startTransition] = useTransition();
@@ -73,8 +82,8 @@ const OnboardingForm = () => {
     imageFormControlSpan : " text-info cursor-pointer",
     // @ts-ignore
     radioGroup : theme === "forest" | theme === "night" && "border-input radio-primary",
-    inputs : " md:w-64",
-    selectBirthTrigger : "min-w-20 px-2 bg-base-100 flex justify-between",
+    inputs : " w-full md:w-72 bg-base-100",
+    selectBirthTrigger : "md:min-w-20 w-24 px-2 bg-base-100 flex justify-between",
   };
 
   const [selectMonth , setSelectMonth] = useState("");
@@ -82,8 +91,8 @@ const OnboardingForm = () => {
   
   return (
     <Form {...form}>
-      <form>
-      <div>
+      <form className=" w-full">
+      <div className=" w-full">
         <FormField
           control={form.control}
           name="image"
@@ -95,7 +104,7 @@ const OnboardingForm = () => {
               ) : (
                 <MyImage src='/1.jpg' className={cn(className.imageDiv)} classname={cn(className.image)} alt='School logo'/>
               )}
-              <span className={cn(className.imageFormControlSpan)}>Profile image</span>
+              <span className={cn(className.imageFormControlSpan,)}>Profile image</span>
             </FormLabel>
             <FormControl>
             <div className={cn(className.imageFormControlDiv)}>
@@ -114,7 +123,7 @@ const OnboardingForm = () => {
           )}
         />
       </div>
-      <div className=" mt-2 flex gap-2">
+      <div className=" mt-2 flex gap-2 w-full max-md:flex-col">
         <FormField 
          name="phoneNumber"
          control={form.control}
@@ -122,7 +131,7 @@ const OnboardingForm = () => {
           <FormItem>
             <FormLabel>Phone number</FormLabel>
             <FormControl>
-              <Input {...field} type="number" className={cn(className.inputs)} placeholder="+250 792537274"/>
+              <Input {...field} autoFocus type="number" className={cn(className.inputs)} placeholder="+250 792537274"/>
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -142,7 +151,7 @@ const OnboardingForm = () => {
          )}
         />
       </div>
-      <div className=" mt-2 flex gap-2 justify-between w-full">
+      <div className=" mt-2 flex gap-2 md:justify-between w-full">
       <FormField control={form.control}  name="gender" render={({ field }) => (
         <FormItem className="space-y-3">
           <FormLabel>Gender</FormLabel>
@@ -258,13 +267,147 @@ const OnboardingForm = () => {
         <FormMessageSuccess message={success}/>
        </div>
        <div>
-        <button type="submit" className=" btn btn-info w-full">
+        <button type="button" onClick={() => choose("socialMedia")} className=" btn btn-info w-full">
           Next
         </button>
        </div>
       </form>
     </Form>
   )
-}
+};
 
-export default OnboardingForm
+type onboardingSocialMediaValidation = z.infer <typeof OnboardingSocialMediaValidation>;
+
+interface OnboardingSocialMediaProps {
+  choose : (choose : ChoosePropsOnboarding) => void;
+}
+export const OnboardingSocialMediaForm = ({
+  choose
+} : OnboardingSocialMediaProps) => {
+  const [error , setError] = useState<string | undefined>("");
+  const [success , setSuccess] = useState<string | undefined>("");
+  const [isPending , startTransition] = useTransition();
+  const theme = useTheme();
+
+  const form = useForm<onboardingSocialMediaValidation>({
+    resolver : zodResolver(OnboardingSocialMediaValidation),
+    defaultValues : {
+      instagram : "",
+      facebook : "",
+      whatsapp : "",
+      linkedin : "",
+      twitter : "",
+      snapchat : "",
+    }
+  });
+  const className = {
+    form : {
+      item : " w-full ",
+      label : "flex gap-2",
+    },
+    input : "w-full bg-base-100",
+    div : "flex gap-2 max-md:flex-col w-full mt-2",
+    divButtons : " w-full justify-end flex mt-2 gap-2",
+    buttons : {
+      submit : "btn btn-info",
+      skip : "btn btn-neutral",
+      back : "btn btn-secondary"
+    },
+    icons : ""
+  }
+  return (
+    <Form {...form}>
+      <form>
+        <div className={cn(className.div)}>
+          <FormField
+           name="instagram"
+           control={form.control}
+           render ={({field}) => (
+            <FormItem className={cn(className.form.item)}>
+              <FormLabel className={cn(className.form.label)}> <BsInstagram className={cn(className.icons , "text-error")} size={16}/> Instagram</FormLabel>
+              <FormControl>
+                <Input autoFocus placeholder="your_instagram_username" className={cn(className.input)} type="text" {...field}/>
+              </FormControl>
+            </FormItem>
+           )}
+           />
+          <FormField
+           name="facebook"
+           control={form.control}
+           render ={({field}) => (
+            <FormItem className={cn(className.form.item)}>
+              <FormLabel className={cn(className.form.label)}><BsFacebook className={cn(className.icons , "text-info")} size={16}/> Facebook</FormLabel>
+              <FormControl>
+                <Input className={cn(className.input)} placeholder="facebook name" type="text" {...field}/>
+              </FormControl>
+            </FormItem>
+           )}
+           />
+        </div>
+        <div className={cn(className.div)}>
+          <FormField
+           name="whatsapp"
+           control={form.control}
+           render ={({field}) => (
+            <FormItem className={cn(className.form.item)}>
+              <FormLabel className={cn(className.form.label)}> <BsWhatsapp className={cn(className.icons, "text-success")} size={16}/> Whatsapp</FormLabel>
+              <FormControl>
+                <Input className={cn(className.input)} placeholder="+250 792537274" type="number" {...field}/>
+              </FormControl>
+            </FormItem>
+           )}
+           />
+          <FormField
+           name="twitter"
+           control={form.control}
+           render ={({field}) => (
+            <FormItem className={cn(className.form.item)}>
+              <FormLabel className={cn(className.form.label)}><BsTwitterX className={cn(className.icons)} size={16}/> Twitter</FormLabel>
+              <FormControl>
+                <Input className={cn(className.input)} placeholder=" twitter username" type="text" {...field}/>
+              </FormControl>
+            </FormItem>
+           )}
+           />
+        </div>
+        <div className={cn(className.div)}>
+          <FormField
+           name="linkedin"
+           control={form.control}
+           render ={({field}) => (
+            <FormItem className={cn(className.form.item)}>
+              <FormLabel className={cn(className.form.label)}> <BsLinkedin className={cn(className.icons , "text-info")} size={16}/> Linkedin</FormLabel>
+              <FormControl>
+                <Input className={cn(className.input)} placeholder="Linkedin username" type="text" {...field}/>
+              </FormControl>
+            </FormItem>
+           )}
+           />
+          <FormField
+           name="twitter"
+           control={form.control}
+           render ={({field}) => (
+            <FormItem className={cn(className.form.item)}>
+              <FormLabel className={cn(className.form.label)}><PiSnapchatLogoFill className={cn(className.icons, " text-yellow-500")} size={16}/> Snapchat</FormLabel>
+              <FormControl>
+                <Input className={cn(className.input)} placeholder=" Snapchat username 🐍" type="text" {...field}/>
+              </FormControl>
+            </FormItem>
+           )}
+           />
+        </div>
+        <div className={cn(className.divButtons)}>
+          {/* <button type="button" className={className.buttons.skip} onClick={()=> choose("userData")}>
+            Skip
+          </button> */}
+          <button type="button" className={className.buttons.back} onClick={()=> choose("userData")}>
+            Back
+          </button>
+          <button type="button" className={className.buttons.submit} onClick={()=> choose("school")}>
+            Next
+          </button>
+        </div>
+      </form>
+    </Form>
+  )
+}

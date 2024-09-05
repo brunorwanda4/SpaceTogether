@@ -23,7 +23,13 @@ export const OnboardingValidation = z.object({
     }).max(23, {
         message : "Maximum characters 23"
     }),
-    username : z.string(),
+    username : z.string().min(1, {
+        message : "Username is required"
+    }).max(50, {
+        message : "maximum characters 50"
+    }).regex(/^[a-zA-Z0-9_]+$/, {
+        message : " username can only contain letters, numbers, and underscores",
+    }),
     gender : z.enum(["male" , "female" , "other"]),
     // birth day
     day : z.string().min(1, {
@@ -35,4 +41,13 @@ export const OnboardingValidation = z.object({
     year : z.string().min(1, {
         message : "Day is required"
     }),
+})
+
+export const OnboardingSocialMediaValidation = z.object({
+    facebook : z.string(),
+    instagram : z.string(),
+    twitter : z.string(),
+    whatsapp : z.string(),
+    linkedin : z.string(),
+    snapchat : z.string(),
 })

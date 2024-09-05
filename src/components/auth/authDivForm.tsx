@@ -66,21 +66,51 @@ export const AuthDivPage = ({
         )
       case "dark":
         return (
-          <div>dark</div>
+          <div>
+            <MyImage className=' h-screen w-full' classname=' rounded-none' src={"/images/6.jpg"}/>
+            <div className=' bg-base-100 size-20 absolute bottom-4 right-4 min-h-32 min-w-44 w-80 shadow-md rounded-lg p-2 max-md:opacity-0 opacity-100'>
+              <div className=' text-2xl flex justify-center'>
+                🐨
+              </div>
+              <p className=' text-xs text-center'>
+                The animal in the image is a koala, a marsupial native to Australia. <br /> Koalas are known for their tree-dwelling habits and typically sleep for up to 18-22 hours a day, often hugging trees for comfort and support.
+              </p>
+            </div>
+        </div>
         )
       case "night":
         return (
-          <div>night</div>
+          <div>
+          <MyImage className=' h-screen w-full' classname=' rounded-none' src={"/images/7.jpg"}/>
+            <div className=' bg-base-100 size-20 absolute bottom-4 right-4 min-h-32 min-w-44 w-80 shadow-md rounded-lg p-2 max-md:opacity-0 opacity-100'>
+              <div className=' text-2xl flex justify-center'>
+                🐨
+              </div>
+              <p className=' text-xs text-center'>
+                The animal in the image is a koala, a marsupial native to Australia. <br /> Koalas are known for their tree-dwelling habits and typically sleep for up to 18-22 hours a day, often hugging trees for comfort and support.
+              </p>
+            </div>
+        </div>
         )
       default:
         return (
-          <div>light</div>
+          <div>
+          <MyImage className=' h-screen w-full' classname=' rounded-none' src={"/images/8.jpg"}/>
+            <div className=' bg-base-100 size-20 absolute bottom-4 right-4 min-h-32 min-w-44 w-80 shadow-md rounded-lg p-2 max-md:opacity-0 opacity-100'>
+              <div className=' text-2xl flex justify-center'>
+                🐨
+              </div>
+              <p className=' text-xs text-center'>
+                The animal in the image is a koala, a marsupial native to Australia. <br /> Koalas are known for their tree-dwelling habits and typically sleep for up to 18-22 hours a day, often hugging trees for comfort and support.
+              </p>
+            </div>
+        </div>
         )
     }
   }
   return (
     <div className={cn("min-h-screen flex gap-2 max-md:relative justify-between" , className)}>
-        <div className='p-5 w-[34rem] max-md:absolute max-md:items-center max-md:h-full max-md:justify-center max-md:top- max-md:z-40 max-md:w-full'>
+        <div className='p-5 max-md:absolute max-md:items-center max-md:h-full max-md:justify-center max-md:top- max-md:z-40 max-md:w-full w-full'>
           <div className=' items-center justify-center max-md:h-full max-w-full max-md:flex max-md:flex-col'>
             <div className=' flex justify-center mb-4'>
                 <Logo title link className=' z-50'/>
@@ -94,7 +124,7 @@ export const AuthDivPage = ({
           </div>
         </div>
         <div className=' w-full relative'>
-        <div className="absolute left-0 bottom-0 inset-x-0 h-full w-32 bg-gradient-to-l pointer-events-none select-none from-transparent to-base-100 max-md:opacity-0 z-40" />
+        <div className="absolute left-0 bottom-0 inset-x-0 h-full w-32 bg-gradient-to-l pointer-events-none select-none from-transparent to-base-100 max-md:opacity-0 z-40 " />
         {themeContent()}
           {/* <div>
             <MyImage className=' h-screen w-full' classname=' rounded-none' src={"/p.jpg"}/>
