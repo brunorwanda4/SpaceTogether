@@ -15,3 +15,24 @@ export const RegisterValidation = z.object({
     path : ["confirmPassword"],
     message : "Password must be matches",
 });
+
+export const OnboardingValidation = z.object({
+    image : z.string(),
+    phoneNumber : z.string().min(10 , {
+        message : "Minimum characters 10"
+    }).max(23, {
+        message : "Maximum characters 23"
+    }),
+    username : z.string(),
+    gender : z.enum(["male" , "female" , "other"]),
+    // birth day
+    day : z.string().min(1, {
+        message : "Day is required"
+    }),
+    month : z.string().min(1, {
+        message : "Day is required"
+    }),
+    year : z.string().min(1, {
+        message : "Day is required"
+    }),
+})

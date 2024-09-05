@@ -32,7 +32,9 @@ export const AuthNav = ({
                     <BsGearFill size={24} className=''/>
                     <span className=' sr-only'>{TSetting}</span>
                 </DialogTrigger>
-                <DialogContent data-theme={theme} className=' bg-base-300 max-md:left-[50%] max-md:top-[50%] max-sm:w-[95%] max-sm:max-w-[95%]'>
+                <DialogContent 
+                 data-theme={theme} 
+                 className=' bg-base-300 max-md:left-[50%] max-md:top-[50%] max-md:w-[95%] max-md:max-w-[95%]'>
                     <DialogTitle>
                         {TSetting}
                     </DialogTitle>

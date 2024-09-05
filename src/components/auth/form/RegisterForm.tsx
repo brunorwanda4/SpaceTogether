@@ -21,6 +21,7 @@ import { IoIosWarning } from 'react-icons/io';
 import { invoke } from '@tauri-apps/api/tauri';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import { loginServer } from '@/server/loginServer';
 
 export interface RegisterProps {
     TPassword: string;
@@ -104,11 +105,11 @@ const RegisterForm = ({
               description: (
                 <div className=' flex gap-2'>
                   <BsCheck2Circle size={20} className=' text-success'/>
-                  <span>You have been create account!</span>
+                  <span>WOW! Account has been created successfully!</span>
                 </div>
               )
             })
-            setSuccess(res.message);            
+            setSuccess("You have been create account!");
             return router.push(`/auth/onboarding/${res.message}`)
           } else {
             toast({
