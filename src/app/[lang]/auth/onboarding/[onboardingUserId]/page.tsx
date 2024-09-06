@@ -39,11 +39,11 @@ const OnboardingPage = ({
     switch (choose) {
       case "userData" :
         return (
-          <OnboardingForm choose={handleChoose}/>
+          <OnboardingForm choose={handleChoose} id={onboardingUserId}/>
         )
       case "socialMedia" : 
         return (
-          <OnboardingSocialMediaForm choose={handleChoose}/>
+          <OnboardingSocialMediaForm choose={handleChoose} id={onboardingUserId}/>
         )
       case "school" :
         return (
@@ -54,7 +54,7 @@ const OnboardingPage = ({
         )
       default : 
         return (
-          <OnboardingForm choose={handleChoose}/>
+          <OnboardingForm choose={handleChoose} id={onboardingUserId}/>
         )
     }
   }
@@ -80,7 +80,7 @@ const OnboardingPage = ({
             </div>
             <main className={cn("max-md:card max-md:backdrop-blur-xl max-md:shadow-md max-md:min-w-96 max-md:w-full max-md:bg-black/40 max-md:border max-md:p-4 max-md:max-w-xl max-md:min-h-fit max-md:overflow-y-auto")}>
               <div className=" bg-base-300 shadow-lg rounded-xl p-4 card">
-              <div className=" flex justify-center w-full"><h2 className=' text-center text-2xl font-bold  w-80'>{renderContentTitle()}</h2></div>
+              <div className=" flex justify-center w-full"><h2 className=' text-center text-xl font-bold  w-80 md:text-2xl'>{renderContentTitle()}</h2></div>
                 {renderContent()}
               </div>
           </main>

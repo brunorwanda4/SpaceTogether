@@ -8,6 +8,7 @@ const SchoolSchema: Schema = new Schema({
     required: [true, "Name is required"],
     minlength: [4, "Minimum character length is 4"],
     maxlength: [25, "Maximum character length is 25 characters"],
+    trim : true
   },
   username: {
     type: String,

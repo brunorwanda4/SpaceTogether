@@ -30,7 +30,7 @@ export const OnboardingValidation = z.object({
     }).regex(/^[a-zA-Z0-9_]+$/, {
         message : " username can only contain letters, numbers, and underscores",
     }),
-    gender : z.enum(["male" , "female" , "other"]),
+    gender : z.enum(["Male" , "Female" , "Other"]),
     // birth day
     day : z.string().min(1, {
         message : "Day is required"

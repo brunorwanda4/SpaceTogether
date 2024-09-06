@@ -15,17 +15,22 @@ import { FormMessageError, FormMessageSuccess } from "./formMessagers";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { ChoosePropsOnboarding } from "@/app/[lang]/auth/onboarding/[onboardingUserId]/page";
-import { BsFacebook, BsInstagram, BsLinkedin, BsSnapchat, BsTwitter, BsTwitterX, BsWhatsapp } from "react-icons/bs";
+import { BsCheck2Circle, BsFacebook, BsInstagram, BsLinkedin, BsSnapchat, BsTwitter, BsTwitterX, BsWhatsapp } from "react-icons/bs";
 import { PiSnapchatLogoFill } from "react-icons/pi";
+import { IoIosWarning } from "react-icons/io";
+import { toast } from "@/components/ui/use-toast";
+import { invoke } from "@tauri-apps/api/tauri";
+import { BeatLoader } from "react-spinners";
 
 type onboardingValidation= z.infer<typeof OnboardingValidation>;
 
 interface OnboardingProps {
   choose : (choose : ChoosePropsOnboarding) => void;
+  id  : string
 }
 
 export const OnboardingForm = ({
-  choose
+  choose , id
 } : OnboardingProps) => {
   const [error , setError] = useState<string | undefined>("");
   const [success , setSuccess] = useState<string | undefined>("");
@@ -89,9 +94,64 @@ export const OnboardingForm = ({
   const [selectMonth , setSelectMonth] = useState("");
   const months ={ January: 31, February: 28, March: 31, April: 30, May: 31, June: 30, July: 31, August: 31, September: 30, October: 31, November: 30, December: 31,};
   
+  const onSubmit = (value : onboardingValidation) => {
+    const validation = OnboardingValidation.safeParse(value);
+
+    if (!validation.success) {
+      return setError("All fields are required")
+    }
+
+    const {phoneNumber ,image, username , gender , year , month , day} = validation.data;
+    const birth_date = new Date(`${year}-${month}-${day}`);
+    startTransition(async () => {
+      try {
+        const res = await invoke<{message : string , success : boolean}>("api_user_update", {
+          id , user : {username ,image, phone_number: phoneNumber , gender , birth_date}
+        });
+
+        if (res.success) {
+          toast({
+            title : "WOW! Account has been created successfully",
+            description: (
+              <div className=' flex gap-2'>
+                <BsCheck2Circle size={20} className=' text-success'/>
+                <span>WOW! Account has been update!</span>
+              </div>
+            )
+          })
+          setSuccess("WOW! Account has been update!");
+          choose("socialMedia");
+        } else {
+          toast({
+            title: "uh oh! some thing went wrong.",
+            description: (
+            <div className=' flex gap-2'>
+              <IoIosWarning size={20} className=' text-error'/>
+              <span>{res.message}</span>
+            </div>
+            ),
+              variant: "destructive",
+          })
+          setError(res.message);
+        }
+      } catch (err : any) {
+        toast({
+          title: "uh oh! some thing went wrong.",
+          description: (
+          <div className=' flex gap-2'>
+            <IoIosWarning size={20} className=' text-error'/>
+            <span>{err}</span>
+          </div>
+          ),
+            variant: "destructive",
+        })
+        setError(err);
+      }
+    })
+  };
   return (
     <Form {...form}>
-      <form className=" w-full">
+      <form onSubmit={form.handleSubmit(onSubmit)} className=" w-full">
       <div className=" w-full">
         <FormField
           control={form.control}
@@ -109,6 +169,7 @@ export const OnboardingForm = ({
             <FormControl>
             <div className={cn(className.imageFormControlDiv)}>
               <Input
+                disabled={isPending}
                 type='file'
                 id="image"
                 accept='image/*'
@@ -131,7 +192,7 @@ export const OnboardingForm = ({
           <FormItem>
             <FormLabel>Phone number</FormLabel>
             <FormControl>
-              <Input {...field} autoFocus type="number" className={cn(className.inputs)} placeholder="+250 792537274"/>
+              <Input {...field} disabled={isPending} autoFocus type="number" className={cn(className.inputs)} placeholder="+250 792537274"/>
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -144,7 +205,7 @@ export const OnboardingForm = ({
           <FormItem>
             <FormLabel>Username</FormLabel>
             <FormControl>
-              <Input {...field} className={cn(className.inputs)} type="text" placeholder="Username"/>
+              <Input {...field} disabled={isPending} className={cn(className.inputs)} type="text" placeholder="Username"/>
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -159,7 +220,7 @@ export const OnboardingForm = ({
             <RadioGroup disabled={isPending} onValueChange={field.onChange}  defaultValue={field.value} className="flex space-x-1">
               <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
                 <FormControl>
-                  <RadioGroupItem className={cn(className.radioGroup)} value="male" />
+                  <RadioGroupItem disabled={isPending} className={cn(className.radioGroup)} value="Male" />
                 </FormControl>
                 <FormLabel className="font-normal">
                   Male
@@ -167,7 +228,7 @@ export const OnboardingForm = ({
               </FormItem>
               <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
                 <FormControl>
-                  <RadioGroupItem className={cn(className.radioGroup)} value="female" />
+                  <RadioGroupItem disabled={isPending} className={cn(className.radioGroup)} value="Female" />
                 </FormControl>
                 <FormLabel className="font-normal">
                   Female
@@ -175,7 +236,7 @@ export const OnboardingForm = ({
               </FormItem>
               <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
                 <FormControl>
-                  <RadioGroupItem className={cn(className.radioGroup)} value="other" />
+                  <RadioGroupItem disabled={isPending} className={cn(className.radioGroup)} value="Other" />
                 </FormControl>
                 <FormLabel className="font-normal">Other</FormLabel>
               </FormItem>
@@ -262,13 +323,13 @@ export const OnboardingForm = ({
           </div>
         </div>
       </div>
-       <div className=" mt-2">
+       <div className=" mt-2 mb-2 line">
         <FormMessageError message={error}/>
         <FormMessageSuccess message={success}/>
        </div>
        <div>
-        <button type="button" onClick={() => choose("socialMedia")} className=" btn btn-info w-full">
-          Next
+        <button type="submit" className=" btn btn-info w-full" disabled={isPending}>
+        {isPending ? <BeatLoader size={20}/> : "Next" }
         </button>
        </div>
       </form>
@@ -280,9 +341,10 @@ type onboardingSocialMediaValidation = z.infer <typeof OnboardingSocialMediaVali
 
 interface OnboardingSocialMediaProps {
   choose : (choose : ChoosePropsOnboarding) => void;
+  id : string;
 }
 export const OnboardingSocialMediaForm = ({
-  choose
+  choose , id
 } : OnboardingSocialMediaProps) => {
   const [error , setError] = useState<string | undefined>("");
   const [success , setSuccess] = useState<string | undefined>("");
@@ -315,9 +377,68 @@ export const OnboardingSocialMediaForm = ({
     },
     icons : ""
   }
+
+  const onSubmit = (value : onboardingSocialMediaValidation) => {
+    const validation = OnboardingSocialMediaValidation.safeParse(value);
+
+    if (!validation.success) {
+      return setError("All fields are required")
+    }
+
+    const {facebook , whatsapp , instagram , snapchat , twitter , linkedin} = validation.data;
+    startTransition(async () => {
+      try {
+        const res = await invoke<{message : string , success : boolean}>("api_user_update", {
+          id , user : {whatsapp ,instagram, snapchat , twitter , linkedin , facebook}
+        });
+
+        if (res.success) {
+          toast({
+            title : "WOW! Account has been created successfully",
+            description: (
+              <div className=' flex gap-2'>
+                <BsCheck2Circle size={20} className=' text-success'/>
+                <span>WOW! Account has been update!</span>
+              </div>
+            )
+          })
+          setSuccess("WOW! Account has been update!");
+          choose("school");
+        } else {
+          toast({
+            title: "uh oh! some thing went wrong.",
+            description: (
+            <div className=' flex gap-2'>
+              <IoIosWarning size={20} className=' text-error'/>
+              <span>{res.message}</span>
+            </div>
+            ),
+              variant: "destructive",
+          })
+          setError(res.message);
+        }
+      } catch (err : any) {
+        toast({
+          title: "uh oh! some thing went wrong.",
+          description: (
+          <div className=' flex gap-2'>
+            <IoIosWarning size={20} className=' text-error'/>
+            <span>{err}</span>
+          </div>
+          ),
+            variant: "destructive",
+        })
+        setError(err);
+      }
+    })
+  };
+
   return (
     <Form {...form}>
-      <form>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <div>
+          <p className=" text-center text-sm text-gray-500">Help get you social account  fi you don&apos;t have account you can skip! 😌</p>
+        </div>
         <div className={cn(className.div)}>
           <FormField
            name="instagram"
@@ -326,7 +447,7 @@ export const OnboardingSocialMediaForm = ({
             <FormItem className={cn(className.form.item)}>
               <FormLabel className={cn(className.form.label)}> <BsInstagram className={cn(className.icons , "text-error")} size={16}/> Instagram</FormLabel>
               <FormControl>
-                <Input autoFocus placeholder="your_instagram_username" className={cn(className.input)} type="text" {...field}/>
+                <Input autoFocus disabled={isPending} placeholder="your_instagram_username" className={cn(className.input)} type="text" {...field}/>
               </FormControl>
             </FormItem>
            )}
@@ -338,7 +459,7 @@ export const OnboardingSocialMediaForm = ({
             <FormItem className={cn(className.form.item)}>
               <FormLabel className={cn(className.form.label)}><BsFacebook className={cn(className.icons , "text-info")} size={16}/> Facebook</FormLabel>
               <FormControl>
-                <Input className={cn(className.input)} placeholder="facebook name" type="text" {...field}/>
+                <Input disabled={isPending} className={cn(className.input)} placeholder="facebook name" type="text" {...field}/>
               </FormControl>
             </FormItem>
            )}
@@ -352,7 +473,7 @@ export const OnboardingSocialMediaForm = ({
             <FormItem className={cn(className.form.item)}>
               <FormLabel className={cn(className.form.label)}> <BsWhatsapp className={cn(className.icons, "text-success")} size={16}/> Whatsapp</FormLabel>
               <FormControl>
-                <Input className={cn(className.input)} placeholder="+250 792537274" type="number" {...field}/>
+                <Input disabled={isPending} className={cn(className.input)} placeholder="+250 792537274" type="number" {...field}/>
               </FormControl>
             </FormItem>
            )}
@@ -364,7 +485,7 @@ export const OnboardingSocialMediaForm = ({
             <FormItem className={cn(className.form.item)}>
               <FormLabel className={cn(className.form.label)}><BsTwitterX className={cn(className.icons)} size={16}/> Twitter</FormLabel>
               <FormControl>
-                <Input className={cn(className.input)} placeholder=" twitter username" type="text" {...field}/>
+                <Input disabled={isPending} className={cn(className.input)} placeholder=" twitter username" type="text" {...field}/>
               </FormControl>
             </FormItem>
            )}
@@ -378,33 +499,34 @@ export const OnboardingSocialMediaForm = ({
             <FormItem className={cn(className.form.item)}>
               <FormLabel className={cn(className.form.label)}> <BsLinkedin className={cn(className.icons , "text-info")} size={16}/> Linkedin</FormLabel>
               <FormControl>
-                <Input className={cn(className.input)} placeholder="Linkedin username" type="text" {...field}/>
+                <Input disabled={isPending} className={cn(className.input)} placeholder="Linkedin username" type="text" {...field}/>
               </FormControl>
             </FormItem>
            )}
            />
           <FormField
-           name="twitter"
+           name="snapchat"
            control={form.control}
            render ={({field}) => (
             <FormItem className={cn(className.form.item)}>
               <FormLabel className={cn(className.form.label)}><PiSnapchatLogoFill className={cn(className.icons, " text-yellow-500")} size={16}/> Snapchat</FormLabel>
               <FormControl>
-                <Input className={cn(className.input)} placeholder=" Snapchat username 🐍" type="text" {...field}/>
+                <Input disabled={isPending} className={cn(className.input)} placeholder=" Snapchat username 🐍" type="text" {...field}/>
               </FormControl>
             </FormItem>
            )}
            />
         </div>
+        <div className=" mt-2 mb-2 line">
+          <FormMessageError message={error}/>
+          <FormMessageSuccess message={success}/>
+        </div>
         <div className={cn(className.divButtons)}>
-          {/* <button type="button" className={className.buttons.skip} onClick={()=> choose("userData")}>
-            Skip
-          </button> */}
-          <button type="button" className={className.buttons.back} onClick={()=> choose("userData")}>
+          <button disabled={isPending} type="button" className={className.buttons.back} onClick={()=> choose("userData")}>
             Back
           </button>
-          <button type="button" className={className.buttons.submit} onClick={()=> choose("school")}>
-            Next
+          <button disabled={isPending} type="submit" className={className.buttons.submit} >
+            {isPending ? <BeatLoader size={20}/> : "Next"}
           </button>
         </div>
       </form>
