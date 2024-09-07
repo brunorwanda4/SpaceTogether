@@ -22,6 +22,7 @@ zod = "0.1.0"
 mongodb = "3.0.1"
 dotenv = "0.15.0"
 reqwest = { version = "0.12", features = ["default", "blocking", "cookies", "json", "socks"] }
+chrono = "0.4.31"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.

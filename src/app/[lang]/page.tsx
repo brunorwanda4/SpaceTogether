@@ -6,6 +6,7 @@ import { auth, signIn, signOut } from "@/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { GetUserByIdForm } from "@/components/forms";
 
 const Home = async ({params : {lang}} : LanguagesProps) =>{
   const { indexPage, page , nav } = await getDictionary(lang);
@@ -69,7 +70,15 @@ const Home = async ({params : {lang}} : LanguagesProps) =>{
            Login
            <ArrowRight size={20} />
         </Link>
+      <div className=" card mt-4">
+        <div className=" card-title">
+          Try to get user in real time
+        </div>
+         <div className=" card-body">
+            <GetUserByIdForm />
+         </div>
       </div>
+    </div>
     </div>
   );
 }

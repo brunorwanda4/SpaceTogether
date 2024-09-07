@@ -1,7 +1,8 @@
 "use server";
 
 import clientPromise from "@/lib/db";
-import { TUser } from "@/types/user";
+import { t_get_user, t_user, TUser } from "@/types/user";
+import { invoke } from "@tauri-apps/api/tauri";
 import { ObjectId } from "mongodb";
 
 export const getUserByEmail = async (email : string | null | undefined): Promise<TUser | null> => {
@@ -61,3 +62,15 @@ export const getUserById = async (id: string | undefined | null): Promise<TUser 
 
     return user;
 }
+
+// export const t_get_user_by_id = async (id : string) : Promise<t_user | null | undefined | String> => {
+//    try {
+//     const user = await invoke<t_get_user>("api_user_data_get", {id})
+//     if (user.success) {
+//         return user.user;
+//     }
+//     return user.error
+//    } catch (err : any) {
+//     return err
+//    }
+// }

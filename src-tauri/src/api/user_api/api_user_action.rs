@@ -14,7 +14,7 @@ pub async fn api_user_create_new(user: UserModel) -> CreateUserResult {
 
     let http_client = Client::new();
     let create_user = http_client
-        .post(url.to_owned() + "/user")
+        .post(format!("{}/user" , url))
         .json(&user_data)
         .send()
         .await;
@@ -77,7 +77,7 @@ pub async fn api_user_update (
 
     let http_client = Client::new();
     let update_user = http_client
-    .put(url.to_owned() + "/user/" + &id)
+    .put(format!("{}/user/{}", url, &id))
     .json(&user_data)
     .send()
     .await;
