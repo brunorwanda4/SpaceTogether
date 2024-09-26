@@ -6,6 +6,8 @@ import { invoke } from "@tauri-apps/api/tauri";
 import { t_get_user } from "@/types/user";
 import { useState, useEffect } from "react";
 import { Input } from "../ui/input";
+import { MyImage } from "../style/myImage";
+import Link from "next/link";
 
 export const SchoolRequestSetting = () => {
     return (
@@ -19,7 +21,7 @@ export const SchoolRequestSetting = () => {
 }
 
 export const GetUserByIdForm = () => {
-    const [userId, setUserId] = useState<string>('');
+    const [userId, setUserId] = useState<string>('66e94543563df23a608a71e0');
     const [userResult, setUserResult] = useState<t_get_user | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -49,6 +51,19 @@ export const GetUserByIdForm = () => {
         fetchUserData();
     }, [userId]); // This effect runs whenever userId changes
 
+    const profile_image = () => {
+        const image = userResult?.user?.image;
+
+        if (Array.isArray(image)) {
+            return image[image.length - 1]?.src
+            // if image is an array
+        } else if (typeof image === "string") {
+            return image
+        } else {
+            return "/1.jpg"
+        }
+    }
+
     return (
         <div>
             <h1>Get User Data</h1>
@@ -57,24 +72,25 @@ export const GetUserByIdForm = () => {
                 value={userId}
                 onChange={(e) => setUserId(e.target.value)}
                 placeholder="Enter User ID"
+                className=" max-w-96"
             />
-            <button className="btn btn-primary mt-2" onClick={() => {}} disabled={loading || userId.trim() === ''}>
-                {loading ? 'Loading...' : 'Fetch User Data'}
-            </button>
-
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {userResult && (
                 <div>
                     {userResult.success ? (
-                        <div>
-                            <h2>User Information:</h2>
-                            <p>Name: {userResult.user?.name}</p>
-                            <p>Email: {userResult.user?.email}</p>
-                            <p>Phone: {userResult.user?.phone_number}</p>
+                        <div className=" card">
+                            <h2 className=" card-title">User Information:</h2>
+                            <div className=" card-body">
+                                <MyImage className=" w-full" classname=" object-contain" src={profile_image()} />
+                                <p>Name: {userResult.user?.name}</p>
+                                <p>Email: {userResult.user?.email}</p>
+                                <p className=" card-actions">Phone: {userResult.user?.phone_number}</p>
+                            </div>
+                            <Link className=" btn btn-primary" href={`/auth/onboarding/${userResult.user?.id}`}>Up date user </Link>
                             {/* Add more fields as needed */}
                         </div>
                     ) : (
-                        <p style={{ color: 'red' }}>Error: {userResult.error}</p>
+                        <p style={{ color: 'red' }} className=" max-w-96">Error: {userResult.error}</p>
                     )}
                 </div>
             )}

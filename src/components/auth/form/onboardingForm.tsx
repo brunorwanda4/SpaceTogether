@@ -108,7 +108,7 @@ export const OnboardingForm = ({
       form.reset({
         phoneNumber: userResult.user?.phone_number || "",
         gender: userResult.user?.gender || undefined,
-        image: userResult.user?.image || "",
+        image: profile_image() || "",
         username: userResult.user?.username || "",
         day: u_day || "",
         month: u_month ||"",
@@ -157,21 +157,30 @@ export const OnboardingForm = ({
     fieldChange: (value: string) => void
   ) => {
     e.preventDefault();
-
+  
     const fileReader = new FileReader();
-
+  
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
+  
+      // Check if the file is an image
       if (!file.type.includes("image")) return;
-
+  
+      // Check if the file size is greater than 2MB (2MB = 2 * 1024 * 1024 bytes)
+      const maxSizeInBytes = 2 * 1024 * 1024;
+      if (file.size > maxSizeInBytes) {
+        return setError("Use other profile image which is not less than 2MB!.");
+      }
+  
       fileReader.onload = async (event) => {
         const imageDataUrl = event.target?.result?.toString() || "";
         fieldChange(imageDataUrl);
       };
-
+  
       fileReader.readAsDataURL(file);
     }
   };
+  
 
   const onSubmit = (value: onboardingValidation) => {
     const validation = OnboardingValidation.safeParse(value);
@@ -229,6 +238,19 @@ export const OnboardingForm = ({
     });
   };
 
+  const profile_image = () => {
+    const image = userResult?.user?.image;
+
+    if (Array.isArray(image)) {
+        return image[image.length - 1]?.src
+        // if image is an array
+    } else if (typeof image === "string") {
+        return image
+    } else {
+        return "/1.jpg"
+    }
+}
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
@@ -242,7 +264,7 @@ export const OnboardingForm = ({
                   {field.value ? (
                     <MyImage src={field.value} className={cn("size-32 min-h-32 min-w-32 rounded-full")} classname=" rounded-full" alt='Profile' />
                   ) : (
-                    <MyImage src={userResult?.user?.image || '/1.jpg'} classname=" rounded-full" className={cn("size-32 min-h-32 min-w-32 rounded-full")} alt='Profile' />
+                    <MyImage src={profile_image()} classname=" rounded-full" className={cn("size-32 min-h-32 min-w-32 rounded-full")} alt='Profile' />
                   )}
                   <span className={cn("text-info cursor-pointer")}>Profile image</span>
                 </FormLabel>
@@ -414,6 +436,7 @@ export const OnboardingForm = ({
           </button>
         </div>
       </form>
+      
     </Form>
   );
 };

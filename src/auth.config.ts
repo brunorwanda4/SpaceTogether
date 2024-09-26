@@ -8,7 +8,10 @@ import { LoginValidation } from "./validation/loginValidation";
 import { getUserByEmail, getUserByEmailOrUsername, getUserByUsername } from "./data/getUserData";
  
 export default { providers: [
-    GitHub,
+    GitHub({
+        clientId : process.env.AUTH_GITHUB_ID,
+        clientSecret: process.env.AUTH_GITHUB_SECRET,
+    }),
     Google,
     Credentials({
         async authorize(credentials) {

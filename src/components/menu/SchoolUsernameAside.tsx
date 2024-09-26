@@ -1,8 +1,11 @@
+"use client";
+
 import { Locale } from "@/i18n"
 import { cn } from "@/lib/utils"
 import { ISchool } from "@/types/school"
 import Link from "next/link"
 import { AsideLinkClassName } from "../style"
+import { useParams } from "next/navigation";
 
 interface props {
     lang : Locale
@@ -12,9 +15,17 @@ interface props {
 const SchoolUsernameAside = ({
     lang , school , username
 } : props) => {
-    if (!school) return null
+    const {classUsername , schoolUsername} = useParams();
+
+
+    if (!classUsername) return null;
+
+
   return (
     <div>
+      <div>
+        Bruno Rwanda
+      </div>
       <Link className={cn(AsideLinkClassName)} href={`/${lang}/s/${username}/se`}>
         settings
       </Link>

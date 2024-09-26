@@ -20,13 +20,17 @@ export interface IUser {
     image ?: string,
     birth_date ?: string,
 }
+
+
+// get user from tauri
+
 export interface t_user {
     id?: ObjectId;      // Handling MongoDB ObjectId as a nested object
     name: string;
     email: string;
     password?: string;
     gender?: "Male" | "Female" | "Other";
-    image?: string;
+    image?: string | ProfileImages[];
     birth_date?: string;
     facebook?: string;
     twitter?: string;
@@ -36,9 +40,20 @@ export interface t_user {
     whatsapp?: string;
     username?: string;
     phone_number?: string;
-    created_at?: string;
-    updated_at?: string | null;
+    created_at?: Date;
+    updated_at?: Date | null;
   }
+
+export interface ProfileImages {
+  src: string;
+  created_at: Timestamp;
+}
+
+interface Timestamp {
+  $date: {
+      $numberLong: string;
+  };
+}
   
   // Wrapper for MongoDB ObjectId structure
   export interface ObjectId {

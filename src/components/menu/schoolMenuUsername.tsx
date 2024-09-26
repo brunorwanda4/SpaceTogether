@@ -29,7 +29,7 @@ export const SchoolMenuUsername = ({
             <SchoolUsernameAside username={schoolUsername} lang={lang} school={school} />
          </div>
          <div className="h-screen">
-          Bruno
+          screen hight
          </div>
         </ResizablePanel>
         <ResizableHandle withHandle className=" h-screen"/>

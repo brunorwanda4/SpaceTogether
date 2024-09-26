@@ -1,6 +1,5 @@
 "use client";
 import SchoolUsernamePage from "@/app/[lang]/(organization)/s/[schoolUsername]/(schoolUsernameOriganization)/page";
-import ClassStudentPage from "@/app/[lang]/(organization)/s/[schoolUsername]/(schoolUsernameOriganization)/[classUsername]/stu/page";
 import { Locale } from "@/i18n";
 import { cn } from "@/lib/utils";
 import { ISchool } from "@/types/school"

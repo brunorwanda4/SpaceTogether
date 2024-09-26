@@ -21,7 +21,7 @@ export const SchoolNavSheet = ({
   const route = useRouter();
   return (
     <Sheet>
-        <SheetTrigger className=' btn btn-circle btn-sm btn-ghost'>
+        <SheetTrigger className=' btn btn-circle btn-sm btn-ghost max-md:flex  hidden'>
             <IoMdMenu size={20}/>
         </SheetTrigger>
         <SheetContent className=' px-2' side={"left"} data-theme={theme}>

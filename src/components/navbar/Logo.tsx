@@ -122,7 +122,7 @@ export const SchoolLogo =  ({
                     />
                     {title && (
                         <div className=" flex gap-1 items-center">
-                            <h1 className={cn("capitalize font-allura font-semibold text-lg" , className)}>{school.name}</h1>
+                            <h1 className={cn("capitalize font-allura font-semibold text-lg line-clamp-1" , className)}>{school.name}</h1>
                         </div>
                     )}
                 </div>

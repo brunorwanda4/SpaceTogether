@@ -110,19 +110,19 @@ export const AuthDivPage = ({
   }
   return (
     <div className={cn("min-h-screen flex gap-2 max-md:relative justify-between" , className)}>
-        <div className='p-5 max-md:absolute max-md:items-center max-md:h-full max-md:justify-center max-md:top- max-md:z-40 max-md:w-full w-full'>
+       <section className='p-5 max-md:absolute max-md:items-center max-md:h-full max-md:justify-center max-md:top- max-md:z-40 max-md:w-full w-full'>
           <div className=' items-center justify-center max-md:h-full max-w-full max-md:flex max-md:flex-col'>
             <div className=' flex justify-center mb-4'>
-                <Logo title link className=' z-50'/>
+                <Logo title link className=' z-[99]'/>
             </div>
-            <main className={cn("max-md:card max-md:backdrop-blur-xl max-md:shadow-md max-md:min-w-96 max-md:w-full max-md:bg-black/40 max-md:border max-md:p-4 max-md:min-h-60 max-md:h-auto max-md:max-w-xl",classname)}>
-                <div>
-                  <h2 className=' text-center text-2xl font-medium'>{title}</h2>
-                </div>
+            <main className={cn("max-md:card max-md:backdrop-blur-xl max-md:shadow-md max-md:min-w-96 max-md:w-full max-md:bg-black/40 max-md:border max-md:p-4 max-md:max-w-xl max-md:min-h-fit max-md:overflow-y-auto")}>
+              <div className=" bg-base-300 shadow-lg rounded-xl p-4 card">
+              <div className=" flex justify-center w-full"><h2 className=' text-center text-xl font-bold  w-80 md:text-2xl'>{title}</h2></div>
                 {children}
+              </div>
           </main>
           </div>
-        </div>
+        </section>
         <div className=' w-full relative'>
         <div className="absolute left-0 bottom-0 inset-x-0 h-full w-32 bg-gradient-to-l pointer-events-none select-none from-transparent to-base-100 max-md:opacity-0 z-40 " />
         {themeContent()}

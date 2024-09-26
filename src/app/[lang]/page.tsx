@@ -62,7 +62,7 @@ const Home = async ({params : {lang}} : LanguagesProps) =>{
           }}
           />
         </div>
-        <Link href={`/${lang}/auth/register`} className=" btn btn-secondary">
+        <Link href={`/${lang}/auth/register`} className=" btn btn-success">
            register 
            <ArrowRight size={20} />
         </Link>
@@ -70,14 +70,9 @@ const Home = async ({params : {lang}} : LanguagesProps) =>{
            Login
            <ArrowRight size={20} />
         </Link>
-      <div className=" card mt-4">
-        <div className=" card-title">
-          Try to get user in real time
+      <div className="">
+          <GetUserByIdForm />
         </div>
-         <div className=" card-body">
-            <GetUserByIdForm />
-         </div>
-      </div>
     </div>
     </div>
   );

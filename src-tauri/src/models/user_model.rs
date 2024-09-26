@@ -1,5 +1,7 @@
-use mongodb::bson::oid::ObjectId;
+use mongodb::bson::{oid::ObjectId, DateTime};
 use serde::{Deserialize, Serialize};
+
+use super::image_model::ProfileImageType;
 // use chrono::{Utc};
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -16,8 +18,8 @@ pub struct UserModel {
     pub name: String,
     pub email: String,
     pub password: Option<String>,
-    pub gender: Option<String>,
-    pub image: Option<String>,
+    pub gender: Option<TGender>,
+    pub image: Option<ProfileImageType>,
     pub birth_date: Option<String>,
     pub facebook: Option<String>,
     pub twitter: Option<String>,
@@ -27,8 +29,8 @@ pub struct UserModel {
     pub whatsapp: Option<String>,
     pub username: Option<String>,
     pub phone_number: Option<String>,
-    pub created_at: Option<String>,
-    pub updated_at: Option<String>,
+    pub created_at: Option<DateTime>,
+    pub updated_at: Option<DateTime>,
 }
 
 // Wrapper for ObjectId to match the JSON structure
@@ -42,7 +44,6 @@ pub struct ObjectIdWrapper {
 pub struct UpdateUserModel {
     #[serde(rename = "_id", skip_serializing_if = "Option::is_none")]
     pub id: Option<ObjectId>,
-    pub password: Option<String>,
     pub gender: Option<String>,
     pub image: Option<String>,
     pub birth_date: Option<String>,
@@ -53,5 +54,5 @@ pub struct UpdateUserModel {
     pub snapchat: Option<String>,
     pub whatsapp: Option<String>,
     pub username: Option<String>,
-    pub phone_number : Option<String>,
+    pub phone_number: Option<String>,
 }
