@@ -322,19 +322,19 @@ export const OnboardingForm = ({
                 <RadioGroup disabled={isPending} onValueChange={field.onChange} defaultValue={field.value} className="flex space-x-1">
                   <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
                     <FormControl>
-                      <RadioGroupItem disabled={isPending} className={cn("border-input radio-primary")} value="Male" />
+                      <RadioGroupItem disabled={isPending} className={cn("border-input radio-primary" , theme === "light" | theme == "pastel" && "border border-gray-500")} value="Male" />
                     </FormControl>
                     <FormLabel className="font-normal">Male</FormLabel>
                   </FormItem>
                   <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
                     <FormControl>
-                      <RadioGroupItem disabled={isPending} className={cn("border-input radio-primary")} value="Female" />
+                      <RadioGroupItem disabled={isPending} className={cn("border-input radio-primary" , theme === "light" | theme == "pastel" && "border border-gray-500")} value="Female" />
                     </FormControl>
                     <FormLabel className="font-normal">Female</FormLabel>
                   </FormItem>
                   <FormItem className="flex items-center space-x-3 space-y-0 flex-col gap-2">
                     <FormControl>
-                      <RadioGroupItem disabled={isPending} className={cn("border-input radio-primary")} value="Other" />
+                      <RadioGroupItem disabled={isPending} className={cn("border-input radio-primary", theme === "light" | theme == "pastel" && "border border-gray-500")} value="Other" />
                     </FormControl>
                     <FormLabel className="font-normal">Other</FormLabel>
                   </FormItem>

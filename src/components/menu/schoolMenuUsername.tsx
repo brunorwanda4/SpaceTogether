@@ -6,6 +6,7 @@ import SchoolNotFount from "../error/schoolNotFount"
 import { SchoolNav } from "../navbar/schoolNav"
 import ClassNavStudent from "../navbar/ClassNavStudent"
 import { TUser } from "@/types/user"
+import Link from "next/link"
 
 interface props {
     children: React.ReactNode
@@ -27,6 +28,12 @@ export const SchoolMenuUsername = ({
          <div className=" p-2">
             <SchoolNav title school={school} schoolUsername={schoolUsername} lang={lang}/>
             <SchoolUsernameAside username={schoolUsername} lang={lang} school={school} />
+         </div>
+         <div className="h-screen">
+          <Link href={`/s/${schoolUsername}/se`}>Settings</Link>
+         </div>
+         <div className="h-screen">
+          screen hight
          </div>
          <div className="h-screen">
           screen hight

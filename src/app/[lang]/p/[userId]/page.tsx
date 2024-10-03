@@ -3,6 +3,7 @@ import { UserScrollTop } from "@/hooks/scrollTop";
 import { Locale } from "@/i18n"
 import { IUser } from "@/types/user";
 import { invoke } from "@tauri-apps/api/tauri";
+import Image from "next/image";
 import Link from "next/link"
 import { redirect } from "next/navigation";
 
@@ -29,7 +30,7 @@ const ProfilePage =async ({
       <Link className=" btn" href={`/${lang}/s`}>School</Link>
 
       <div>
-        {user.image}
+        {user.image && <Image src={user.image} alt="user profile image" width={32} height={32}/>}
       </div>
 
       {/* user form tauri is {tauri_user.UserModel.name}; */}

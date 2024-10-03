@@ -71,6 +71,7 @@ const OnboardingPage = ({
         return ("Onboarding");
     }
   }
+
   return (
     <div className={cn("min-h-screen flex gap-2 max-md:relative justify-between " )}>
         <section className='p-5 max-md:absolute max-md:items-center max-md:h-full max-md:justify-center max-md:top- max-md:z-40 max-md:w-full w-full'>
@@ -86,12 +87,14 @@ const OnboardingPage = ({
           </main>
           </div>
         </section>
-        <div className=' w-full relative'>
-        <div className="absolute left-0 bottom-0 inset-x-0 h-full w-32 bg-gradient-to-l pointer-events-none select-none from-transparent to-base-100 max-md:opacity-0 z-40" />
-          <div>
-            <MyImage className=' h-screen w-full' classname=' rounded-none' src={"/p.jpg"}/>
+        {choose !== "school" && (
+          <div className=' w-full relative'>
+          <div className="absolute left-0 bottom-0 inset-x-0 h-full w-32 bg-gradient-to-l pointer-events-none select-none from-transparent to-base-100 max-md:opacity-0 z-40" />
+            <div>
+              <MyImage className=' h-screen w-full' classname=' rounded-none' src={"/p.jpg"}/>
+            </div>
           </div>
-        </div>
+        )}
     </div>
   )
 }
