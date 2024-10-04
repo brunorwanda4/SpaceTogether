@@ -133,12 +133,12 @@ input[type=number]::-webkit-inner-spin-button {
 
 /* background */
 .bg-grid-sm {
-  @apply  dark:bg-dot-white/[0.2] bg-dot-black/[0.2]
+  @apply  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] bg-fixed
 }
 .bg-grid-md{
-  @apply dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]
+  @apply dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] bg-fixed
 }
 
 .bg-grid-lg {
-  @apply  dark:bg-grid-white/[0.2] bg-grid-black/[0.2]
+  @apply  dark:bg-grid-white/[0.2] bg-grid-black/[0.2] bg-fixed
 }

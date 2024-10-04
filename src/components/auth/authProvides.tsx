@@ -3,6 +3,7 @@ import { BsFacebook, BsGithub, BsGoogle } from 'react-icons/bs'
 import { SPLine } from '../style/simpleComponents/line'
 import { loginAuthProvider } from '@/server/authProvides';
 import { Locale } from '@/i18n';
+import Image from 'next/image';
 
 interface Props {
     TProvides : string
@@ -33,3 +34,38 @@ const AuthProvides = ({TProvides , lang} : Props) => {
 }
 
 export default AuthProvides
+
+
+export const RegisterProvider = () => {
+  return (
+    <div className=' p-4  gap-3 flex justify-center'>
+      <button className=' relative size-10'>
+        <Image 
+          src={"/icons/google.png"}
+           alt='google icon' 
+           fill 
+           sizes='20vh'
+           className=' object-contain'
+           />
+      </button>
+      <button className=' relative size-10'>
+        <Image 
+          src={"/icons/github.png"}
+           alt='github icon' 
+           fill 
+           sizes='20vh' 
+           className=' object-contain'
+           />
+      </button>
+      <button className=' relative size-10'>
+        <Image 
+          src={"/icons/facebook.png"}
+           alt='facebook icon' 
+           fill 
+           sizes='20vh' 
+           className=' object-contain'
+           />
+      </button>
+    </div>
+  )
+}

@@ -101,7 +101,7 @@ const LoginForm = ({
             <FormItem>
               <FormLabel>{TUsername}</FormLabel>
               <FormControl>
-                <Input className=' bg-base-300' autoFocus disabled={isPending} placeholder="user_name" {...field} />
+                <Input className=' bg-base-100' autoFocus disabled={isPending} placeholder="user_name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -116,7 +116,7 @@ const LoginForm = ({
               <FormLabel>{TPassword}</FormLabel>
               <FormControl>
                 <div className=' relative '>
-                  <Input className=' bg-base-300 ' placeholder="password" disabled={isPending} type={seePassword ? "password" : "text"} {...field} />
+                  <Input className=' bg-base-100' placeholder="password" disabled={isPending} type={seePassword ? "password" : "text"} {...field} />
                   <div className=' absolute right-0 top-0 items-center flex rounded-r-md cursor-pointer h-full w-6 px-1 hover:bg-neutral/40 duration-200' onClick={handleSeePassword}>
                       {seePassword ? <ImEye size={24} /> : <ImEyeBlocked size={24} />}
                     </div>
@@ -132,7 +132,7 @@ const LoginForm = ({
         <FormMessageError message={error}/>
         
         <FormMessageSuccess message={success}/>
-        <button className=' btn btn-neutral capitalize font-semibold' type='submit'>
+        <button className=' btn btn-neutral capitalize font-semibold btn-info' type='submit'>
           {isPending ? <BeatLoader/> : `${TLogin}`}
         </button>
       </form>

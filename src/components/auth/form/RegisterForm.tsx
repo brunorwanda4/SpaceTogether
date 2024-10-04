@@ -75,7 +75,7 @@ const RegisterForm = ({
     });
     
 
-    const DivClass = ["flex gap-2 flex-col","bg-base-300 lg:min-w-60"];
+    const DivClass = ["flex gap-2 flex-col w-full","bg-base-100 w-96 max-lg:w-full lg:min-w-60"];
 
     const [error , setError] = useState<string | undefined>("");
     const [success , setSuccess] = useState<string | undefined>("");
@@ -137,7 +137,7 @@ const RegisterForm = ({
     }
   return (
     <Form {...form} >
-      <form onSubmit={form.handleSubmit(onSubmit)} className=' flex gap-2 flex-col'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className=' flex gap-2 flex-col w-full'>
         {/* left */}
         <div className={cn(DivClass[0])}>
             {/* first name */}
@@ -145,7 +145,7 @@ const RegisterForm = ({
             control={form.control}
             name="name"
             render={({ field }) => (
-                <FormItem>
+                <FormItem className=' w-full'>
                 <FormLabel>{TFName}</FormLabel>
                 <FormControl>
                     <Input className={cn(DivClass[1] , "")} disabled={isPending} autoFocus placeholder="Your full name" {...field} />
@@ -208,7 +208,7 @@ const RegisterForm = ({
         </div>
         <FormMessageError message={error}/>
         <FormMessageSuccess message={success}/>
-        <button className=' btn btn-neutral capitalize font-semibold' type='submit'>
+        <button className=' btn btn-neutral capitalize font-semibold btn-info' type='submit'>
           {isPending ? <BeatLoader size={20} /> : `${TCreate}`}
         </button>
       </form>

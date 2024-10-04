@@ -40,7 +40,7 @@
                 "register" : " Create new account"
             },
             "register" : {
-                "registerTitle" : "Where you are where we are",
+                "registerTitle" : "Create Account",
                 "login" : "Login",
                 "CPassword" : "Confirm Password",
                 "FName" : "Your full name",

@@ -27,40 +27,29 @@ export const ChooseHowToCreateAccount = ({
   } : Props) => {
     const online = UseOnlineStatus();
   return (
-    <div>
-      <div className=''>
-        <RegisterForm 
-         TCPassword={registerProp.TCPassword}
-         TFName={registerProp.TFName} 
-         TEmail={registerProp.TEmail} 
-         TLName={registerProp.TLName} 
-         TDay={registerProp.TDay} 
-         TFmale={registerProp.TFmale} 
-         TGender={registerProp.TGender} 
-         TMale={registerProp.TMale} 
-         TMonth={registerProp.TMonth} 
-         TOther={registerProp.TOther} 
-         TYear={registerProp.TYear} 
-         TCreate={registerProp.TCreate}
-         lang={lang} 
-         TLogin={TLogin} 
-         TPassword={TPassword}
-        />
-       {!!online &&(<>
-         {choose ? (
-          <button onClick={() => choose("login")} className=' mt-2 text-sm text-neutral-content btn btn-sm btn-link'>{TLogin}</button>
-         ) : (
-          <Link href={`/${lang}/auth/login`} className=' mt-2 text-sm text-neutral-content btn-sm btn btn-link '>{TLogin}</Link>
-         )}
-         </>)}
-      </div>
-      {!!online && (
-        <div className=' mt-2'>
-          <AuthSeverDiv >
-            <AuthProvides TProvides={TProvides} lang={lang}/>
-          </AuthSeverDiv>
-      </div> 
-      )}
+    <div className=''>
+      <RegisterForm 
+        TCPassword={registerProp.TCPassword}
+        TFName={registerProp.TFName} 
+        TEmail={registerProp.TEmail} 
+        TLName={registerProp.TLName} 
+        TDay={registerProp.TDay} 
+        TFmale={registerProp.TFmale} 
+        TGender={registerProp.TGender} 
+        TMale={registerProp.TMale} 
+        TMonth={registerProp.TMonth} 
+        TOther={registerProp.TOther} 
+        TYear={registerProp.TYear} 
+        TCreate={registerProp.TCreate}
+        lang={lang} 
+        TLogin={TLogin} 
+        TPassword={TPassword}
+      />
+      {/* {!!online &&(<> */}
+        {choose && (
+        <button onClick={() => choose("login")} className=' mt-2 text-sm text-neutral-content btn btn-sm btn-link'>{TLogin}</button>
+        )}
+        {/* </>)} */}
     </div>
   )
 }

@@ -9,5 +9,13 @@ type provider = {
 }
 
 export const loginAuthProvider = async ({provides , locale} : provider) => {
-   await signIn(provides)
+   await signIn(provides , {
+    redirectTo : `/s`
+   })
+}
+
+export const registerAuthProvider = async ({provides} : provider) => {
+    await signIn(provides , {
+        redirectTo : `/onboarding`
+    })
 }

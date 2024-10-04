@@ -32,15 +32,7 @@ export const OnboardingValidation = z.object({
     }),
     gender : z.enum(["Male" , "Female" , "Other"]),
     // birth day
-    day : z.string().min(1, {
-        message : "Day is required"
-    }),
-    month : z.string().min(1, {
-        message : "Day is required"
-    }),
-    year : z.string().min(1, {
-        message : "Day is required"
-    }),
+    userType : z.enum(["parent" , "student" , "staff" , "teacher",]),
 })
 
 export const OnboardingSocialMediaValidation = z.object({
