@@ -6,43 +6,33 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/lib/utils";
-import { OnboardingSocialMediaValidation, OnboardingValidation } from "@/validation/registerValidation";
+import { OnboardingValidation } from "@/validation/registerValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChangeEvent, useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { FormMessageError, FormMessageSuccess } from "./formMessagers";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
-import { ChoosePropsOnboarding } from "@/app/[lang]/auth/onboarding/[onboardingUserId]/page";
-import { BsCheck2Circle, BsFacebook, BsInstagram, BsLinkedin, BsSnapchat, BsTwitter, BsTwitterX, BsWhatsapp } from "react-icons/bs";
-import { PiSnapchatLogoFill } from "react-icons/pi";
+import { BsCheck2Circle } from "react-icons/bs";
 import { IoIosWarning } from "react-icons/io";
 import { toast } from "@/components/ui/use-toast";
 import { invoke } from "@tauri-apps/api/tauri";
 import { BeatLoader } from "react-spinners";
-import { t_get_user, t_user } from "@/types/user";
+import { t_get_user, } from "@/types/user";
 
 type onboardingValidation = z.infer<typeof OnboardingValidation>;
 interface OnboardingProps {
-  choose: (choose: ChoosePropsOnboarding) => void;
   id: string;
 }
 
 export const OnboardingForm = ({
-  choose, id
+  id
 }: OnboardingProps) => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
   const [userResult, setUserResult] = useState<t_get_user | null>(null);
-  const [selectMonth, setSelectMonth] = useState("");
-  const [daysInMonth, setDaysInMonth] = useState<number[]>([]);
-  const [initialValuesSet, setInitialValuesSet] = useState(false);
-
-  const [u_day , setU_day] = useState<string | undefined>(undefined);
-  const [u_month , setU_Mont] = useState<string | undefined>(undefined);
-  const [u_year , setU_year] = useState<string | undefined>(undefined);
+  const [isDirecter , setIsIDirecter] = useState<Boolean>(false);
 
   const theme = useTheme();
   const form = useForm<onboardingValidation>({
@@ -61,51 +51,6 @@ export const OnboardingForm = ({
     mode: "onChange",
   });
 
-  const get_user = async () => {
-    try {
-      const result = await invoke<t_get_user>('api_user_data_get', { id });
-      setUserResult(result);
-      setInitialValuesSet(true);
-    } catch (error: any) {
-      setError(error.message);
-    }
-  };
-
-  const formatDate = (DateString : string | undefined) => {
-    if (!DateString) return;
-
-    const date = new Date(DateString);
-
-    // Define arrays for month names
-    const monthNames = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-
-    // Extract day, month, and year
-    const day = date.getDate(); // Day of the month (1-31)
-    const month = monthNames[date.getMonth()]; // Month name (January-December)
-    const year = date.getFullYear(); // Full year (e.g., 2024)
-
-    // Set form values
-    setU_day(day.toString());
-    setU_Mont(month);
-    setU_year(year.toString());
-
-    return {day , month , year}
-  }
-
-  useEffect(() => {
-    get_user();
-    formatDate(userResult?.user?.birth_date);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
-
-  const months = {
-    January: 31, February: 28, March: 31, April: 30, May: 31, June: 30,
-    July: 31, August: 31, September: 30, October: 31, November: 30, December: 31
-  };
-
   const handleImage = (
     e: ChangeEvent<HTMLInputElement>,
     fieldChange: (value: string) => void
@@ -123,7 +68,7 @@ export const OnboardingForm = ({
       // Check if the file size is greater than 2MB (2MB = 2 * 1024 * 1024 bytes)
       const maxSizeInBytes = 2 * 1024 * 1024;
       if (file.size > maxSizeInBytes) {
-        return setError("Use other profile image which is not less than 2MB!.");
+        return setError("Sorry your image it to high try other image which is not less than 2MB!.");
       }
   
       fileReader.onload = async (event) => {
@@ -136,18 +81,19 @@ export const OnboardingForm = ({
   };
 
   const onSubmit = (value: onboardingValidation) => {
+    setError("");
+    setSuccess("");
     const validation = OnboardingValidation.safeParse(value);
 
     if (!validation.success) {
       return setError("All fields are required");
     }
 
-    const { phoneNumber, image, username, gender} = validation.data;
-    const birth_date = "bujnfjgf";
+    const { phoneNumber, image, username, gender , userType} = validation.data;
     startTransition(async () => {
       try {
         const res = await invoke<{ message: string, success: boolean }>("api_user_update", {
-          id, user: { username, image, phone_number: phoneNumber, gender, birth_date }
+          id, user: { username, image, phone_number: phoneNumber, gender, user_type : userType }
         });
 
         if (res.success) {
@@ -161,7 +107,6 @@ export const OnboardingForm = ({
             )
           });
           setSuccess("WOW! Account has been updated!");
-          choose("socialMedia");
         } else {
           toast({
             title: "uh oh! something went wrong.",
@@ -247,7 +192,7 @@ export const OnboardingForm = ({
               <FormItem>
                 <FormLabel>Phone number</FormLabel>
                 <FormControl>
-                  <Input {...field} disabled={isPending} autoFocus type="number" className={cn("w-full md:w-72 bg-base-100")} placeholder="+250 792537274" />
+                  <Input {...field} disabled={isPending} type="number" className={cn("w-full md:w-72 bg-base-100")} placeholder="+250 792537274" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -260,7 +205,7 @@ export const OnboardingForm = ({
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input {...field} disabled={isPending} className={cn("w-full md:w-72 bg-base-100")} type="text" placeholder="Username" />
+                  <Input {...field} autoFocus disabled={isPending} className={cn("w-full md:w-72 bg-base-100")} type="text" placeholder="Username" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -303,18 +248,18 @@ export const OnboardingForm = ({
               render={({field}) => (
                 <FormItem className="">
                   <FormLabel className="">Your type</FormLabel>
-                  <Select>
+                  <Select onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger className="bg-base-100">
                         <SelectValue placeholder="Which type are you" className=" placeholder:text-gray-500"/>
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent data-theme={theme} className=" bg-base-100">
-                      <SelectItem value="student">Student</SelectItem>
-                      <SelectItem value="teacher">Teacher</SelectItem>
-                      <SelectItem value="parent">Parent</SelectItem>
-                      <SelectItem value="staff">Staff</SelectItem>
-                      <SelectItem value="directer">Directer</SelectItem>
+                      <SelectItem value="Student">Student</SelectItem>
+                      <SelectItem value="Teacher">Teacher</SelectItem>
+                      <SelectItem value="Parent">Parent</SelectItem>
+                      <SelectItem value="Staff">Staff</SelectItem>
+                      <SelectItem value="Directer">Directer</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormItem>
@@ -327,7 +272,7 @@ export const OnboardingForm = ({
           <FormMessageSuccess message={success} />
         </div>
         <div>
-          <button type="submit" className="btn btn-info w-full" disabled={isPending}>
+          <button type="submit" className={cn(" btn btn-neutral capitalize font-semibold btn-info w-full" ,isPending && "btn-disabled")} disabled={isPending}>
             {isPending ? <BeatLoader size={20} /> : "Next"}
           </button>
         </div>

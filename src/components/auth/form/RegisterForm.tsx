@@ -82,6 +82,8 @@ const RegisterForm = ({
     const [isPending , startTransition] = useTransition();
 
     const onSubmit = async (values : z.infer<typeof RegisterValidation>) => {
+      setError("");
+      setSuccess("");
       const validation = RegisterValidation.safeParse(values);
       if (!validation.success) {
         return setError("All fields are required")
@@ -205,10 +207,10 @@ const RegisterForm = ({
               </FormItem>
             )}
           />
-        </div>
+      </div>
         <FormMessageError message={error}/>
         <FormMessageSuccess message={success}/>
-        <button className=' btn btn-neutral capitalize font-semibold btn-info' type='submit'>
+        <button className={cn(" btn btn-neutral capitalize font-semibold btn-info" ,isPending && "btn-disabled")} type='submit'>
           {isPending ? <BeatLoader size={20} /> : `${TCreate}`}
         </button>
       </form>

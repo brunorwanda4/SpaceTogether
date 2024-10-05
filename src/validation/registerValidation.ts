@@ -27,12 +27,16 @@ export const OnboardingValidation = z.object({
         message : "Username is required"
     }).max(50, {
         message : "maximum characters 50"
-    }).regex(/^[a-zA-Z0-9_]+$/, {
+    }).regex(/^[a-zA-Z0-9_-]+$/, {
         message : " username can only contain letters, numbers, and underscores",
     }),
-    gender : z.enum(["Male" , "Female" , "Other"]),
+    gender : z.enum(["Male" , "Female" , "Other"], {
+        message : "Select you gender."
+    }),
     // birth day
-    userType : z.enum(["parent" , "student" , "staff" , "teacher",]),
+    userType : z.enum(["Parent" , "Student" , "Staff" , "Teacher",] , {
+        message : "Please enter Select your type",
+    }),
 })
 
 export const OnboardingSocialMediaValidation = z.object({

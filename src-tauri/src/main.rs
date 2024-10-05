@@ -7,7 +7,8 @@ use mongodb::bson::doc;
 use serde::Serialize;
 
 // my functions
-use crate::api::user_api::api_user_action::{api_user_create_new , api_user_update};
+use crate::api::user_api::api_user_action::api_user_create_new;
+use crate::api::user_api::api_user_update::api_user_update;
 use crate::api::user_api::api_use_data::api_user_data_get;
 
 use crate::api::school_api::class_api::class_action::class_action_insert_new;

@@ -30,6 +30,7 @@ import { useRouter } from 'next/navigation';
 import { BeatLoader } from 'react-spinners';
 import { TUser } from '@/types/user';
 import { ChoosePropsAuth } from '../authDialog';
+import { cn } from '@/lib/utils';
 
 interface Props {
     TPassword: string;
@@ -66,9 +67,11 @@ const LoginForm = ({
   const [success , setSuccess] = useState<string | undefined>("");
 
   const router = useRouter();
-  
 
   const onSubmit = (value : z.infer<typeof LoginValidation>) => {
+    setError("");
+    setSuccess("");
+    
     startTransition(() => {
       loginServer(value , lang).then((data) => {
           
@@ -127,12 +130,12 @@ const LoginForm = ({
           )}
         />
         <div className=' flex justify-start'>
-          {!!online && <Link className='link-hover text-sm duration-300 text-neutral-content leading-4 btn btn-sm btn-link' href={`/${lang}/auth/forgetPassword`}>{TForget}</Link>}
+          {!!online && <Link className='link-hover text-sm duration-300 text-neutral-content leading-4 btn btn-sm btn-link font-medium btn-info' href={`/${lang}/auth/forgetPassword`}>{TForget}</Link>}
         </div>
         <FormMessageError message={error}/>
         
         <FormMessageSuccess message={success}/>
-        <button className=' btn btn-neutral capitalize font-semibold btn-info' type='submit'>
+        <button className={cn(" btn btn-neutral capitalize font-semibold btn-info w-full" ,isPending && "btn-disabled")} type='submit'>
           {isPending ? <BeatLoader/> : `${TLogin}`}
         </button>
       </form>

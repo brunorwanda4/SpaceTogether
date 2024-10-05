@@ -11,6 +11,16 @@ pub enum TGender {
     Other,
 }
 
+
+#[derive(Debug , Serialize , Deserialize ,Clone)]
+pub enum TUserType {
+    Teacher,
+    Student,
+    Parent,
+    Staff,
+    Directer,
+}
+
 #[derive(Debug, Serialize, Deserialize)]
 pub struct UserModel {
     #[serde(rename = "_id")]
@@ -29,6 +39,7 @@ pub struct UserModel {
     pub whatsapp: Option<String>,
     pub username: Option<String>,
     pub phone_number: Option<String>,
+    pub user_type : Option<TUserType>,
     pub created_at: Option<DateTime>,
     pub updated_at: Option<DateTime>,
 }
@@ -55,4 +66,5 @@ pub struct UpdateUserModel {
     pub whatsapp: Option<String>,
     pub username: Option<String>,
     pub phone_number: Option<String>,
+    pub user_type : Option<String>,
 }
