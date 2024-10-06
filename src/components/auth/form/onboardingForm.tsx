@@ -19,11 +19,13 @@ import { toast } from "@/components/ui/use-toast";
 import { invoke } from "@tauri-apps/api/tauri";
 import { BeatLoader } from "react-spinners";
 import { t_get_user, } from "@/types/user";
+import DialogOnboardingDirecterSchool from "../dialog/onbaording/DialogOnboardingDirecterSchool";
 
 type onboardingValidation = z.infer<typeof OnboardingValidation>;
 interface OnboardingProps {
   id: string;
 }
+
 
 export const OnboardingForm = ({
   id
@@ -32,7 +34,26 @@ export const OnboardingForm = ({
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
   const [userResult, setUserResult] = useState<t_get_user | null>(null);
-  const [isDirecter , setIsIDirecter] = useState<Boolean>(false);
+  const [isDirecter , setIsIDirecter] = useState(false);
+  
+  // to change search parameters
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("who") === "directer") {
+      setIsIDirecter(true);
+    }
+  } , []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (isDirecter) {
+      params.set("who" , "directer");
+    } else {
+      params.delete("who");
+    }
+    window.history.replaceState({}, "", `${window.location.pathname}?${params}`);
+  }, [isDirecter]);
+  
 
   const theme = useTheme();
   const form = useForm<onboardingValidation>({
@@ -63,7 +84,9 @@ export const OnboardingForm = ({
       const file = e.target.files[0];
   
       // Check if the file is an image
-      if (!file.type.includes("image")) return;
+      if (!file.type.includes("image")) {
+        return (setError("Please select an image file"))
+      };
   
       // Check if the file size is greater than 2MB (2MB = 2 * 1024 * 1024 bytes)
       const maxSizeInBytes = 2 * 1024 * 1024;
@@ -102,11 +125,14 @@ export const OnboardingForm = ({
             description: (
               <div className='flex gap-2'>
                 <BsCheck2Circle size={20} className='text-success' />
-                <span>WOW! Account has been updated!</span>
+                <span className={cn(isDirecter && " text-white")}>WOW! Account has been updated!</span>
               </div>
             )
           });
           setSuccess("WOW! Account has been updated!");
+          if(userType === "Directer"){
+            setIsIDirecter(state => !state);
+          }
         } else {
           toast({
             title: "uh oh! something went wrong.",
@@ -148,7 +174,6 @@ export const OnboardingForm = ({
         return "/1.jpg"
     }
 }
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
@@ -276,8 +301,8 @@ export const OnboardingForm = ({
             {isPending ? <BeatLoader size={20} /> : "Next"}
           </button>
         </div>
+        <DialogOnboardingDirecterSchool isOpen={isDirecter} userId={id}/>
       </form>
-      
     </Form>
   );
 };

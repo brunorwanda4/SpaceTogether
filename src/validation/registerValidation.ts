@@ -34,7 +34,7 @@ export const OnboardingValidation = z.object({
         message : "Select you gender."
     }),
     // birth day
-    userType : z.enum(["Parent" , "Student" , "Staff" , "Teacher",] , {
+    userType : z.enum(["Parent" , "Student" , "Staff" , "Teacher", "Directer"] , {
         message : "Please enter Select your type",
     }),
 })
