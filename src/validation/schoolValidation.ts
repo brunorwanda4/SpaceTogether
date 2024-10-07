@@ -1,5 +1,28 @@
 import {z} from "zod";
 
+export const CreateSchoolValidation = z.object({
+    name : z.string().max(80 , {
+        message : "Maximum characters are 80",
+    }).min(4 , {
+        message : "Minimum characters are 4",
+    }),
+    email : z.string().email(),
+    logo : z.string(),
+    phoneNUmber : z.string(),
+    description : z.string().min(1 , {
+        message : "Description is required",
+    }),
+    country : z.string().min(1 , {
+        message : "Country is required",
+    }),
+    province : z.string().min(1 , {
+        message : "Province is required",
+    }),
+    district : z.string().min(1 , {
+        message : "District is required",
+    }),
+})
+
 export const SchoolValidation = z.object({
     name : z.string().min(4 , {
         message : "Minimum characters are 4",

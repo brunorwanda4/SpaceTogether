@@ -19,10 +19,10 @@ const AuthProvides = ({TProvides , lang} : Props) => {
             <SPLine className='w-full  divider'/>
           </div>
         <div className=' flex justify-center gap-2 mt-2'>
-        <button onClick={() => loginAuthProvider({provides : "github" , locale : lang})} className=' btn btn-circle btn-neutral'>
+        <button onClick={() => loginAuthProvider({provides : "github"})} className=' btn btn-circle btn-neutral'>
             <BsGithub size={24} />
         </button>
-        <button className=' btn btn-circle btn-neutral' onClick={() => loginAuthProvider({provides : "google" , locale : lang})}>
+        <button className=' btn btn-circle btn-neutral' onClick={() => loginAuthProvider({provides : "google"})}>
             <BsGoogle size={24} />
         </button>
         <button className=' btn btn-circle btn-neutral'>
@@ -39,8 +39,8 @@ export default AuthProvides
 export const RegisterProvider = () => {
   return (
     <div className=' p-4  gap-3 flex justify-center'>
-      <button className=' relative size-10'>
-        <Image 
+      <button onClick={() => loginAuthProvider({provides : "google"})} className=' relative size-10'>
+        <Image
           src={"/icons/google.png"}
            alt='google icon' 
            fill 
@@ -48,7 +48,7 @@ export const RegisterProvider = () => {
            className=' object-contain'
            />
       </button>
-      <button className=' relative size-10'>
+      <button onClick={() => loginAuthProvider({provides : "github"})} className=' relative size-10'>
         <Image 
           src={"/icons/github.png"}
            alt='github icon' 

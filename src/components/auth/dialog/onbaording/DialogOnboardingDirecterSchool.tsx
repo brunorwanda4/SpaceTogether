@@ -22,7 +22,7 @@ const DialogOnboardingDirecterSchool = ({
 
   const handelNoSchool = () => {
     startTransition(() => {
-      router.push(`/auth/onboarding/${userId}/directer`)
+      router.push(`/auth/onboarding/${userId}/directer/add`)
     })
   }
 

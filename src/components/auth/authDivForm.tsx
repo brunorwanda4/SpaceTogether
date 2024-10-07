@@ -30,9 +30,9 @@ export const AuthDivPage = ({
        <section className='p-5 max-md:absolute max-md:items-center max-md:h-full max-md:justify-center max-md:z-40 max-md:w-full'>
           <div className=' items-center justify-center flex h-full max-lg:h-full max-w-full max-md:flex max-md:flex-col'>
             <main className={cn(" w-full")}>
-              <div className=" bg-base-300 shadow-lg rounded-xl p-4 card ">
+              <div className=" bg-base-300 shadow-lg p-4 card ">
                 <div className=' flex justify-center mb-4'>
-                  <Logo title link className=' z-[99]'/>
+                  <Logo title link className=' '/>
                 </div>
                <div className=" flex justify-center"><h2 className=' text-center text-xl font-semibold leading-4  w-80 md:text-2xl'>{title}</h2></div>
                 <div className=' flex gap-4 mt-2 max-lg:flex-col-reverse'>
