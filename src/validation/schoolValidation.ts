@@ -3,12 +3,19 @@ import {z} from "zod";
 export const CreateSchoolValidation = z.object({
     name : z.string().max(80 , {
         message : "Maximum characters are 80",
-    }).min(4 , {
-        message : "Minimum characters are 4",
+    }).min(1 , {
+        message : "School name is required",
+    }),
+    username : z.string().regex(/^[a-zA-Z0-9_]+$/ , {
+        message : "username can only contain letters, numbers, and underscores"
+    }).min(1 , {
+        message : "username is required"
+    }).max(25, {
+        message : "maximum characters are 25",
     }),
     email : z.string().email(),
     logo : z.string(),
-    phoneNUmber : z.string(),
+    phone : z.string(),
     description : z.string().min(1 , {
         message : "Description is required",
     }),

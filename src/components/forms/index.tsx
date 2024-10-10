@@ -21,7 +21,7 @@ export const SchoolRequestSetting = () => {
 }
 
 export const GetUserByIdForm = () => {
-    const [userId, setUserId] = useState<string>('66e94543563df23a608a71e0');
+    const [userId, setUserId] = useState<string>('67068867a43efb97342917a7');
     const [userResult, setUserResult] = useState<t_get_user | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);

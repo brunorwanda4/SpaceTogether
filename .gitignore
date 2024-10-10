@@ -63,7 +63,7 @@ next-env.d.ts
 *.ico
 *.jpeg
 *.jpg
-*.png
+# *.png
 *.bmp
 
 # -- Nodejs

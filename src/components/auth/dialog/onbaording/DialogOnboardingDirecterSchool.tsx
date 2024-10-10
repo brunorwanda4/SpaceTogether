@@ -40,8 +40,8 @@ const DialogOnboardingDirecterSchool = ({
             </DialogDescription>
         </DialogHeader>
         <div className=' mt-2 flex gap-2  justify-end'>
-          <button onClick={handelNoSchool} className={cn("btn btn-warning flex gap-2" , isPending && " btn-disabled ")}><span>No</span> {isPending && <span className=' loading loading-spinner text-lg size-4'/>}</button>
-          <button className={cn("btn btn-info flex gap-2" , isPending && " btn-disabled ")}>Yes {isPending && <span className=' loading loading-spinner text-lg size-4'/>}</button>
+          <button onClick={handelNoSchool} data-tip="Create new school in our application" className={cn("btn tooltip font-medium btn-warning flex gap-2" , isPending && " btn-disabled ")}><span>No</span> {isPending && <span className=' loading loading-spinner text-lg size-4'/>}</button>
+          <button className={cn("btn btn-info flex gap-2" , isPending && " btn-disabled ")}>Yes</button>
         </div>
       </DialogContent>
     </Dialog>
