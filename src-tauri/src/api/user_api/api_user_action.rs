@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use reqwest::Client;
-use crate::{errors::result::CreateUserResult, libs::api_conn::api_conn_st, models::user_model::{UpdateUserModel, UserModel}};
+use crate::{errors::result::CreateUserResult, libs::api_conn::api_conn_st, models::user_model::UserModel};
 use serde_json::Value;
 
 #[tauri::command]

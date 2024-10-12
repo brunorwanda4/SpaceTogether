@@ -1,6 +1,6 @@
 use mongodb::{Client, error::Result, Collection};
 
-use crate::models::SchoolClass;
+use crate::models::class::class_model::SchoolClass;
 
 pub async fn insert_class(client: &Client, class : SchoolClass) -> Result<()> {
     let db: mongodb::Database = client.database("schoolDataBase");

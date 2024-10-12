@@ -14,3 +14,9 @@ pub struct GetUserUserResult {
     pub user : Option<UserModel>,
     pub error : Option<String>,
 }
+
+#[derive(Serialize , Debug , Deserialize , Clone)]
+pub struct ResReq {
+    pub success : bool,
+    pub message : String,
+}

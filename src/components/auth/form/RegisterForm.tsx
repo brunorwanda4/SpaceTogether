@@ -14,8 +14,6 @@ import { useRouter } from 'next/navigation';
 import { toast } from '@/components/ui/use-toast';
 import { BeatLoader } from 'react-spinners';
 import { BsCheck2Circle } from 'react-icons/bs';
-import { useTheme } from '@/hooks/useTheme';
-import { create_user } from '@/controllers/user_controller';
 import { IoIosWarning } from 'react-icons/io';
 import { invoke } from '@tauri-apps/api/tauri';
 
@@ -54,12 +52,6 @@ const RegisterForm = ({
     // router
     const router = useRouter();
 
-    // themes
-    const themes= useTheme();
-
-    // month
-    const months ={ January: 31, February: 28, March: 31, April: 30, May: 31, June: 30, July: 31, August: 31, September: 30, October: 31, November: 30, December: 31,};
-
     const form = useForm<z.infer <typeof RegisterValidation>> ({
         resolver : zodResolver(RegisterValidation),
         defaultValues : {
@@ -84,15 +76,10 @@ const RegisterForm = ({
     const onSubmit = async (values : z.infer<typeof RegisterValidation>) => {
       setError("");
       setSuccess("");
-      const validation = RegisterValidation.safeParse(values);
-      if (!validation.success) {
-        return setError("All fields are required")
-      };
-
-      const {email , name , password} = validation.data;
       startTransition(async () => {
         const validation = RegisterValidation.safeParse(values);
         if (!validation.success) return setError("All fields are required");
+        const {email , name , password} = validation.data;
 
         try {
           const res = await invoke<{message : string , success : boolean}>("api_user_create_new" , {user : {email , password , name}});

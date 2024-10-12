@@ -1,11 +1,18 @@
-import CreatingSchoolForm from "@/components/auth/form/onboarding/creatingSchoolForm"
+import SchoolRequestForm from "@/components/auth/form/onboarding/schoolRequestForm"
 import { Logo } from "@/components/navbar/Logo"
-import { CreateSchoolForm } from "@/components/page/school/createSchoolForm"
 import { cn } from "@/lib/utils"
 
-const DirecterAddSchoolPage = () => {
+interface props {
+  params : {
+    onboardingUserId : string
+  }
+}
+
+const DirecterAddSchoolPage = ({
+  params : {onboardingUserId : userId}
+} : props) => {
   return (
-    <div className={cn("min-h-screen flex gap-2 max-md:relative justify-between " )}>
+    <div className={cn("h-auto px-12 flex gap-2 max-md:relative justify-between " )}>
     <section className=' w-full items-center justify-center flex min-h-screen'>
       <div className=' bg-base-300  card p-4 shadow-lg'>
         <div className=' flex justify-center mb-4 flex-col gap-2 items-center'>
@@ -15,7 +22,7 @@ const DirecterAddSchoolPage = () => {
         </div>
         <main className="  bg-base-200 p-4 card">
           <div className="">
-            <CreatingSchoolForm />
+            <SchoolRequestForm userId={userId}/>
           </div>
       </main>
       </div>

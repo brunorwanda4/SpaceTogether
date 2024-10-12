@@ -26,7 +26,6 @@ interface OnboardingProps {
   id: string;
 }
 
-
 export const OnboardingForm = ({
   id
 }: OnboardingProps) => {
