@@ -34,7 +34,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
             <div className="h-screen w-full flex items-center justify-center">
                 <div className="line items-center justify-center">
                     <Logo title />
-                    <span className="loading loading-dots loading-lg text-info" />
+                    <span className="loading loading-spinner loading-lg text-info" />
                 </div>
             </div>
         );

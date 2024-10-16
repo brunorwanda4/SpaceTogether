@@ -94,8 +94,8 @@ const SchoolRequestForm = ({
               </div>
             ),
           });
-          setSuccess(res.message);
-        //   router.push(`/auth/onboarding/directer/add/${res.message}`);
+          setSuccess("School has been created!");
+          router.push(`/auth/onboarding/${userId}/directer/add/${res.message}`);
         } else {
           toast({
             title: "Uh oh! Something went wrong.",
@@ -133,7 +133,7 @@ const SchoolRequestForm = ({
               <FormItem>
                 <FormLabel>School Name</FormLabel>
                 <FormControl>
-                  <Input className={className.input} {...field} placeholder="School name" type="text" />
+                  <Input disabled={isPending} className={className.input} {...field} placeholder="School name" type="text" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -143,7 +143,7 @@ const SchoolRequestForm = ({
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input className={className.input} {...field} placeholder="school-username" type="text" />
+                  <Input disabled={isPending} className={className.input} {...field} placeholder="school-username" type="text" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -155,7 +155,7 @@ const SchoolRequestForm = ({
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input className={className.input} {...field} placeholder="email@gmail.com" type="email" />
+                  <Input disabled={isPending} className={className.input} {...field} placeholder="email@gmail.com" type="email" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -165,7 +165,7 @@ const SchoolRequestForm = ({
               <FormItem>
                 <FormLabel>Phone Number</FormLabel>
                 <FormControl>
-                  <Input className={className.input} {...field} placeholder="Phone number" type="number" />
+                  <Input disabled={isPending} className={className.input} {...field} placeholder="Phone number" type="number" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -178,7 +178,7 @@ const SchoolRequestForm = ({
                 <FormLabel>Country</FormLabel>
                 <Select onValueChange={field.onChange}>
                   <FormControl data-theme={theme} className={className.formControl}>
-                    <SelectTrigger className={className.selectTrigger}>
+                    <SelectTrigger disabled={isPending} className={className.selectTrigger}>
                       <SelectValue className={className.selectValue} defaultValue="Rwanda" placeholder="Select Country" />
                     </SelectTrigger>
                   </FormControl>
@@ -200,7 +200,7 @@ const SchoolRequestForm = ({
                 <FormLabel>Province</FormLabel>
                 <Select onValueChange={(value) => { field.onChange(value); setSelectedProvince(value); }} defaultValue="">
                   <FormControl className={className.formControl}>
-                    <SelectTrigger className={className.selectTrigger}>
+                    <SelectTrigger disabled={isPending} className={className.selectTrigger}>
                       <SelectValue placeholder="Select a province" />
                     </SelectTrigger>
                   </FormControl>
@@ -221,7 +221,7 @@ const SchoolRequestForm = ({
                 <FormLabel>District</FormLabel>
                 <Select onValueChange={field.onChange}>
                   <FormControl className={className.formControl}>
-                    <SelectTrigger className={cn(className.selectTrigger, !selectedProvince && "tooltip")} disabled={!selectedProvince} data-tip={cn(!selectedProvince && "Please select province first")}>
+                    <SelectTrigger  className={cn(className.selectTrigger, !selectedProvince && "tooltip")} disabled={!selectedProvince || isPending} data-tip={cn(!selectedProvince && "Please select province first")}>
                       <SelectValue placeholder="Select District" />
                     </SelectTrigger>
                   </FormControl>
@@ -244,7 +244,7 @@ const SchoolRequestForm = ({
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Textarea {...field} rows={4} className={cn(className.textarea)} />
+                  <Textarea {...field} rows={4} className={cn(className.textarea)} disabled={isPending}/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -255,7 +255,7 @@ const SchoolRequestForm = ({
             <FormMessageError message={error} />
             <FormMessageSuccess message={success} />
         </div>
-        <button type="submit" className="mt-2 btn btn-info w-full">
+        <button type="submit" className={cn("mt-2 btn btn-info w-full" , isPending && "btn-disabled")} disabled={isPending}>
           {isPending ? <BeatLoader size={20} /> : "Create School"}
         </button>
       </form>

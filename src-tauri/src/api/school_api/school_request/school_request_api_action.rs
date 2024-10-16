@@ -34,7 +34,7 @@ pub async fn create_new_school_request(request: SchoolRequestModel) -> ResReq {
                         .and_then(|oid| oid.as_str()) {
                     return ResReq {
                         success: true,
-                        message: format!("Successfully created school request with ID: {}", inserted_id),
+                        message: format!("{}", inserted_id),
                     };
                 }
 
