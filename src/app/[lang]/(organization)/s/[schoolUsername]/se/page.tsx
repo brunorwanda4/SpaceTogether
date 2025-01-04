@@ -21,7 +21,7 @@ const SchoolUsernameSettingPage = async ({
      params : {schoolUsername , lang}
 } : props) => {
   const user = (await auth())?.user;
-  if (!user) return redirect(`/${lang}/auth/login`);
+  // if (!user) return redirect(`/${lang}/auth/login`);
 
   const school = await getSchoolByUsername(schoolUsername);
   if(!school) return <SchoolNotFount lang={lang} schoolUsername={schoolUsername}/>

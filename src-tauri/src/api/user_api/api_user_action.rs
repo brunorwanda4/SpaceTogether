@@ -1,7 +1,9 @@
-use std::collections::HashMap;
+use crate::{
+    errors::result::CreateUserResult, libs::api_conn::api_conn_st, models::user_model::UserModel,
+};
 use reqwest::Client;
-use crate::{errors::result::CreateUserResult, libs::api_conn::api_conn_st, models::user_model::UserModel};
 use serde_json::Value;
+use std::collections::HashMap;
 
 #[tauri::command]
 pub async fn api_user_create_new(user: UserModel) -> CreateUserResult {
@@ -14,7 +16,7 @@ pub async fn api_user_create_new(user: UserModel) -> CreateUserResult {
 
     let http_client = Client::new();
     let create_user = http_client
-        .post(format!("{}/user" , url))
+        .post(format!("{}/user", url))
         .json(&user_data)
         .send()
         .await;
@@ -24,16 +26,16 @@ pub async fn api_user_create_new(user: UserModel) -> CreateUserResult {
             if res.status().is_success() {
                 if let Ok(json) = res.json::<Value>().await {
                     if let Some(inserted_id) = json["insertedId"]["$oid"].as_str() {
-                        return CreateUserResult {
+                        CreateUserResult {
                             success: true,
                             message: format!("{}", inserted_id),
                         };
                     }
                 }
-                return CreateUserResult {
+                CreateUserResult {
                     success: false,
                     message: "Failed to parse the response".into(),
-                };
+                }
             } else if res.status().as_u16() == 406 {
                 return CreateUserResult {
                     success: false,

@@ -16,7 +16,7 @@ const SchoolSettingLayout = async ({
   const school = await getSchoolByUsername(schoolUsername);
   if(!school) return (redirect(`/${lang}/s`));
   const user = (await auth())?.user
-  if(!user) return (redirect(`/${lang}`));
+  // if(!user) return (redirect(`/${lang}`));
   return (
     <section>
      <SchoolMenuSettings username={schoolUsername} school={school} lang={lang}>

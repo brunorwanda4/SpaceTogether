@@ -50,7 +50,7 @@ const SchoolRequestForm = ({
   });
 
   const className = {
-    input: " bg-base-100 w-96 max-lg:w-full",
+    input: " bg-base-100 w-80 max-lg:w-60",
     textarea: "bg-base-100",
     nameUsernameDiv: " flex gap-2 mt-2",
     selectItems: "w-1/3",
@@ -58,6 +58,7 @@ const SchoolRequestForm = ({
     selectValue: "w-full bg-base-100",
     selectTrigger: " w-full bg-base-100",
     formControl: "w-full",
+    parentDiv : " flex w-full"
   };
 
   const [selectedProvince, setSelectedProvince] = useState("");
@@ -128,116 +129,124 @@ const SchoolRequestForm = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className={cn(className.nameUsernameDiv)}>
-          <FormField name="name" control={form.control} render={({ field }) => (
-              <FormItem>
-                <FormLabel>School Name</FormLabel>
-                <FormControl>
-                  <Input disabled={isPending} className={className.input} {...field} placeholder="School name" type="text" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField name="username" control={form.control} render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input disabled={isPending} className={className.input} {...field} placeholder="school-username" type="text" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className={className.nameUsernameDiv}>
-          <FormField name="email" control={form.control} render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input disabled={isPending} className={className.input} {...field} placeholder="email@gmail.com" type="email" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField name="phone" control={form.control} render={({ field }) => (
-              <FormItem>
-                <FormLabel>Phone Number</FormLabel>
-                <FormControl>
-                  <Input disabled={isPending} className={className.input} {...field} placeholder="Phone number" type="number" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className="flex gap-4 mt-2 w-full">
-          <FormField name="country" control={form.control} render={({ field }) => (
-              <FormItem className={cn(className.selectItems)}>
-                <FormLabel>Country</FormLabel>
-                <Select onValueChange={field.onChange}>
-                  <FormControl data-theme={theme} className={className.formControl}>
-                    <SelectTrigger disabled={isPending} className={className.selectTrigger}>
-                      <SelectValue className={className.selectValue} defaultValue="Rwanda" placeholder="Select Country" />
-                    </SelectTrigger>
+        <div className={cn(className.parentDiv)}>
+          <div>
+            <div className={cn(className.nameUsernameDiv)}>
+            <FormField name="name" control={form.control} render={({ field }) => (
+                <FormItem>
+                  <FormLabel>School Name</FormLabel>
+                  <FormControl>
+                    <Input disabled={isPending} className={className.input} {...field} placeholder="School name" type="text" />
                   </FormControl>
-                  <SelectContent data-theme={theme} className={cn(className.selectContent)}>
-                    <SelectItem value="Rwanda" className="flex w-full">
-                      <div className="flex gap-2 w-full items-center">
-                        <MyImage alt="Rwanda flag icon" className="size-6" classname="object-contain" src="/icons/countries/rwanda.png" />
-                        Rwanda
-                      </div>
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField name="province" control={form.control} render={({ field }) => (
-              <FormItem className={cn(className.selectItems)}>
-                <FormLabel>Province</FormLabel>
-                <Select onValueChange={(value) => { field.onChange(value); setSelectedProvince(value); }} defaultValue="">
-                  <FormControl className={className.formControl}>
-                    <SelectTrigger disabled={isPending} className={className.selectTrigger}>
-                      <SelectValue placeholder="Select a province" />
-                    </SelectTrigger>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField name="username" control={form.control} render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl>
+                    <Input disabled={isPending} className={className.input} {...field} placeholder="school-username" type="text" />
                   </FormControl>
-                  <SelectContent data-theme={theme} className={cn(className.selectContent)}>
-                    {Object.keys(provincesAndCities).map((province) => (
-                      <SelectItem key={province} value={province}>
-                        {province}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className={className.nameUsernameDiv}>
+            <FormField name="email" control={form.control} render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input disabled={isPending} className={className.input} {...field} placeholder="email@gmail.com" type="email" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField name="phone" control={form.control} render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone Number</FormLabel>
+                  <FormControl>
+                    <Input disabled={isPending} className={className.input} {...field} placeholder="Phone number" type="number" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex gap-4 mt-2 w-full">
+            <FormField name="country" control={form.control} render={({ field }) => (
+                <FormItem className={cn(className.selectItems)}>
+                  <FormLabel>Country</FormLabel>
+                  <Select onValueChange={field.onChange}>
+                    <FormControl data-theme={theme} className={className.formControl}>
+                      <SelectTrigger disabled={isPending} className={className.selectTrigger}>
+                        <SelectValue className={className.selectValue} defaultValue="Rwanda" placeholder="Select Country" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent data-theme={theme} className={cn(className.selectContent)}>
+                      <SelectItem value="Rwanda" className="flex w-full">
+                        <div className="flex gap-2 w-full items-center">
+                          <MyImage alt="Rwanda flag icon" className="size-6" classname="object-contain" src="/icons/countries/rwanda.png" />
+                          Rwanda
+                        </div>
                       </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField name="district" control={form.control} render={({ field }) => (
-              <FormItem className={cn(className.selectItems)}>
-                <FormLabel>District</FormLabel>
-                <Select onValueChange={field.onChange}>
-                  <FormControl className={className.formControl}>
-                    <SelectTrigger  className={cn(className.selectTrigger, !selectedProvince && "tooltip")} disabled={!selectedProvince || isPending} data-tip={cn(!selectedProvince && "Please select province first")}>
-                      <SelectValue placeholder="Select District" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent data-theme={theme} className={cn(className.selectContent)}>
-                    {selectedProvince &&
-                      (provincesAndCities as any)[selectedProvince].map((city: string) => (
-                        <SelectItem key={city} value={city}>
-                          {city}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField name="province" control={form.control} render={({ field }) => (
+                <FormItem className={cn(className.selectItems)}>
+                  <FormLabel>Province</FormLabel>
+                  <Select onValueChange={(value) => { field.onChange(value); setSelectedProvince(value); }} defaultValue="">
+                    <FormControl className={className.formControl}>
+                      <SelectTrigger disabled={isPending} className={className.selectTrigger}>
+                        <SelectValue placeholder="Select a province" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent data-theme={theme} className={cn(className.selectContent)}>
+                      {Object.keys(provincesAndCities).map((province) => (
+                        <SelectItem key={province} value={province}>
+                          {province}
                         </SelectItem>
                       ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField name="district" control={form.control} render={({ field }) => (
+                <FormItem className={cn(className.selectItems)}>
+                  <FormLabel>District</FormLabel>
+                  <Select onValueChange={field.onChange}>
+                    <FormControl className={className.formControl}>
+                      <SelectTrigger  className={cn(className.selectTrigger, !selectedProvince && "tooltip")} disabled={!selectedProvince || isPending} data-tip={cn(!selectedProvince && "Please select province first")}>
+                        <SelectValue placeholder="Select District" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent data-theme={theme} className={cn(className.selectContent)}>
+                      {selectedProvince &&
+                        (provincesAndCities as any)[selectedProvince].map((city: string) => (
+                          <SelectItem key={city} value={city}>
+                            {city}
+                          </SelectItem>
+                        ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          </div>
+          {/* left */}
+          <div>
+            bruno rwanda
+          </div>
         </div>
         <div className="mt-2">
           <FormField name="description" control={form.control} render={({ field }) => (

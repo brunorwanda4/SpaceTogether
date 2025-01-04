@@ -10,7 +10,7 @@ export const CreateSchoolRequestValidation = z.object({
         message : "username is required"
     }).max(25, {
         message : "maximum characters are 25",
-    }),
+    }),    
     email : z.string().email(),
     phone : z.string().min(1 , {
         message : " phone number is required",

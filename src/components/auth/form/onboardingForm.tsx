@@ -172,7 +172,10 @@ export const OnboardingForm = ({
     } else {
         return "/1.jpg"
     }
-}
+  }
+  const className = {
+    input : "md:w-72 bg-base-100 w-96"
+  }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
@@ -216,7 +219,7 @@ export const OnboardingForm = ({
               <FormItem>
                 <FormLabel>Phone number</FormLabel>
                 <FormControl>
-                  <Input {...field} disabled={isPending} type="number" className={cn("w-full md:w-72 bg-base-100")} placeholder="+250 792537274" />
+                  <Input {...field} disabled={isPending} type="number" className={cn(className.input)} placeholder="+250 792537274" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -229,14 +232,14 @@ export const OnboardingForm = ({
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input {...field} autoFocus disabled={isPending} className={cn("w-full md:w-72 bg-base-100")} type="text" placeholder="Username" />
+                  <Input {...field} autoFocus disabled={isPending} className={cn(className.input)} type="text" placeholder="Username" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
-        <div className="mt-2 flex gap-2 md:justify-between w-full">
+        <div className="mt-2 flex gap-2 md:justify-between w-full max-lg:flex-col">
           <FormField control={form.control} name="gender" render={({ field }) => (
             <FormItem className="space-y-3">
               <FormLabel>Gender</FormLabel>
@@ -274,7 +277,7 @@ export const OnboardingForm = ({
                   <FormLabel className="">Your type</FormLabel>
                   <Select onValueChange={field.onChange}>
                     <FormControl>
-                      <SelectTrigger className="bg-base-100">
+                      <SelectTrigger className={cn(className.input)}>
                         <SelectValue placeholder="Which type are you" className=" placeholder:text-gray-500"/>
                       </SelectTrigger>
                     </FormControl>

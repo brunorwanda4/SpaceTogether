@@ -27,6 +27,7 @@ export const AuthDivPage = ({
 
   return (
     <div className={cn("min-h-screen h-full flex gap-2 justify-center" , className)}>
+      <div className=" h-80"/>
        <section className='p-5 max-md:absolute max-md:items-center max-md:h-full max-md:justify-center max-md:z-40 max-md:w-full'>
           <div className=' items-center justify-center flex h-full max-lg:h-full max-w-full max-md:flex max-md:flex-col'>
             <main className={cn(" w-full")}>
@@ -58,6 +59,7 @@ export const AuthDivPage = ({
           </main>
           </div>
         </section>
+        <div className=" h-44"/>
     </div>
   )
 }

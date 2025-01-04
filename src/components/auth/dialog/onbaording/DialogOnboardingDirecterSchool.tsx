@@ -26,11 +26,15 @@ const DialogOnboardingDirecterSchool = ({
     })
   }
 
+  const className = {
+    content : " w-full max-lg:w-96"
+  }
+
   return (
     <Dialog open={isOpen}>
-      <DialogContent data-theme={theme} className=''>
+      <DialogContent data-theme={theme} className={cn(className.content)}>
        <div className=' flex justify-center'><Logo title /></div>
-        <DialogHeader>
+        <DialogHeader className={""}>
           <DialogTitle>
             Has your school been created in our <span className=' text-info'>space-together</span>
             </DialogTitle>

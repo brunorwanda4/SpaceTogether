@@ -3,11 +3,9 @@
 import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import z from "zod";
-import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -18,17 +16,14 @@ import { Input } from "@/components/ui/input";
 import { LoginValidation } from '@/validation/loginValidation';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Locale } from '@/i18n';
-import { BsEye, BsEyeFill } from 'react-icons/bs';
 import UseOnlineStatus from '@/hooks/useOnlineStatus';
 import Link from 'next/link';
 import { ImEye, ImEyeBlocked } from 'react-icons/im';
 import { loginServer } from '@/server/loginServer';
 import { toast } from '@/components/ui/use-toast';
 import { FormMessageError, FormMessageSuccess } from './formMessagers';
-import { redirect } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { BeatLoader } from 'react-spinners';
-import { TUser } from '@/types/user';
 import { ChoosePropsAuth } from '../authDialog';
 import { cn } from '@/lib/utils';
 
@@ -93,6 +88,9 @@ const LoginForm = ({
         
       })
     })
+  };
+  const className = {
+    input : " w-96 bg-base-100 max-lg:w-full"
   }
   return (
     <Form {...form} >
@@ -104,7 +102,7 @@ const LoginForm = ({
             <FormItem>
               <FormLabel>{TUsername}</FormLabel>
               <FormControl>
-                <Input className=' bg-base-100' autoFocus disabled={isPending} placeholder="user_name" {...field} />
+                <Input className={cn(className.input)} autoFocus disabled={isPending} placeholder="user_name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -119,7 +117,7 @@ const LoginForm = ({
               <FormLabel>{TPassword}</FormLabel>
               <FormControl>
                 <div className=' relative '>
-                  <Input className=' bg-base-100' placeholder="password" disabled={isPending} type={seePassword ? "password" : "text"} {...field} />
+                  <Input className={cn(className.input)} placeholder="password" disabled={isPending} type={seePassword ? "password" : "text"} {...field} />
                   <div className=' absolute right-0 top-0 items-center flex rounded-r-md cursor-pointer h-full w-6 px-1 hover:bg-neutral/40 duration-200' onClick={handleSeePassword}>
                       {seePassword ? <ImEye size={24} /> : <ImEyeBlocked size={24} />}
                     </div>

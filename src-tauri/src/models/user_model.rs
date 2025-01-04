@@ -1,4 +1,4 @@
-use mongodb::bson::{oid::ObjectId, DateTime};
+use mongodb::bson::DateTime;
 use serde::{Deserialize, Serialize};
 
 use super::image_model::ProfileImageType;
@@ -11,8 +11,7 @@ pub enum TGender {
     Other,
 }
 
-
-#[derive(Debug , Serialize , Deserialize ,Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub enum TUserType {
     Teacher,
     Student,
@@ -24,7 +23,7 @@ pub enum TUserType {
 #[derive(Debug, Serialize, Deserialize)]
 pub struct UserModel {
     #[serde(rename = "_id")]
-    pub id: Option<ObjectIdWrapper>,  // Wrapper to handle MongoDB ObjectId
+    pub id: Option<ObjectIdWrapper>, // Wrapper to handle MongoDB ObjectId
     pub name: String,
     pub email: String,
     pub password: Option<String>,
@@ -39,7 +38,7 @@ pub struct UserModel {
     pub whatsapp: Option<String>,
     pub username: Option<String>,
     pub phone_number: Option<String>,
-    pub user_type : Option<TUserType>,
+    pub user_type: Option<TUserType>,
     pub created_at: Option<DateTime>,
     pub updated_at: Option<DateTime>,
 }
@@ -53,8 +52,6 @@ pub struct ObjectIdWrapper {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct UpdateUserModel {
-    #[serde(rename = "_id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<ObjectId>,
     pub gender: Option<String>,
     pub image: Option<String>,
     pub birth_date: Option<String>,
@@ -66,5 +63,5 @@ pub struct UpdateUserModel {
     pub whatsapp: Option<String>,
     pub username: Option<String>,
     pub phone_number: Option<String>,
-    pub user_type : Option<String>,
+    pub user_type: Option<String>,
 }

@@ -13,6 +13,7 @@ const DirecterAddSchoolPage = ({
 } : props) => {
   return (
     <div className={cn("h-auto px-12 flex gap-2 max-md:relative justify-between flex-col" )}>
+      <div className=" h-24"/>
       <section className=' w-full items-center justify-center flex min-h-screen'>
         <div className=' bg-base-300  card p-4 shadow-lg'>
           <div className=' flex justify-center mb-4 flex-col gap-2 items-center'>
@@ -27,6 +28,7 @@ const DirecterAddSchoolPage = ({
         </main>
         </div>
       </section>
+      <div className=" h-24"/>
     </div>
   )
 }
